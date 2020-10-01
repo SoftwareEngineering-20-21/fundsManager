@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DAL.Domain
 {
-    class TransactionHistory : BaseEntity
+    public class TransactionHistory
     {
+        [Key]
+        public int Id { get; set; }
         public BankAccount FromBankAccount { get; set; }
         public BankAccount ToBankAccount { get; set; }
         public decimal Amount { get; set; }
