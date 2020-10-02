@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Context
 {
-    public class AppContext : DbContext
+    public class FundsContext : DbContext
     {
         public DbSet<User> User { get; set; }
         public DbSet<BankAccount> BankAccount { get; set; }
@@ -14,7 +14,7 @@ namespace DAL.Context
         public DbSet<TransactionHistory> Transaction { get; set; }
         public DbSet<UserDetails> UserDetails { get; set; }
 
-        public AppContext(DbContextOptions<AppContext> options)
+        public FundsContext(DbContextOptions<FundsContext> options)
             : base(options)
         {
         }
