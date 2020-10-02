@@ -12,9 +12,9 @@ namespace DAL.Domain
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public Currency CurrencyType { get; set; }
-        public ICollection<User> Users { get; set; }
         public AccountType Type { get; set; }
+        public Currency CurrencyType { get; set; }
+        public IEnumerable<UserBankAccount> Users { get; set; }
 
     }
 }
