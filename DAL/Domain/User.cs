@@ -12,6 +12,6 @@ namespace DAL.Domain
         public string Login { get; set; }
         public string Password { get; set; }
         public UserDetails Details { get; set; }
-        public BankAccount BankAccount { get; set; }
+        public ICollection<BankAccount> BankAccounts { get; set; }
     }
 }

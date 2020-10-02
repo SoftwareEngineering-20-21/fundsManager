@@ -9,9 +9,10 @@ namespace DAL.Domain
     {
         [Key]
         public int Id { get; set; }
-        public BankAccount FromBankAccount { get; set; }
-        public BankAccount ToBankAccount { get; set; }
-        public decimal Amount { get; set; }
+        public BankAccount BankAccountFrom { get; set; }
+        public BankAccount BankAccountTo { get; set; }
+        public decimal AmountTo { get; set; }
+        public decimal AmountFrom { get; set; }
         public DateTime TransactionDate { get; set; }
         public string Description { get; set; }
     }
