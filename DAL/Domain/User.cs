@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace DAL.Domain
 {
@@ -9,7 +7,9 @@ namespace DAL.Domain
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Login { get; set; }
+        [Required]
         public string Password { get; set; }
         public UserDetails Details { get; set; }
         public IEnumerable<UserBankAccount> BankAccounts { get; set; }
