@@ -8,9 +8,11 @@ namespace DAL.Context
         public DbSet<User> Users { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Currency> Currency { get; set; }
-        public DbSet<TransactionHistory> Transaction { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
         public DbSet<UserDetails> UserDetails { get; set; }
-
+        public FundsContext()
+            : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(
+                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb2;Integrated Security=True").Options) { }
         public FundsContext(DbContextOptions<FundsContext> options)
             : base(options)
         {

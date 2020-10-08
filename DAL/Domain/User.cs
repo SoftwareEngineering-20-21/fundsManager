@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Domain
 {
-    public class User
+    public class User:BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string Login { get; set; }
         [Required]

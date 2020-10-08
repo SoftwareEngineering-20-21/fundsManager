@@ -13,7 +13,7 @@ namespace Console_UI
         {
             DbContextOptionsBuilder<FundsContext> optionsBuilder = new DbContextOptionsBuilder<FundsContext>();
             optionsBuilder.UseSqlServer(
-                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb2;Integrated Security=True");
+                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb3;Integrated Security=True");
             
             using (FundsContext context = new FundsContext(optionsBuilder.Options))
             {

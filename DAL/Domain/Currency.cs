@@ -2,10 +2,8 @@
 
 namespace DAL.Domain
 {
-    public class Currency
+    public class Currency:BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string Code { get; set; }
     }

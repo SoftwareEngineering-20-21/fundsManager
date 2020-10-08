@@ -4,11 +4,8 @@ using DAL.Enums;
 
 namespace DAL.Domain
 {
-    public class BankAccount
+    public class BankAccount:BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string Name { get; set; }
 

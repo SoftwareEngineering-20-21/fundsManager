@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Domain
 {
-    public class TransactionHistory
+    public class Transaction:BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         public BankAccount BankAccountFrom { get; set; }
         public BankAccount BankAccountTo { get; set; }
         [Required]
