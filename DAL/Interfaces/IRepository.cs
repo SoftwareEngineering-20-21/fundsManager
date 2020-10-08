@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DAL.Domain;
 
 namespace DAL.Interfaces
@@ -11,6 +12,8 @@ namespace DAL.Interfaces
         void Delete(int id);
         void Update(T entity);
         void Save();
+        Task SaveAsync();
+
 
     }
 }
