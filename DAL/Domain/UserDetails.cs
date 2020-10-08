@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DAL.Domain
+﻿namespace DAL.Domain
 {
     public class UserDetails:BaseEntity
     {

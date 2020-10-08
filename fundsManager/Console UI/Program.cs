@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using DAL.Context;
 using DAL.Domain;
 using DAL.Enums;
 using DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Console_UI
 {
@@ -20,7 +19,7 @@ namespace Console_UI
             
             
             var context = new FundsContext(optionsBuilder.Options);
-           //context.Database.EnsureCreated();
+            context.Database.EnsureCreated();
             using (UnitOfWork unitOfWork = new UnitOfWork(context))
             {
                 
@@ -29,6 +28,7 @@ namespace Console_UI
                     {
                        BankAccount  = new BankAccount{CurrencyType = new Currency{Code = "USD"},Name = "Na Pivo",Type = AccountType.Income}
                     }}});
+                Console.WriteLine(unitOfWork.Repository<User>().Get(x => x.Login == "Severun").FirstOrDefault().Password);
 
                 unitOfWork.Save();
             }

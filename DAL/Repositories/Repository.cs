@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DAL.Context;
 using DAL.Domain;
@@ -12,8 +11,8 @@ namespace DAL.Repositories
 {
     public class Repository<T>: IRepository<T> where T:BaseEntity
     {
-        private FundsContext context;
-        private DbSet<T> dbSet;
+        private readonly FundsContext context;
+        private readonly DbSet<T> dbSet;
         public Repository()
         {
             this.context = new FundsContext();

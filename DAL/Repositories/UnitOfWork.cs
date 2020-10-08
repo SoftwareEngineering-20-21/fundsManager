@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DAL.Context;
 using DAL.Domain;
-using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
@@ -43,12 +42,9 @@ namespace DAL.Repositories
 
         public virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!disposed && disposing)
             {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
+                context.Dispose();
             }
    
             disposed = true;
