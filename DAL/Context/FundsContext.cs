@@ -12,7 +12,7 @@ namespace DAL.Context
         public DbSet<UserDetails> UserDetails { get; set; }
         public FundsContext()
             : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(
-                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb2;Integrated Security=True").Options) { }
+                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb;Integrated Security=True").Options) { }
         public FundsContext(DbContextOptions<FundsContext> options)
             : base(options)
         {

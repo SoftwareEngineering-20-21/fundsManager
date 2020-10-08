@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using DAL.Context;
 using DAL.Domain;
+using DAL.Enums;
+using DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -13,15 +16,21 @@ namespace Console_UI
         {
             DbContextOptionsBuilder<FundsContext> optionsBuilder = new DbContextOptionsBuilder<FundsContext>();
             optionsBuilder.UseSqlServer(
-                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb3;Integrated Security=True");
+                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb;Integrated Security=True");
             
-            using (FundsContext context = new FundsContext(optionsBuilder.Options))
+            
+            var context = new FundsContext(optionsBuilder.Options);
+           //context.Database.EnsureCreated();
+            using (UnitOfWork unitOfWork = new UnitOfWork(context))
             {
-                context.Database.EnsureCreated();
+                
+                unitOfWork.Repository<User>().Update(new User{Login =  "Petuh",Password = "Petuh" ,Details = new UserDetails{Name = "Nazar",Mail = "Kuchma@gmail.com"} 
+                    , BankAccounts = new List<UserBankAccount>{new UserBankAccount
+                    {
+                       BankAccount  = new BankAccount{CurrencyType = new Currency{Code = "USD"},Name = "Na Pivo",Type = AccountType.Income}
+                    }}});
 
-
-
-                context.SaveChanges();
+                unitOfWork.Save();
             }
 
 

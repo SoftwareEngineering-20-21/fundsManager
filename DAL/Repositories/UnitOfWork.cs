@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DAL.Context;
 using DAL.Domain;
 using DAL.Interfaces;
@@ -8,12 +9,10 @@ namespace DAL.Repositories
 {
     public class UnitOfWork : IDisposable
     {
-
+   
         private readonly FundsContext context;
         private bool disposed;
-        private BankAccountRepository bankAccountRepository;
-        private UserRepository userRepository;
-        private TransactionRepository transactionRepository;
+        private Dictionary<string, object> repositories;
         public UnitOfWork()
         {
             this.context = new FundsContext();
@@ -22,44 +21,25 @@ namespace DAL.Repositories
         {
             this.context = context;
         }
-        public TransactionRepository GeTransactionRepository
-        {
-            get
-            {
-                if (transactionRepository is null)
-                {
-                    transactionRepository = new TransactionRepository(context);
-                }
 
-                return transactionRepository;
+        public Repository<T> Repository<T>() where T : BaseEntity
+        {
+            if (repositories == null)
+            {
+                repositories = new Dictionary<string, object>();
             }
+
+            var type = typeof(T).Name;
+
+            if (!repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(Repository<T>);
+                var repositoryInstance = Activator.CreateInstance(repositoryType, context);
+                repositories.Add(type, repositoryInstance);
+            }
+            return (Repository<T>)repositories[type];
         }
 
-        public BankAccountRepository GetBankAccountRepository
-        {
-            get
-            {
-                if (bankAccountRepository is null)
-                {
-                    bankAccountRepository = new BankAccountRepository(context);
-                }
-
-                return bankAccountRepository;
-            }
-        }
-
-        public UserRepository GetUserRepository
-        {
-            get
-            {
-                if (userRepository is null)
-                {
-                    return  new UserRepository(context);
-                }
-
-                return userRepository;
-            }
-        }
 
         public virtual void Dispose(bool disposing)
         {
@@ -70,7 +50,7 @@ namespace DAL.Repositories
                     context.Dispose();
                 }
             }
-
+   
             disposed = true;
         }
 
@@ -79,10 +59,14 @@ namespace DAL.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
+   
         public void Save()
         {
             context.SaveChanges();
+        }
+        public async Task SaveAsync()
+        {
+            await context.SaveChangesAsync();
         }
     }
 }
