@@ -5,8 +5,8 @@ namespace DAL.Context
 {
     public class FundsContext : DbContext
     {
-        public DbSet<User> User { get; set; }
-        public DbSet<BankAccount> BankAccount { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Currency> Currency { get; set; }
         public DbSet<TransactionHistory> Transaction { get; set; }
         public DbSet<UserDetails> UserDetails { get; set; }
@@ -30,6 +30,10 @@ namespace DAL.Context
                 .WithMany(p => p.Users)
                 .HasForeignKey(pt => pt.UserId);
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>(entity => {
+                entity.HasIndex(e => e.Login).IsUnique();
+            });
 
             base.OnModelCreating(modelBuilder);
         }

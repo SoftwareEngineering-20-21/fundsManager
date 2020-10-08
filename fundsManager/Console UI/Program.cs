@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using DAL.Context;
+using DAL.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -12,13 +13,14 @@ namespace Console_UI
         {
             DbContextOptionsBuilder<FundsContext> optionsBuilder = new DbContextOptionsBuilder<FundsContext>();
             optionsBuilder.UseSqlServer(
-                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb;Integrated Security=True");
+                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb2;Integrated Security=True");
             
             using (FundsContext context = new FundsContext(optionsBuilder.Options))
             {
                 context.Database.EnsureCreated();
-            
-            
+
+
+
                 context.SaveChanges();
             }
 
