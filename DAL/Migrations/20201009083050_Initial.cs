@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +27,11 @@ namespace DAL.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Login = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
+                    Password = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
+                    Mail = table.Column<string>(nullable: true),
+                    Phone = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,29 +55,6 @@ namespace DAL.Migrations
                         name: "FK_BankAccounts_Currency_CurrencyTypeId",
                         column: x => x.CurrencyTypeId,
                         principalTable: "Currency",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true),
-                    Mail = table.Column<string>(nullable: true),
-                    Phone = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserDetails_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -109,7 +90,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserBankAccount",
+                name: "UserBankAccounts",
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
@@ -117,15 +98,15 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserBankAccount", x => new { x.UserId, x.BankAccountId });
+                    table.PrimaryKey("PK_UserBankAccounts", x => new { x.UserId, x.BankAccountId });
                     table.ForeignKey(
-                        name: "FK_UserBankAccount_Users_BankAccountId",
+                        name: "FK_UserBankAccounts_Users_BankAccountId",
                         column: x => x.BankAccountId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserBankAccount_BankAccounts_UserId",
+                        name: "FK_UserBankAccounts_BankAccounts_UserId",
                         column: x => x.UserId,
                         principalTable: "BankAccounts",
                         principalColumn: "Id",
@@ -148,15 +129,9 @@ namespace DAL.Migrations
                 column: "BankAccountToId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBankAccount_BankAccountId",
-                table: "UserBankAccount",
+                name: "IX_UserBankAccounts_BankAccountId",
+                table: "UserBankAccounts",
                 column: "BankAccountId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserDetails_UserId",
-                table: "UserDetails",
-                column: "UserId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Login",
@@ -171,16 +146,13 @@ namespace DAL.Migrations
                 name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "UserBankAccount");
-
-            migrationBuilder.DropTable(
-                name: "UserDetails");
-
-            migrationBuilder.DropTable(
-                name: "BankAccounts");
+                name: "UserBankAccounts");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "BankAccounts");
 
             migrationBuilder.DropTable(
                 name: "Currency");

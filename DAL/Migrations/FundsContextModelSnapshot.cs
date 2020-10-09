@@ -104,8 +104,20 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Mail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Phone")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -128,43 +140,13 @@ namespace DAL.Migrations
 
                     b.HasIndex("BankAccountId");
 
-                    b.ToTable("UserBankAccount");
-                });
-
-            modelBuilder.Entity("DAL.Domain.UserDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Mail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("UserDetails");
+                    b.ToTable("UserBankAccounts");
                 });
 
             modelBuilder.Entity("DAL.Domain.BankAccount", b =>
                 {
                     b.HasOne("DAL.Domain.Currency", "CurrencyType")
-                        .WithMany()
+                        .WithMany("BankAccounts")
                         .HasForeignKey("CurrencyTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -192,15 +174,6 @@ namespace DAL.Migrations
                     b.HasOne("DAL.Domain.BankAccount", "BankAccount")
                         .WithMany("Users")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DAL.Domain.UserDetails", b =>
-                {
-                    b.HasOne("DAL.Domain.User", "User")
-                        .WithOne("Details")
-                        .HasForeignKey("DAL.Domain.UserDetails", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

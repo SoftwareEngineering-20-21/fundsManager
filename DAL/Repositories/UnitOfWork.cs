@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DAL.Context;
 using DAL.Domain;
+using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork :  IUnitOfWork
     {
    
         private readonly FundsContext context;
@@ -21,12 +22,9 @@ namespace DAL.Repositories
             this.context = context;
         }
 
-        public Repository<T> Repository<T>() where T : BaseEntity
+        public IRepository<T> Repository<T>() where T : BaseEntity
         {
-            if (repositories == null)
-            {
-                repositories = new Dictionary<string, object>();
-            }
+            repositories ??= new Dictionary<string, object>();
 
             var type = typeof(T).Name;
 

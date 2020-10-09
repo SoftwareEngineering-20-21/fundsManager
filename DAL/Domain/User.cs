@@ -10,8 +10,10 @@ namespace DAL.Domain
         public string Login { get; set; }
         [Required]
         public string Password { get; set; }
-        [AllowNull]
-        public UserDetails Details { get; set; }
         public IEnumerable<UserBankAccount> BankAccounts { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Mail { get; set; }
+        public int Phone { get; set; }
     }
 }
