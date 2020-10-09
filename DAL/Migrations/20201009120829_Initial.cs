@@ -90,7 +90,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserBankAccounts",
+                name: "UserBankAccount",
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
@@ -98,17 +98,17 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserBankAccounts", x => new { x.UserId, x.BankAccountId });
+                    table.PrimaryKey("PK_UserBankAccount", x => new { x.UserId, x.BankAccountId });
                     table.ForeignKey(
-                        name: "FK_UserBankAccounts_Users_BankAccountId",
+                        name: "FK_UserBankAccount_BankAccounts_BankAccountId",
                         column: x => x.BankAccountId,
-                        principalTable: "Users",
+                        principalTable: "BankAccounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserBankAccounts_BankAccounts_UserId",
+                        name: "FK_UserBankAccount_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "BankAccounts",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -129,8 +129,8 @@ namespace DAL.Migrations
                 column: "BankAccountToId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBankAccounts_BankAccountId",
-                table: "UserBankAccounts",
+                name: "IX_UserBankAccount_BankAccountId",
+                table: "UserBankAccount",
                 column: "BankAccountId");
 
             migrationBuilder.CreateIndex(
@@ -146,13 +146,13 @@ namespace DAL.Migrations
                 name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "UserBankAccounts");
-
-            migrationBuilder.DropTable(
-                name: "Users");
+                name: "UserBankAccount");
 
             migrationBuilder.DropTable(
                 name: "BankAccounts");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Currency");

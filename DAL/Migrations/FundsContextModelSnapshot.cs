@@ -140,13 +140,13 @@ namespace DAL.Migrations
 
                     b.HasIndex("BankAccountId");
 
-                    b.ToTable("UserBankAccounts");
+                    b.ToTable("UserBankAccount");
                 });
 
             modelBuilder.Entity("DAL.Domain.BankAccount", b =>
                 {
                     b.HasOne("DAL.Domain.Currency", "CurrencyType")
-                        .WithMany("BankAccounts")
+                        .WithMany()
                         .HasForeignKey("CurrencyTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -165,14 +165,14 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Domain.UserBankAccount", b =>
                 {
-                    b.HasOne("DAL.Domain.User", "User")
-                        .WithMany("BankAccounts")
+                    b.HasOne("DAL.Domain.BankAccount", "BankAccount")
+                        .WithMany("Users")
                         .HasForeignKey("BankAccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Domain.BankAccount", "BankAccount")
-                        .WithMany("Users")
+                    b.HasOne("DAL.Domain.User", "User")
+                        .WithMany("BankAccounts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
