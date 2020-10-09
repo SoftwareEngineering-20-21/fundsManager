@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using DAL.Context;
 using DAL.Domain;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DAL.Repositories
 {
@@ -17,6 +19,7 @@ namespace DAL.Repositories
         {
             this.context = new FundsContext();
             dbSet = context.Set<T>();
+            dbSet.Load();
         }
         public Repository(FundsContext context)
         {
@@ -25,12 +28,12 @@ namespace DAL.Repositories
         }
         public IEnumerable<T> Get()
         {
-            return dbSet;
+            return dbSet.ToList();
         }
 
         public T Get(int id)
         {
-            return dbSet.Find(id);
+            return dbSet.FirstOrDefault(x=>x.Id == id);
         }
         public IEnumerable<T> Get(Func<T, bool> predicate)
         {

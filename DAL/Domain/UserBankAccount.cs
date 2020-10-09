@@ -5,7 +5,7 @@
         public int UserId { get; set; }
         public virtual User User { get; set; }
         public int BankAccountId { get; set; }
-        public BankAccount BankAccount { get; set; }
+        public virtual BankAccount BankAccount { get; set; }
 
     }
 } 

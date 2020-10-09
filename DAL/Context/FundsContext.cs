@@ -1,5 +1,6 @@
 ﻿using DAL.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace DAL.Context
 {
@@ -11,8 +12,8 @@ namespace DAL.Context
         public DbSet<Transaction> Transactions { get; set; }
         public FundsContext()
             : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(
-                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb;Integrated Security=True").Options)
-        { 
+                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb;Integrated Security=True").UseLazyLoadingProxies().Options)
+        {
             Database.EnsureCreated();
         }
         public FundsContext(DbContextOptions<FundsContext> options)
@@ -28,19 +29,12 @@ namespace DAL.Context
             modelBuilder.Entity<UserBankAccount>()
                 .HasOne(pt => pt.User)
                 .WithMany(p => p.BankAccounts)
-                .HasForeignKey(pt => pt.BankAccountId);
+                .HasForeignKey(pt => pt.UserId);
 
             modelBuilder.Entity<UserBankAccount>()
                 .HasOne(pt => pt.BankAccount)
                 .WithMany(p => p.Users)
-                .HasForeignKey(pt => pt.UserId);
-
-
-            modelBuilder.Entity<BankAccount>()
-                .HasOne(p => p.CurrencyType)
-                .WithMany(b => b.BankAccounts)
-                .HasForeignKey(x => x.CurrencyTypeId);
-
+                .HasForeignKey(pt => pt.BankAccountId);
 
             modelBuilder.Entity<User>(entity => {
                 entity.HasIndex(e => e.Login).IsUnique();

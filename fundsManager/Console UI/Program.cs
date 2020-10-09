@@ -16,16 +16,18 @@ namespace Console_UI
         static void Main(string[] args)
         {
             DbContextOptionsBuilder<FundsContext> optionsBuilder = new DbContextOptionsBuilder<FundsContext>();
-            optionsBuilder.UseSqlServer(
-                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb13;Integrated Security=True");
+            optionsBuilder.UseSqlServer("")
+                .UseLazyLoadingProxies();
+
+
+        var context = new FundsContext(optionsBuilder.Options);
             
-            
-            var context = new FundsContext(optionsBuilder.Options);
             using (UnitOfWork unitOfWork = new UnitOfWork(context))
             { 
                 //seed(unitOfWork);
                 //unitOfWork.Save();
                 //Console.WriteLine(unitOfWork.Repository<BankAccount>().Get(3).CurrencyType);
+
                 Console.WriteLine("Users");
                 foreach (var i in unitOfWork.Repository<User>().Get())
                 {
@@ -42,6 +44,9 @@ namespace Console_UI
                 Console.WriteLine("BankAccounts");
                 foreach (var i in unitOfWork.Repository<BankAccount>().Get())
                 {
+                    Console.WriteLine(i.CurrencyType.Code);
+                    Console.WriteLine(i.Users.Count);
+
                     Console.Write(i.Id + "\t");
                     Console.Write(i.CurrencyTypeId + "\t");
                     Console.Write(i.Name + "\t");

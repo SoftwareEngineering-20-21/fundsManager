@@ -11,12 +11,13 @@ namespace DAL.Domain
         public string Name { get; set; }
         [Required]
         public AccountType Type { get; set; }
+
         [Required]
         [ForeignKey("CurrencyType")]
         public int CurrencyTypeId { get; set; }
         [Required]
-        public Currency CurrencyType { get; set; }
-        public IEnumerable<UserBankAccount> Users { get; set; }
+        public virtual Currency CurrencyType { get; set; }
+        public virtual List<UserBankAccount> Users { get; set; }
 
     }
 }

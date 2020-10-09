@@ -7,6 +7,5 @@ namespace DAL.Domain
     {
         [Required]
         public string Code { get; set; }
-        public IEnumerable<BankAccount> BankAccounts { get; set; }
     }
 }

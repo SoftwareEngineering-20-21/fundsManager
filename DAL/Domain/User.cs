@@ -10,7 +10,7 @@ namespace DAL.Domain
         public string Login { get; set; }
         [Required]
         public string Password { get; set; }
-        public IEnumerable<UserBankAccount> BankAccounts { get; set; }
+        public virtual List<UserBankAccount> BankAccounts { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Mail { get; set; }

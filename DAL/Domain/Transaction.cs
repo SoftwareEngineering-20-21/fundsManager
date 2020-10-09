@@ -5,8 +5,8 @@ namespace DAL.Domain
 {
     public class Transaction:BaseEntity
     {
-        public BankAccount BankAccountFrom { get; set; }
-        public BankAccount BankAccountTo { get; set; }
+        public virtual BankAccount BankAccountFrom { get; set; }
+        public virtual BankAccount BankAccountTo { get; set; }
         [Required]
         public decimal AmountTo { get; set; }
         [Required]
