@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DAL.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Interfaces
 {
