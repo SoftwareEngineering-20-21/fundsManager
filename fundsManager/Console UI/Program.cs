@@ -14,16 +14,9 @@ namespace Console_UI
     class Program
     {
         static void Main(string[] args)
-        {
-            DbContextOptionsBuilder<FundsContext> optionsBuilder = new DbContextOptionsBuilder<FundsContext>();
-            optionsBuilder.UseSqlServer("")
-                .UseLazyLoadingProxies();
-
-
-        var context = new FundsContext(optionsBuilder.Options);
-            
-            using (UnitOfWork unitOfWork = new UnitOfWork(context))
-            { 
+        {   
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
                 //seed(unitOfWork);
                 //unitOfWork.Save();
                 //Console.WriteLine(unitOfWork.Repository<BankAccount>().Get(3).CurrencyType);
@@ -85,16 +78,16 @@ namespace Console_UI
                 new Currency{Code = "RUB"},
                 new Currency{Code = "ZAR"},
                 new Currency{Code = "GBP"}
-            };  
+            };
             List<User> users = new List<User>
             {
-                new User{Surname = "Surname1",Mail = "mail1",Name = "Name1",Phone = 0684565708,Login ="Login1",Password = "Password1"},
-                new User{Surname = "Surname2",Mail = "mail2",Name = "Name2",Phone = 0684565701,Login ="Login2",Password = "Password2"},
-                new User{Surname = "Surname3",Mail = "mail3",Name = "Name3",Phone = 0684565728,Login ="Login3",Password = "Password3"},
-                new User{Surname = "Surname4",Mail = "mail4",Name = "Name4",Phone = 0684565738,Login ="Login4",Password = "Password4"},
-                new User{Surname = "Surname5",Mail = "mail5",Name = "Name5",Phone = 0684565748,Login ="Login5",Password = "Password5"},
-                new User{Surname = "Surname6",Mail = "mail6",Name = "Name6",Phone = 0684565758,Login ="Login6",Password = "Password6"},
-                new User{Surname = "Surname7",Mail = "mail7",Name = "Name7",Phone = 0684565768,Login ="Login7",Password = "Password7"}
+                new User{Surname = "Surname3",Mail = "mail3",Name = "Name3",Phone = "0684565728",Login ="Login3",Password = "Password3"},
+                new User{Surname = "Surname4",Mail = "mail4",Name = "Name4",Phone = "0684565738",Login ="Login4",Password = "Password4"},
+                new User{Surname = "Surname1",Mail = "mail1",Name = "Name1",Phone = "0684565708",Login ="Login1",Password = "Password1"},
+                new User{Surname = "Surname5",Mail = "mail5",Name = "Name5",Phone = "0684565748",Login ="Login5",Password = "Password5"},
+                new User{Surname = "Surname6",Mail = "mail6",Name = "Name6",Phone = "0684565758",Login ="Login6",Password = "Password6"},
+                new User{Surname = "Surname7",Mail = "mail7",Name = "Name7",Phone = "0684565768",Login ="Login7",Password = "Password7"},
+                new User{Surname = "Surname2",Mail = "mail2",Name = "Name2",Phone = "0684565701",Login ="Login2",Password = "Password2"}
 
             };
 
