@@ -16,7 +16,7 @@ namespace DAL.Context
 
         public FundsContext()
             : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(
-                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=fundsManagerDB;Integrated Security=True").UseLazyLoadingProxies().Options)
+                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial catalog=FundsDbTest123;Integrated Security=True").UseLazyLoadingProxies().Options)
         {
             Database.EnsureCreated();
         }
@@ -41,7 +41,7 @@ namespace DAL.Context
                 .HasForeignKey(pt => pt.BankAccountId);
 
             modelBuilder.Entity<User>(entity => {
-                entity.HasIndex(e => e.Login).IsUnique();
+                entity.HasIndex(e => e.Mail).IsUnique();
             });
         }
     }

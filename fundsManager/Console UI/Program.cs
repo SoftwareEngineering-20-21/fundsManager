@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using BLL.Interfaces;
+using BLL.Services;
 using DAL.Context;
 using DAL.Domain;
 using DAL.Enums;
@@ -17,56 +19,61 @@ namespace Console_UI
         {   
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
+                IUserService service = new UserService(unitOfWork);
+                //Console.WriteLine(service.SignUp("Kuchma","Siverun","taras@mail.com","380682151604","taras"));
+                //Console.WriteLine(service.Login("taras@mail.com", "taras1"));
+                //Console.WriteLine(service.ChangePassword("taras1","taras5"));
+                //Console.WriteLine(service.Login("taras@mail.com", "taras5"));
+                //Console.WriteLine(service.Login("taras@mail.com", "taras3"));
                 //seed(unitOfWork);
                 //unitOfWork.Save();
-                //Console.WriteLine(unitOfWork.Repository<BankAccount>().Get(3).CurrencyType);
 
-                Console.WriteLine("Users");
-                foreach (var i in unitOfWork.Repository<User>().Get())
-                {
-                    Console.Write(i.Id + "\t");
-                    Console.Write(i.Login + "\t");
-                    Console.Write(i.Password + "\t");
-                    Console.Write(i.Mail + "\t");
-                   Console.Write(i.Name + "\t");
-                   Console.Write(i.Surname + "\t");
-                   Console.Write(i.Phone.ToString() + "\t");
-                   Console.WriteLine();
-                }
-                
-                Console.WriteLine("BankAccounts");
-                foreach (var i in unitOfWork.Repository<BankAccount>().Get())
-                {
-                    Console.WriteLine(i.CurrencyType.Code);
-                    Console.WriteLine(i.Users.Count);
+                //Console.WriteLine("Users");
+                //foreach (var i in unitOfWork.Repository<User>().Get())
+                //{
+                //    Console.Write(i.Id + "\t");
+                //    Console.Write(i.Login + "\t");
+                //    Console.Write(i.Password + "\t");
+                //    Console.Write(i.Mail + "\t");
+                //   Console.Write(i.Name + "\t");
+                //   Console.Write(i.Surname + "\t");
+                //   Console.Write(i.Phone.ToString() + "\t");
+                //   Console.WriteLine();
+                //}
+                //
+                //Console.WriteLine("BankAccounts");
+                //foreach (var i in unitOfWork.Repository<BankAccount>().Get())
+                //{
+                //    Console.WriteLine(i.CurrencyType.Code);
+                //    Console.WriteLine(i.Users.Count);
+                //
+                //    Console.Write(i.Id + "\t");
+                //    Console.Write(i.CurrencyTypeId + "\t");
+                //    Console.Write(i.Name + "\t");
+                //    Console.Write(i.Type.ToString() + "\t");
+                //    Console.Write(i.Name + "\t");
+                //    Console.WriteLine();
+                //}
+                //Console.WriteLine("Transaction");
+                //foreach (var i in unitOfWork.Repository<Transaction>().Get())
+                //{
+                //    Console.Write(i.Id.ToString() + "\t");
+                //    Console.Write(i.AmountFrom.ToString() + "\t");
+                //    Console.Write(i.AmountTo.ToString() + "\t");
+                //    Console.Write(i.BankAccountFrom.Id.ToString() + "\t");
+                //    Console.Write(i.BankAccountTo.Id.ToString() + "\t");
+                //    Console.Write(i.TransactionDate.ToString() + "\t");
+                //    Console.WriteLine();
+                //}
+                //Console.WriteLine("Currency");
+                //foreach (var i in unitOfWork.Repository<Currency>().Get())
+                //{
+                //    Console.Write(i.Id.ToString() + "\t");
+                //    Console.Write(i.Code.ToString() + "\t");
+                //    Console.WriteLine();
+                //}
 
-                    Console.Write(i.Id + "\t");
-                    Console.Write(i.CurrencyTypeId + "\t");
-                    Console.Write(i.Name + "\t");
-                    Console.Write(i.Type.ToString() + "\t");
-                    Console.Write(i.Name + "\t");
-                    Console.WriteLine();
-                }
-                Console.WriteLine("Transaction");
-                foreach (var i in unitOfWork.Repository<Transaction>().Get())
-                {
-                    Console.Write(i.Id.ToString() + "\t");
-                    Console.Write(i.AmountFrom.ToString() + "\t");
-                    Console.Write(i.AmountTo.ToString() + "\t");
-                    Console.Write(i.BankAccountFrom.Id.ToString() + "\t");
-                    Console.Write(i.BankAccountTo.Id.ToString() + "\t");
-                    Console.Write(i.TransactionDate.ToString() + "\t");
-                    Console.WriteLine();
-                }
-                Console.WriteLine("Currency");
-                foreach (var i in unitOfWork.Repository<Currency>().Get())
-                {
-                    Console.Write(i.Id.ToString() + "\t");
-                    Console.Write(i.Code.ToString() + "\t");
-                    Console.WriteLine();
-                }
-               
-               
+
             }
         }
         public static void seed(IUnitOfWork unitOfWork)
@@ -81,13 +88,13 @@ namespace Console_UI
             };
             List<User> users = new List<User>
             {
-                new User{Surname = "Surname3",Mail = "mail3",Name = "Name3",Phone = "0684565728",Login ="Login3",Password = "Password3"},
-                new User{Surname = "Surname4",Mail = "mail4",Name = "Name4",Phone = "0684565738",Login ="Login4",Password = "Password4"},
-                new User{Surname = "Surname1",Mail = "mail1",Name = "Name1",Phone = "0684565708",Login ="Login1",Password = "Password1"},
-                new User{Surname = "Surname5",Mail = "mail5",Name = "Name5",Phone = "0684565748",Login ="Login5",Password = "Password5"},
-                new User{Surname = "Surname6",Mail = "mail6",Name = "Name6",Phone = "0684565758",Login ="Login6",Password = "Password6"},
-                new User{Surname = "Surname7",Mail = "mail7",Name = "Name7",Phone = "0684565768",Login ="Login7",Password = "Password7"},
-                new User{Surname = "Surname2",Mail = "mail2",Name = "Name2",Phone = "0684565701",Login ="Login2",Password = "Password2"}
+                new User{Surname = "Surname3",Mail = "mail3",Name = "Name3",Phone = "0684565728",Password = "Password3"},
+                new User{Surname = "Surname4",Mail = "mail4",Name = "Name4",Phone = "0684565738",Password = "Password4"},
+                new User{Surname = "Surname1",Mail = "mail1",Name = "Name1",Phone = "0684565708",Password = "Password1"},
+                new User{Surname = "Surname5",Mail = "mail5",Name = "Name5",Phone = "0684565748",Password = "Password5"},
+                new User{Surname = "Surname6",Mail = "mail6",Name = "Name6",Phone = "0684565758",Password = "Password6"},
+                new User{Surname = "Surname7",Mail = "mail7",Name = "Name7",Phone = "0684565768",Password = "Password7"},
+                new User{Surname = "Surname2",Mail = "mail2",Name = "Name2",Phone = "0684565701",Password = "Password2"}
 
             };
 
