@@ -56,10 +56,8 @@ namespace BLL.Services
                 unitOfWork.Save();
                 return true;
             }
-            else 
-            {
-                return false;
-            }
+            return false;
+
         }
 
         public bool ChangePhoneNumber(string number)
@@ -71,10 +69,8 @@ namespace BLL.Services
                 unitOfWork.Save();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
+
         }
 
         public bool Login(string email, string password)
@@ -85,9 +81,8 @@ namespace BLL.Services
                 currentUser = user;
                 return true;
             }
-            {
-                return false;
-            }
+            return false;
+            
         }
 
         public bool SignUp(string firstName, string lastName, string email, string phoneNumber, string password)
@@ -109,10 +104,7 @@ namespace BLL.Services
                 currentUser = user;
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
 }
