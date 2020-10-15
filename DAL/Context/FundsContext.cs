@@ -1,6 +1,8 @@
 ﻿using DAL.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace DAL.Context
 {
@@ -10,9 +12,11 @@ namespace DAL.Context
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Currency> Currency { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+
+
         public FundsContext()
             : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(
-                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial Catalog=FundsDb;Integrated Security=True").UseLazyLoadingProxies().Options)
+                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=fundsManagerDB;Integrated Security=True").UseLazyLoadingProxies().Options)
         {
             Database.EnsureCreated();
         }
