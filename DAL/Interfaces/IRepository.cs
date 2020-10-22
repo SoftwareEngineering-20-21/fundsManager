@@ -13,6 +13,7 @@ namespace DAL.Interfaces
         void Delete(T entity);
         void Delete(int id);
         void Update(T entity);
+        Task AddAsync(T entity);
         void Save();
         Task SaveAsync();
     }

@@ -55,7 +55,14 @@ namespace DAL.Repositories
 
         public void Update(T entity)
         {
-            context.Entry(entity).State = EntityState.Modified;
+            dbSet.Remove(dbSet.Find(entity.Id));
+            context.SaveChanges();
+            dbSet.Add(entity);
+        }
+
+        public async Task AddAsync(T entity)
+        {
+            await dbSet.AddAsync(entity);
         }
 
         public void Save()

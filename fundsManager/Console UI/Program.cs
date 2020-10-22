@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using AutoMapper;
 using BLL;
-using BLL.DTO;
 using BLL.Interfaces;
 using BLL.Services;
 using DAL.Context;
@@ -24,85 +23,11 @@ namespace Console_UI
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
 
-                IMapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new AutomapperProfile())));
-                //seed(unitOfWork);
-                //unitOfWork.Save();
-
-                List<UserDTO> users = new List<UserDTO>();
-                List<User> usersEntity = unitOfWork.Repository<User>().Get().ToList();
-
-                mapper.Map(usersEntity, users);
-
-                foreach (var i in users)
-                {
-                    i.Name = "Debil" + i.ToString();
-                    Console.WriteLine(i.Name);
-                    unitOfWork.Repository<User>().Update(mapper.Map<User>(i));
-                }
-                unitOfWork.Save();
-                // IUserService service = new UserService(unitOfWork);
-                // Console.WriteLine(service.SignUp("Kuchma","Siverun","taras@mail.com","380682151604","taras"));
-                // Console.WriteLine(service.Login("taras@mail.com", "taras1"));
-                // Console.WriteLine(service.ChangePassword("taras1","taras5"));
-                // Console.WriteLine(service.Login("taras@mail.com", "taras5"));
-                // Console.WriteLine(service.Login("taras@mail.com", "taras3"));
-                // seed(unitOfWork);
-                // unitOfWork.Save();
-                //
-                // Console.WriteLine("Users");
-                // foreach (var i in unitOfWork.Repository<User>().Get())
-                // {
-                //     Console.Write(i.Id + "\t");
-                //     Console.Write(i.Password + "\t");
-                //     Console.Write(i.Mail + "\t");
-                //    Console.Write(i.Name + "\t");
-                //    Console.Write(i.Surname + "\t");
-                //    Console.Write(i.Phone.ToString() + "\t");
-                //    Console.WriteLine();
-                // }
-                // 
-                // Console.WriteLine("BankAccounts");
-                // foreach (var i in unitOfWork.Repository<BankAccount>().Get())
-                // {
-                //     Console.WriteLine(i.CurrencyType.Code);
-                //     Console.WriteLine(i.Users.Count);
-                // 
-                //     Console.Write(i.Id + "\t");
-                //     Console.Write(i.CurrencyTypeId + "\t");
-                //     Console.Write(i.Name + "\t");
-                //     Console.Write(i.Type.ToString() + "\t");
-                //     Console.Write(i.Name + "\t");
-                //     Console.WriteLine();
-                // }
-                // Console.WriteLine("Transaction");
-                // foreach (var i in unitOfWork.Repository<Transaction>().Get())
-                // {
-                //     Console.Write(i.Id.ToString() + "\t");
-                //     Console.Write(i.AmountFrom.ToString() + "\t");
-                //     Console.Write(i.AmountTo.ToString() + "\t");
-                //     Console.Write(i.BankAccountFrom.Id.ToString() + "\t");
-                //     Console.Write(i.BankAccountTo.Id.ToString() + "\t");
-                //     Console.Write(i.TransactionDate.ToString() + "\t");
-                //     Console.WriteLine();
-                // }
-                // Console.WriteLine("Currency");
-                // foreach (var i in unitOfWork.Repository<Currency>().Get())
-                // {
-                //     Console.Write(i.Id.ToString() + "\t");
-                //     Console.Write(i.Code.ToString() + "\t");
-                //     Console.WriteLine();
-                // }
-
-
-
-
-
 
             }
         }
         public static void seed(IUnitOfWork unitOfWork)
         {
-            IMapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new AutomapperProfile())));
             List<Currency> cur = new List<Currency>
             {
                 new Currency{Code = "USD"},
@@ -162,19 +87,19 @@ namespace Console_UI
             };
             foreach (var i in cur)
             {
-                unitOfWork.Repository<Currency>().Update(i);
+                unitOfWork.Repository<Currency>().AddAsync(i);
             }
             foreach (var i in users)
             {
-                unitOfWork.Repository<User>().Update(i);
+                unitOfWork.Repository<User>().AddAsync(i);
             }
             foreach (var i in accounts)
             {
-                unitOfWork.Repository<BankAccount>().Update(i);
+                unitOfWork.Repository<BankAccount>().AddAsync(i);
             }
             foreach (var i in transactions)
             {
-                unitOfWork.Repository<Transaction>().Update(i);
+                unitOfWork.Repository<Transaction>().AddAsync(i);
             }
         }
     }
