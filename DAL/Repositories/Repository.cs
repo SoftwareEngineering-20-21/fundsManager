@@ -55,9 +55,7 @@ namespace DAL.Repositories
 
         public void Update(T entity)
         {
-            dbSet.Remove(dbSet.Find(entity.Id));
-            context.SaveChanges();
-            dbSet.Add(entity);
+            dbSet.Update(entity);
         }
 
         public async Task AddAsync(T entity)
