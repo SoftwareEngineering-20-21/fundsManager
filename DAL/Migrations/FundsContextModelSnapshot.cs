@@ -72,10 +72,10 @@ namespace DAL.Migrations
                     b.Property<decimal>("AmountTo")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("BankAccountFromId")
+                    b.Property<int>("BankAccountFromId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BankAccountToId")
+                    b.Property<int>("BankAccountToId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -154,11 +154,15 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.Domain.BankAccount", "BankAccountFrom")
                         .WithMany()
-                        .HasForeignKey("BankAccountFromId");
+                        .HasForeignKey("BankAccountFromId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DAL.Domain.BankAccount", "BankAccountTo")
                         .WithMany()
-                        .HasForeignKey("BankAccountToId");
+                        .HasForeignKey("BankAccountToId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DAL.Domain.UserBankAccount", b =>

@@ -55,7 +55,7 @@ namespace DAL.Repositories
 
         public void Update(T entity)
         {
-            dbSet.Update(entity);
+            context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Save()
