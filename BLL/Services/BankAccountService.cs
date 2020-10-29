@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.Interfaces;
@@ -18,19 +19,57 @@ namespace BLL.Services
             this.unitOfWork = unitOfWork;
             this.currencyService = currencyService;
         }
+
+        public IEnumerable<Transaction> GetAllUserTransactions()
+        {
+            if (CurrentUser is null)
+            {
+                throw new ArgumentException("Current user is null");
+            }
+            return unitOfWork.Repository<Transaction>()
+                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id));
+        }
+
+        public IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount)
+        {
+            return unitOfWork.Repository<Transaction>()
+                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) && x.BankAccountFrom.Id == fromAccount.Id);
+        }
+
+        public IEnumerable<Transaction> GetAllUserTransactionsTo(BankAccount toAccount)
+        {
+            return unitOfWork.Repository<Transaction>()
+                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) && x.BankAccountTo.Id == toAccount.Id);
+        }
+
+        public IEnumerable<BankAccount> GetAllUserAccounts()
+        {
+            if (CurrentUser is null)
+            {
+                throw new ArgumentException("Current user is null");
+            }
+
+            return unitOfWork.Repository<BankAccount>()
+                .Get(x => x.Users.Select(x => x.UserId).Contains(CurrentUser.Id));
+        }
+
         public async Task<Transaction> MakeTransaction(BankAccount from, BankAccount to, decimal amount, DateTime date, string description)
         {
+            if (CurrentUser is null)
+            {
+                throw new ArgumentException("Current user is null");
+            }
             if (from is null || to is null)
-                throw new ArgumentException("Bank account is null");
+                throw new ArgumentException("Bank fromAccount is null");
             
             if (from.Type == AccountType.Income && to.Type == AccountType.Expence)
-                throw new ArgumentException("Cannot create transaction from income to expence account");
+                throw new ArgumentException("Cannot create transaction from income to expence fromAccount");
             
             if (from.Type == AccountType.Expence)
                 throw new ArgumentException("Cannot create transaction from expence");
             
             if (from.Type == AccountType.Current && to.Type == AccountType.Income)
-                throw new ArgumentException("Cannot create transaction from current to income account");
+                throw new ArgumentException("Cannot create transaction from current to income fromAccount");
 
             var transaction = new Transaction
             {
