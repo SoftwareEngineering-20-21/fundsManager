@@ -16,7 +16,7 @@ namespace DAL.Context
 
         public FundsContext()
             : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(
-                @"Data Source=DESKTOP-1CLE678\SQLEXPRESS;Initial catalog=FundsDbTest123;Integrated Security=True").UseLazyLoadingProxies().Options)
+                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FundsManager;Integrated Security=True").UseLazyLoadingProxies().Options)
         {
             Database.EnsureCreated();
         }

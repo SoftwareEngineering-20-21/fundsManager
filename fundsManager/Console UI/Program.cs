@@ -16,7 +16,7 @@ namespace Console_UI
     class Program
     {
         static void Main(string[] args)
-        {   
+        {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 IUserService service = new UserService(unitOfWork);
@@ -29,17 +29,16 @@ namespace Console_UI
                 //unitOfWork.Save();
 
                 //Console.WriteLine("Users");
-                //foreach (var i in unitOfWork.Repository<User>().Get())
-                //{
-                //    Console.Write(i.Id + "\t");
-                //    Console.Write(i.Login + "\t");
-                //    Console.Write(i.Password + "\t");
-                //    Console.Write(i.Mail + "\t");
-                //   Console.Write(i.Name + "\t");
-                //   Console.Write(i.Surname + "\t");
-                //   Console.Write(i.Phone.ToString() + "\t");
-                //   Console.WriteLine();
-                //}
+                foreach (var i in unitOfWork.Repository<User>().Get())
+                {
+                    Console.Write(i.Id + "\t");
+                    Console.Write(i.Password + "\t");
+                    Console.Write(i.Mail + "\t");
+                   Console.Write(i.Name + "\t");
+                   Console.Write(i.Surname + "\t");
+                   Console.Write(i.Phone.ToString() + "\t");
+                   Console.WriteLine();
+                }
                 //
                 //Console.WriteLine("BankAccounts");
                 //foreach (var i in unitOfWork.Repository<BankAccount>().Get())
