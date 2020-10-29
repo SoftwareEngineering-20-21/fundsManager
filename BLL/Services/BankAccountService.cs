@@ -18,9 +18,33 @@ namespace BLL.Services
             this.unitOfWork = unitOfWork;
             this.currencyService = currencyService;
         }
-        public Task<Transaction> MakeTransaction(BankAccount from, BankAccount to, decimal amount, DateTime date)
+        public async Task<Transaction> MakeTransaction(BankAccount from, BankAccount to, decimal amount, DateTime date, string description)
         {
-            throw new NotImplementedException();
+            if (from is null || to is null)
+                throw new ArgumentException("Bank account is null");
+            
+            if (from.Type == AccountType.Income && to.Type == AccountType.Expence)
+                throw new ArgumentException("Cannot create transaction from income to expence account");
+            
+            if (from.Type == AccountType.Expence)
+                throw new ArgumentException("Cannot create transaction from expence");
+            
+            if (from.Type == AccountType.Current && to.Type == AccountType.Income)
+                throw new ArgumentException("Cannot create transaction from current to income account");
+
+            var transaction = new Transaction
+            {
+                AmountFrom = amount,
+                AmountTo = amount * currencyService.GetRate(to.CurrencyType.Code) /
+                           currencyService.GetRate(from.CurrencyType.Code),
+                BankAccountFrom = from,
+                BankAccountTo = to,
+                Description = description,
+                TransactionDate = date
+            };
+            await unitOfWork.Repository<Transaction>().AddAsync(transaction);
+            await unitOfWork.SaveAsync();
+            return transaction;
         }
         public async Task<bool> ShareAccount(BankAccount account, string email)
         {
