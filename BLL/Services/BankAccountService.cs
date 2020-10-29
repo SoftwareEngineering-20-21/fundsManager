@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using BLL.Interfaces;
 using DAL.Domain;
 using DAL.Enums;
@@ -11,15 +12,17 @@ namespace BLL.Services
     {
         public User CurrentUser { get; set; }
         private readonly IUnitOfWork unitOfWork;
-        public BankAccountService(IUnitOfWork unitOfWork)
+        private readonly ICurrencyService currencyService;    
+        public BankAccountService(IUnitOfWork unitOfWork, ICurrencyService currencyService)
         {
             this.unitOfWork = unitOfWork;
+            this.currencyService = currencyService;
         }
-        public bool MakeTransaction(BankAccount from, BankAccount to, decimal amount, DateTime date)
+        public Task<Transaction> MakeTransaction(BankAccount from, BankAccount to, decimal amount, DateTime date)
         {
             throw new NotImplementedException();
         }
-        public bool ShareAccount(BankAccount account, string email)
+        public async Task<bool> ShareAccount(BankAccount account, string email)
         {
             var user = unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email);
             if (user == null || account == null)
@@ -31,42 +34,42 @@ namespace BLL.Services
                 BankAccount = account
             });
             unitOfWork.Repository<User>().Update(user);
-            unitOfWork.Save();
+            await unitOfWork.SaveAsync();
             return true;
         }
 
-        public bool CreateAccount(AccountType type, string name, Currency currency)
+        public async Task<BankAccount> CreateAccount(AccountType type, string name, Currency currency)
         {
-            if (CurrentUser != null)
+            if (CurrentUser is null)
             {
-                CurrentUser.BankAccounts.Add(
-                    new UserBankAccount
-                    {
-                        BankAccount = new BankAccount
-                        {
-                            CurrencyType = currency,
-                            Name = name,
-                            Type = type
-                        }
-                    });
-                unitOfWork.Repository<User>().Update(CurrentUser);
-                unitOfWork.SaveAsync();
-                return true;
+                throw new ArgumentException("Current user is null");
             }
-            return false;
+
+            if (currency is null)
+            {
+                throw new ArgumentException("Currency is null");
+            }
+
+            var account = new BankAccount
+            {
+                CurrencyType = currency,
+                Name = name,
+                Type = type
+            };
+            CurrentUser.BankAccounts.Add(
+                new UserBankAccount
+                {
+                    BankAccount = account
+                });
+            unitOfWork.Repository<User>().Update(CurrentUser);
+            await unitOfWork.SaveAsync();
+            return account;
         }
-        public bool DeleteAccount(BankAccount account)
+
+        public async Task DeleteAccount(BankAccount account)
         {
-            try
-            {
-                unitOfWork.Repository<BankAccount>().Delete(account);
-                unitOfWork.Save();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            unitOfWork.Repository<BankAccount>().Delete(account);
+            await unitOfWork.SaveAsync();
         }
     }
 }
