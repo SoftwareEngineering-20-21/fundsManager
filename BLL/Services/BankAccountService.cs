@@ -50,7 +50,7 @@ namespace BLL.Services
                 .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) && x.BankAccountTo.Id == toAccount.Id);
         }
 
-        public IEnumerable<Transaction> GetAllUserTransactions(DateTime dateFrom)
+        public IEnumerable<Transaction> GetAllUserTransactions(DateTime dateFrom, DateTime dateTo)
         {
             if (CurrentUser is null)
             {
@@ -59,10 +59,10 @@ namespace BLL.Services
 
             return unitOfWork.Repository<Transaction>()
                 .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id))
-                .Where(x => x.TransactionDate > dateFrom);
+                .Where(x => x.TransactionDate >= dateFrom && x.TransactionDate <= dateTo);
         }
 
-        public IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount, DateTime dateFrom)
+        public IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount, DateTime dateFrom, DateTime dateTo)
         {
             if (CurrentUser is null)
             {
@@ -71,10 +71,10 @@ namespace BLL.Services
 
             return unitOfWork.Repository<Transaction>()
                 .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) &&
-                          x.BankAccountFrom.Id == fromAccount.Id).Where(x => x.TransactionDate > dateFrom);
+                          x.BankAccountFrom.Id == fromAccount.Id).Where(x => x.TransactionDate >= dateFrom && x.TransactionDate <=dateTo);
         }
 
-        public IEnumerable<Transaction> GetAllUserTransactionsTo(BankAccount toAccount, DateTime dateFrom)
+        public IEnumerable<Transaction> GetAllUserTransactionsTo(BankAccount toAccount, DateTime dateFrom, DateTime dateTo)
         {
             if (CurrentUser is null)
             {
@@ -83,7 +83,7 @@ namespace BLL.Services
 
             return unitOfWork.Repository<Transaction>()
                 .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) &&
-                          x.BankAccountTo.Id == toAccount.Id).Where(x => x.TransactionDate > dateFrom);
+                          x.BankAccountTo.Id == toAccount.Id).Where(x => x.TransactionDate >= dateFrom && x.TransactionDate <= dateTo);
         }
 
         public IEnumerable<BankAccount> GetAllUserAccounts()
