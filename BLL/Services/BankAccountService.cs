@@ -32,14 +32,58 @@ namespace BLL.Services
 
         public IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount)
         {
+            if (CurrentUser is null)
+            {
+                throw new ArgumentException("Current user is null");
+            }
             return unitOfWork.Repository<Transaction>()
                 .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) && x.BankAccountFrom.Id == fromAccount.Id);
         }
 
         public IEnumerable<Transaction> GetAllUserTransactionsTo(BankAccount toAccount)
         {
+            if (CurrentUser is null)
+            {
+                throw new ArgumentException("Current user is null");
+            }
             return unitOfWork.Repository<Transaction>()
                 .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) && x.BankAccountTo.Id == toAccount.Id);
+        }
+
+        public IEnumerable<Transaction> GetAllUserTransactions(DateTime dateFrom)
+        {
+            if (CurrentUser is null)
+            {
+                throw new ArgumentException("Current user is null");
+            }
+
+            return unitOfWork.Repository<Transaction>()
+                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id))
+                .Where(x => x.TransactionDate > dateFrom);
+        }
+
+        public IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount, DateTime dateFrom)
+        {
+            if (CurrentUser is null)
+            {
+                throw new ArgumentException("Current user is null");
+            }
+
+            return unitOfWork.Repository<Transaction>()
+                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) &&
+                          x.BankAccountFrom.Id == fromAccount.Id).Where(x => x.TransactionDate > dateFrom);
+        }
+
+        public IEnumerable<Transaction> GetAllUserTransactionsTo(BankAccount toAccount, DateTime dateFrom)
+        {
+            if (CurrentUser is null)
+            {
+                throw new ArgumentException("Current user is null");
+            }
+
+            return unitOfWork.Repository<Transaction>()
+                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) &&
+                          x.BankAccountTo.Id == toAccount.Id).Where(x => x.TransactionDate > dateFrom);
         }
 
         public IEnumerable<BankAccount> GetAllUserAccounts()
