@@ -20,14 +20,35 @@ namespace BLL.Services
             this.currencyService = currencyService;
         }
 
+        public decimal GetAccountScore(BankAccount account)
+        {
+            if (account.Type == AccountType.Income)
+            {
+                return unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
+                    .Select(x => x.AmountFrom).Sum();
+            }
+            else if (account.Type == AccountType.Expence)
+            {
+                return unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
+                    .Select(x => x.AmountTo).Sum();
+            }
+            else
+            {
+                return unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
+                           .Select(x => x.AmountTo).Sum() -
+                       unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
+                           .Select(x => x.AmountFrom).Sum();
+            }
+        }
+
         public IEnumerable<Transaction> GetAllUserTransactions()
         {
             if (CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
-            return unitOfWork.Repository<Transaction>()
-                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id));
+            return unitOfWork.Repository<Transaction>().Get(x => x.UserId == CurrentUser.Id);
+
         }
 
         public IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount)
@@ -36,8 +57,9 @@ namespace BLL.Services
             {
                 throw new ArgumentException("Current user is null");
             }
+
             return unitOfWork.Repository<Transaction>()
-                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) && x.BankAccountFrom.Id == fromAccount.Id);
+                .Get(x => x.UserId == CurrentUser.Id && x.BankAccountFrom.Id == fromAccount.Id);
         }
 
         public IEnumerable<Transaction> GetAllUserTransactionsTo(BankAccount toAccount)
@@ -47,7 +69,8 @@ namespace BLL.Services
                 throw new ArgumentException("Current user is null");
             }
             return unitOfWork.Repository<Transaction>()
-                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) && x.BankAccountTo.Id == toAccount.Id);
+                .Get(x => x.UserId == CurrentUser.Id && x.BankAccountFrom.Id == toAccount.Id);
+
         }
 
         public IEnumerable<Transaction> GetAllUserTransactions(DateTime dateFrom, DateTime dateTo)
@@ -56,10 +79,8 @@ namespace BLL.Services
             {
                 throw new ArgumentException("Current user is null");
             }
-
             return unitOfWork.Repository<Transaction>()
-                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id))
-                .Where(x => x.TransactionDate >= dateFrom && x.TransactionDate <= dateTo);
+                .Get(x => x.UserId == CurrentUser.Id && x.TransactionDate >= dateFrom && x.TransactionDate <= dateTo);
         }
 
         public IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount, DateTime dateFrom, DateTime dateTo)
@@ -70,7 +91,7 @@ namespace BLL.Services
             }
 
             return unitOfWork.Repository<Transaction>()
-                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) &&
+                .Get(x => x.UserId ==  CurrentUser.Id &&
                           x.BankAccountFrom.Id == fromAccount.Id).Where(x => x.TransactionDate >= dateFrom && x.TransactionDate <=dateTo);
         }
 
@@ -82,7 +103,7 @@ namespace BLL.Services
             }
 
             return unitOfWork.Repository<Transaction>()
-                .Get(x => x.BankAccountFrom.Users.Select(a => a.UserId).Contains(CurrentUser.Id) &&
+                .Get(x => x.UserId == CurrentUser.Id &&
                           x.BankAccountTo.Id == toAccount.Id).Where(x => x.TransactionDate >= dateFrom && x.TransactionDate <= dateTo);
         }
 
@@ -123,7 +144,9 @@ namespace BLL.Services
                 BankAccountFrom = from,
                 BankAccountTo = to,
                 Description = description,
-                TransactionDate = date
+                TransactionDate = date,
+                UserId = CurrentUser.Id,
+                User = CurrentUser
             };
             await unitOfWork.Repository<Transaction>().AddAsync(transaction);
             await unitOfWork.SaveAsync();
