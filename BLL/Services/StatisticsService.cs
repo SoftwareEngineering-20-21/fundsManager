@@ -18,9 +18,10 @@ namespace BLL.Services
         public StatisticsService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+            
         }
 
-        public IEnumerable<StatisticsItem> GetStatistics(DateTime fromDate, DateTime toDate)
+        public IEnumerable<StatisticsItem> GetExpenceStatistics(DateTime fromDate, DateTime toDate)
         {
            
             List<StatisticsItem> Items = new List<StatisticsItem>();
@@ -29,18 +30,31 @@ namespace BLL.Services
                 throw new ArgumentException("User is null");
             }
 
-            if (acctype == null)
+            var transactions = unitOfWork.Repository<Transaction>()
+               .Get(x=>x.UserId== CurrentUser.Id).Where(x => x.TransactionDate >= fromDate && x.TransactionDate <= toDate  &&  x.BankAccountTo.Type==AccountType.Expence);
+
+            return transactions.Select(x => new StatisticsItem
             {
-                var accounts=unitOfWork.Repository<BankAccount>().Get(x => x.Users.Select(a => a.UserId).Contains(CurrentUser.Id));
-                var transaction= unitOfWork.Repository<Transaction>().Get(x => x.Users.Select(a => a.UserId).Contains(CurrentUser.Id));
-          
+                Date = x.TransactionDate,
+                Value = x.AmountTo
+            });
+        }   
+        public IEnumerable<StatisticsItem> GetIncomeStatistics(DateTime fromDate, DateTime toDate)
+        {
+            List<StatisticsItem> Items = new List<StatisticsItem>();
+            if (CurrentUser is null)
+            {
+                throw new ArgumentException("User is null");
             }
-            
-      
+
+            var transactions = unitOfWork.Repository<Transaction>()
+               .Get(x => x.UserId == CurrentUser.Id).Where(x => x.TransactionDate >= fromDate && x.TransactionDate <= toDate && x.BankAccountTo.Type == AccountType.Income);
+
+            return transactions.Select(x => new StatisticsItem
+            {
+                Date = x.TransactionDate,
+                Value = x.AmountTo
+            });
         }
-        public IEnumerable<StatisticsItem> GetIncomeStatistics(DateTime fromDate, DateTime toDate, AccountType? acctype = null)
-
-
-
     }
 }

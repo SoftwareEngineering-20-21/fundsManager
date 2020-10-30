@@ -9,7 +9,7 @@ namespace BLL.Interfaces
 {
     interface IStatisticsService
     {
-        public IEnumerable<StatisticsItem> GetCostsStatistics(DateTime fromDate,DateTime toDate);
+        public IEnumerable<StatisticsItem> GetExpenceStatistics(DateTime fromDate,DateTime toDate);
         public IEnumerable<StatisticsItem> GetIncomeStatistics(DateTime fromDate, DateTime toDate);
     }
 }
