@@ -15,5 +15,8 @@ namespace DAL.Domain
         [Required]
         public DateTime TransactionDate { get; set; }
         public string Description { get; set; }
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }
