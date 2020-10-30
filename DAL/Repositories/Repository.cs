@@ -58,6 +58,11 @@ namespace DAL.Repositories
             dbSet.Update(entity);
         }
 
+        public async Task AddAsync(T entity)
+        {
+            await dbSet.AddAsync(entity);
+        }
+
         public void Save()
         {
             context.SaveChanges();
