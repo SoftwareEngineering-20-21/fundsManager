@@ -18,13 +18,11 @@ namespace BLL.Services
         public StatisticsService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            
         }
 
         public IEnumerable<StatisticsItem> GetExpenceStatistics(DateTime fromDate, DateTime toDate)
         {
            
-            List<StatisticsItem> Items = new List<StatisticsItem>();
             if (CurrentUser is null)
             {
                 throw new ArgumentException("User is null");
@@ -41,14 +39,14 @@ namespace BLL.Services
         }   
         public IEnumerable<StatisticsItem> GetIncomeStatistics(DateTime fromDate, DateTime toDate)
         {
-            List<StatisticsItem> Items = new List<StatisticsItem>();
+          
             if (CurrentUser is null)
             {
                 throw new ArgumentException("User is null");
             }
 
             var transactions = unitOfWork.Repository<Transaction>()
-               .Get(x => x.UserId == CurrentUser.Id).Where(x => x.TransactionDate >= fromDate && x.TransactionDate <= toDate && x.BankAccountTo.Type == AccountType.Income);
+               .Get(x => x.UserId == CurrentUser.Id).Where(x => x.TransactionDate >= fromDate && x.TransactionDate <= toDate && x.BankAccountFrom.Type == AccountType.Income);
 
             return transactions.Select(x => new StatisticsItem
             {
