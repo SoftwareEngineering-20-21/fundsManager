@@ -11,5 +11,7 @@ namespace BLL.Interfaces
     {
         public IEnumerable<StatisticsItem> GetExpenceStatistics(DateTime fromDate,DateTime toDate);
         public IEnumerable<StatisticsItem> GetIncomeStatistics(DateTime fromDate, DateTime toDate);
+        public IEnumerable<StatisticsItem> GetExpenceStatisticsFullPeriod();
+        public IEnumerable<StatisticsItem> GetIncomeStatisticsFullPeriod();
     }
 }
