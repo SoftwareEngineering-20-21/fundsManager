@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Menu HorizontalAlignment="Left" Height="122" Margin="153,85,0,0" VerticalAlignment="Top" Width="142" Background="#FFF68383"/>
-    </Grid>
+    <Grid/>
 </Window>

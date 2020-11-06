@@ -13,7 +13,7 @@ namespace BLL.Services
     public class UserService: IUserService
     {
         private readonly Regex phoneRegex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
-        public User currentUser {get;};
+        public User currentUser { get; private set; }
         private readonly IUnitOfWork unitOfWork;
         private bool IsValidMail(string emailaddress)
         {
