@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
 using System;
+using System.Runtime.InteropServices;
 
 namespace BLL.Services
 {
     public class UserService: IUserService
     {
         private readonly Regex phoneRegex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
-        private User currentUser = null;
+        public User currentUser {get;};
         private readonly IUnitOfWork unitOfWork;
         private bool IsValidMail(string emailaddress)
         {
@@ -29,6 +30,7 @@ namespace BLL.Services
         public UserService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+            currentUser = null;
         }
 
         public bool ChangeMail(string newMail)
