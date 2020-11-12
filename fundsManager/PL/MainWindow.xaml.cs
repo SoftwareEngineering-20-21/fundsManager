@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,36 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
+            
+        }
+
+        public void TextBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+           
+            //TextBox tb = (TextBox)sender;
+            //tb.Text = string.Empty;
+            //tb.GotFocus -= TextBoxGotFocus;
+        }
+        public void PasswordBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            //PasswordBox tb = (PasswordBox)sender;
+            //tb.Password = string.Empty;
+            //tb.GotFocus -= PasswordBoxGotFocus;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Registration win2 = new Registration();
+            MainWindow win1 = new MainWindow();
+            SystemCommands.CloseWindow(this);
+            win2.Show();
+            
+           
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
