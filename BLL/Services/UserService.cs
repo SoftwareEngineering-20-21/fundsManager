@@ -13,7 +13,7 @@ namespace BLL.Services
     public class UserService: IUserService
     {
         private readonly Regex phoneRegex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
-        public User currentUser { get; private set; }
+        public User CurrentUser { get; private set; }
         private readonly IUnitOfWork unitOfWork;
         private bool IsValidMail(string emailaddress)
         {
@@ -30,69 +30,63 @@ namespace BLL.Services
         public UserService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            currentUser = null;
+            CurrentUser = null;
         }
 
         public bool ChangeMail(string newMail)
         {
+            bool changed = false;
             var emails = unitOfWork.Repository<User>().Get().Select(x => x.Mail);
-            if (emails.Contains(newMail) || !IsValidMail(newMail))
+            if (!emails.Contains(newMail) || IsValidMail(newMail))
             {
-                return false;
+                CurrentUser.Mail = newMail;
+                unitOfWork.Repository<User>().Update(CurrentUser);
+                unitOfWork.Save();
+                changed = true;
             }
-            currentUser.Mail = newMail;
-            unitOfWork.Repository<User>().Update(currentUser);
-            unitOfWork.Save();
-            return true;
+            return changed;
         }
 
         public bool ChangePassword(string oldPassword, string newPassword)
         {
-            string currentPassword = currentUser.Password;
+            bool changed = false;
+            string currentPassword = CurrentUser.Password;
             bool validPassword = BCrypt.Net.BCrypt.Verify(oldPassword, currentPassword);
             if (validPassword)
             {
                 string hashPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
-                currentUser.Password = hashPassword;
-                unitOfWork.Repository<User>().Update(currentUser);
+                CurrentUser.Password = hashPassword;
+                unitOfWork.Repository<User>().Update(CurrentUser);
                 unitOfWork.Save();
-                return true;
+                changed = true;
             }
-            else 
-            {
-                return false;
-            }
+            return changed;
         }
 
         public bool ChangePhoneNumber(string number)
         {
+            bool changed = false;
             if (phoneRegex.IsMatch(number))
             {
-                currentUser.Phone = number;
-                unitOfWork.Repository<User>().Update(currentUser);
+                CurrentUser.Phone = number;
+                unitOfWork.Repository<User>().Update(CurrentUser);
                 unitOfWork.Save();
-                return true;
+                changed = true;
             }
-            else
-            {
-                return false;
-            }
+            return changed;
         }
 
-        public bool Login(string email, string password)
+        public User Login(string email, string password)
         {
             User user = unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email);
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
-                currentUser = user;
-                return true;
+                CurrentUser = user;
             }
-            {
-                return false;
-            }
+            return CurrentUser;
         }
 
-        public bool SignUp(string firstName, string lastName, string email, string phoneNumber, string password)
+        public User SignUp(string firstName, string lastName, string email, string phoneNumber, string password)
         {
             var existUser = unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email || x.Phone == phoneNumber);
             if (existUser == null && phoneRegex.IsMatch(phoneNumber) && IsValidMail(email)) 
@@ -108,12 +102,12 @@ namespace BLL.Services
                 };
                 unitOfWork.Repository<User>().Update(user);
                 unitOfWork.Save();
-                currentUser = user;
-                return true;
+                CurrentUser = user;
+                return CurrentUser;
             }
             else
             {
-                return false;
+                return CurrentUser;
             }
         }
     }
