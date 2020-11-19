@@ -24,10 +24,12 @@ namespace Console_UI
         static void Main(string[] args)
         {
             var registrations = new NinjectRegistrations();
+            var registrations2 = new NinjectRegistrations();
             IKernel kernel = new StandardKernel(registrations);
+            IKernel kernel2 = new StandardKernel(registrations2);
             IUserService userService = kernel.Get<IUserService>();
             var user = userService.Login("Taras@mail.com","Taras123");
-            IUserService userService2 = kernel.Get<IUserService>();
+            IUserService userService2 = kernel2.Get<IUserService>();
             Console.WriteLine(userService2.CurrentUser.Name);
 
 
