@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,9 +18,12 @@ namespace PL
     /// </summary>
     public partial class MainForm : Window
     {
-        public MainForm()
+        private IKernel kernel;
+        public MainForm(IKernel kernel)
         {
             InitializeComponent();
+            this.kernel = kernel;
+           
         }
     }
 }
