@@ -17,8 +17,8 @@
                 <RowDefinition Height="24*"/>
                 <RowDefinition Height="37*"/>
             </Grid.RowDefinitions>
-            <Button Content="Sign Up" HorizontalAlignment="Left" Margin="212,139,0,44" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1"/>
-            <Button Content="Cancel" HorizontalAlignment="Left" Margin="341,139,0,0" VerticalAlignment="Top" Height="39" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="Button_Click" Grid.ColumnSpan="2"/>
+            <Button x:Name="RegSignUpButton" Content="Sign Up" HorizontalAlignment="Left" Margin="212,139,0,44" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="RegSignUpButton_Click" />
+            <Button Content="Cancel" HorizontalAlignment="Left" Margin="341,139,0,0" VerticalAlignment="Top" Height="39" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="CancelButton_Click" Grid.ColumnSpan="2"/>
             <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Margin="212,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="19"  FontSize="14" Background="#FF2FC3CB" FontStyle="Normal" Grid.ColumnSpan="2" Grid.Row="1" Text=""/>
             <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="19"  FontSize="14" Visibility="Visible"  PasswordChar="$" Background="#FF2FC3CB" Margin="212,54,0,0" Grid.Row="1" Grid.ColumnSpan="2"/>
             <Label x:Name="LabelEmail" Content="Email:" HorizontalAlignment="Left" Margin="140,6,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="62" FontSize="20" Grid.Row="1"/>

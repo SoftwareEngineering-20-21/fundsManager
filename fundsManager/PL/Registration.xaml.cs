@@ -22,12 +22,20 @@ namespace PL
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            Registration win2 = new Registration();
+           
             MainWindow win1 = new MainWindow();
             win1.Show();
             SystemCommands.CloseWindow(this);
+        }
+
+        private void RegSignUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainForm win2 = new MainForm();
+           
+            SystemCommands.CloseWindow(this);
+            win2.Show();
         }
     }
 }
