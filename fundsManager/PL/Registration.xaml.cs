@@ -3,6 +3,7 @@ using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -32,10 +33,53 @@ namespace PL
 
         private void RegSignUpButton_Click(object sender, RoutedEventArgs e)
         {
+
             IUserService userService = kernel.Get<IUserService>();
-            MainForm win2 = new MainForm(kernel);
-            win2.Show();
-            Close();
+            string firstName = FirstNameTextBox.Text;
+            string secondName = SecondNameTextBox.Text;
+            string phone = PhoneTextBox.Text;
+            string email = EmailTextBox.Text;
+            string password = PasswordTextBox.Password;
+            string confirmPassword = ConfirmPasswordTextBox.Password;
+            Regex phoneRegex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
+          
+            if (firstName.Length==0|| secondName.Length==0|| phone.Length==0|| email.Length == 0 || password.Length == 0|| confirmPassword.Length==0)
+            {
+                ErrorLabel.Content = "Any field can not be empty.";
+                return;
+            }
+            if (!userService.IsValidMail(email))
+            {
+                ErrorLabel.Content = "The email is not a valid email address.";
+                return;
+            }
+            if (phoneRegex.IsMatch(password))
+            {
+                ErrorLabel.Content = "The password is not a valid password";
+                return;
+            }
+            if (password!= confirmPassword)
+            {
+                ErrorLabel.Content = "Password doesn't match.";
+                return;
+            }
+            try
+            {
+                var user = userService.SignUp(firstName, secondName, email, phone, password);
+                MainForm mainForm = new MainForm(kernel);
+                mainForm.Show();
+                Close();
+            }
+            catch (ArgumentException exc)
+            {
+                ErrorLabel.Content = exc.Message;
+            }
+  
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
