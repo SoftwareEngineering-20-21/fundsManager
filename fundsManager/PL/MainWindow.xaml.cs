@@ -32,17 +32,39 @@ namespace PL
         {
             this.kernel = kernel;
         }
+
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             IUserService userService = kernel.Get<IUserService>();
-            MainForm win2 = new MainForm(kernel);
-            win2.Show();
-            Close();
+            string email = EmailTextBox.Text;
+            string password = PasswordBox.Password;
+            if (email.Length == 0 || password.Length == 0)
+            {
+                MessageBox.Show("The email or password field can not be empty.");
+                return;
+            }
+            if (!userService.IsValidMail(email))
+            {
+                MessageBox.Show("The email is not a valid email address.");
+                return;
+            }
+            try
+            {
+                var user = userService.Login(email, password);
+                MainForm mainForm = new MainForm(kernel);
+                mainForm.Show();
+                Close();
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
+
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            Registration win2 = new Registration(kernel);
-            win2.Show();
+            Registration registration = new Registration(kernel);
+            registration.Show();
             Close();
         }
     }

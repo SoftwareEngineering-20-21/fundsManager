@@ -12,5 +12,6 @@ namespace BLL.Interfaces
         bool ChangePassword(string oldPassword, string newPassword);
         bool ChangeMail(string newMail);
         bool ChangePhoneNumber(string number);
+        bool IsValidMail(string emailaddress);
     }
 }

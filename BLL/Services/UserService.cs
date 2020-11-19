@@ -15,14 +15,14 @@ namespace BLL.Services
         private readonly Regex phoneRegex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
         public User CurrentUser { get; private set; }
         private readonly IUnitOfWork unitOfWork;
-        private bool IsValidMail(string emailaddress)
+        public bool IsValidMail(string emailaddress)
         {
             try
             {
                 MailAddress m = new MailAddress(emailaddress);
                 return true;
             }
-            catch (FormatException)
+            catch (Exception)
             {
                 return false;
             }
@@ -82,6 +82,10 @@ namespace BLL.Services
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
                 CurrentUser = user;
+            }
+            else
+            {
+                throw new ArgumentException("The email or password is incorrect.");
             }
             return CurrentUser;
         }
