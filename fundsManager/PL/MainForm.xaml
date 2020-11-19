@@ -18,8 +18,13 @@
                 <RowDefinition Height="0*"/>
             </Grid.RowDefinitions>
             <TabControl Margin="-24,0,0,0" TabStripPlacement="Left" Background="#FF083846" Grid.Row="1" BorderBrush="#FF083846" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <TabItem Header="Accounts" Background="#FF2FC3CB" Padding="6,2,6,45">
-                    <Grid Background="#FF083846" Margin="0,0,-366,-2" />
+                <TabItem Header="Accounts" Background="#FF2FC3CB"  Padding="6,2,6,45">
+                    <Grid Background="#FF083846"  Margin="0,0,-366,-2" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="19*"/>
+                            <RowDefinition Height="107*"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Stats" Background="#FF2FC3CB" Padding="6,2,6,45">
                     <Grid Background="#FF083846" Margin="0,0,-366,-2"/>

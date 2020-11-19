@@ -7,7 +7,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="" Height="452" Width="771" Background="#FF083846">
-    
+
     <Viewbox>
         <Grid x:Name="LoginForm" Background="#FF083846" Height="366" Width="634">
             <Grid.ColumnDefinitions>
@@ -24,6 +24,7 @@
             <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="36"  FontSize="20" Visibility="Visible"  PasswordChar="$" Background="#FF2FC3CB" Margin="212,1,0,0" Grid.Row="1" Grid.ColumnSpan="2"/>
             <Label x:Name="LabelEmail" Content="Email:" HorizontalAlignment="Left" Margin="123,84,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="62" FontSize="20"/>
             <Label x:Name="LabelPassword" Content="Password:" HorizontalAlignment="Left" Margin="89,0,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Width="96" Grid.Row="1"/>
+            <Label x:Name="ErrorLabel" Content="Label" HorizontalAlignment="Left" Margin="260,35,0,0" VerticalAlignment="Top" Foreground="#FFD70D0D" Visibility="Hidden" RenderTransformOrigin="0.368,0.665"/>
 
         </Grid>
     </Viewbox>

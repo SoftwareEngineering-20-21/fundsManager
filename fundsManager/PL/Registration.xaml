@@ -31,6 +31,8 @@
             <Label Content="Cell phone:" HorizontalAlignment="Left" Margin="92,113,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Grid.RowSpan="2"/>
             <Label Content="Second name:" HorizontalAlignment="Left" Margin="67,75,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB"/>
             <Label Content="First name:" HorizontalAlignment="Left" Margin="96,37,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB"/>
+            <Label x:Name="ErrorLabel" Content="Label" HorizontalAlignment="Left" Margin="279,10,0,0" VerticalAlignment="Top" Foreground="#FFD70D0D" Visibility="Hidden" RenderTransformOrigin="0.368,0.665" FontSize="20"/>
+
 
         </Grid>
     </Viewbox>
