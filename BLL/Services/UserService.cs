@@ -101,8 +101,12 @@ namespace BLL.Services
                     BankAccounts = new List<UserBankAccount>()
                 };
                 unitOfWork.Repository<User>().Update(user);
-                unitOfWork.Save();
+                unitOfWork.Save(); 
                 CurrentUser = user;
+            }
+            else
+            {
+                throw new ArgumentException("Phone or mail incorrect");
             }
             return CurrentUser;
         }

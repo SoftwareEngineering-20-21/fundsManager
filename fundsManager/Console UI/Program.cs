@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using BLL;
 using BLL.Interfaces;
@@ -13,6 +14,8 @@ using DAL.Enums;
 using DAL.Interfaces;
 using DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Ninject;
+using PL;
 
 namespace Console_UI
 {
@@ -20,12 +23,13 @@ namespace Console_UI
     {
         static void Main(string[] args)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork())
-            {
+            var registrations = new NinjectRegistrations();
+            IKernel kernel = new StandardKernel(registrations);
+            IUserService userService = kernel.Get<IUserService>();
+            var user = userService.SignUp("Taras123", "Taras123", "Taras@mail.com", "380682151604", "Taras123");
 
 
 
-            }
         }
         public static void seed(IUnitOfWork unitOfWork)
         {

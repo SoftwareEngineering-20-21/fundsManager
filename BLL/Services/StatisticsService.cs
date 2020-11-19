@@ -11,7 +11,7 @@ using System.Text;
 
 namespace BLL.Services
 {
-    class StatisticsService : IStatisticsService
+    public class StatisticsService : IStatisticsService
     {
         private readonly IUnitOfWork unitOfWork;
         public User CurrentUser { get; set; }

@@ -9,7 +9,7 @@ using System.Xml.XPath;
 using BLL.Interfaces;
 namespace BLL.Services
 {
-    class CurrencyService : ICurrencyService
+    public class CurrencyService : ICurrencyService
     {
         XmlDocument xml;
 
