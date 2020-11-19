@@ -103,12 +103,8 @@ namespace BLL.Services
                 unitOfWork.Repository<User>().Update(user);
                 unitOfWork.Save();
                 CurrentUser = user;
-                return CurrentUser;
             }
-            else
-            {
-                return CurrentUser;
-            }
+            return CurrentUser;
         }
     }
 }
