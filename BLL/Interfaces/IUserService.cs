@@ -6,6 +6,7 @@ namespace BLL.Interfaces
 {
     public interface IUserService
     {
+        User CurrentUser { get; }
         User Login(string email, string password);
         User SignUp(string firstName, string lastName, string email, string phoneNumber, string password);
         bool ChangePassword(string oldPassword, string newPassword);

@@ -13,16 +13,16 @@ namespace PL
     {
         public override void Load()
         {
-            Bind<FundsContext>().ToSelf();
-            Bind<IRepository<BankAccount>>().To<Repository<BankAccount>>();
-            Bind<IRepository<Currency>>().To<Repository<Currency>>();
-            Bind<IRepository<Transaction>>().To<Repository<Transaction>>();
-            Bind<IRepository<User>>().To<Repository<User>>();
-            Bind<IUnitOfWork>().To<UnitOfWork>();
-            Bind<IUserService>().To<UserService>();
-            Bind<IBankAccountService>().To<BankAccountService>();
-            Bind<ICurrencyService>().To<CurrencyService>();
-            Bind<IStatisticsService >().To<StatisticsService>();
+            Bind<FundsContext>().ToSelf().InSingletonScope();
+            Bind<IRepository<BankAccount>>().To<Repository<BankAccount>>().InSingletonScope();
+            Bind<IRepository<Currency>>().To<Repository<Currency>>().InSingletonScope();
+            Bind<IRepository<Transaction>>().To<Repository<Transaction>>().InSingletonScope();
+            Bind<IRepository<User>>().To<Repository<User>>().InSingletonScope();
+            Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
+            Bind<IUserService>().To<UserService>().InSingletonScope();
+            Bind<IBankAccountService>().To<BankAccountService>().InSingletonScope();
+            Bind<ICurrencyService>().To<CurrencyService>().InSingletonScope();
+            Bind<IStatisticsService >().To<StatisticsService>().InSingletonScope();
         }
     }
 }

@@ -26,8 +26,9 @@ namespace Console_UI
             var registrations = new NinjectRegistrations();
             IKernel kernel = new StandardKernel(registrations);
             IUserService userService = kernel.Get<IUserService>();
-            var user = userService.SignUp("Taras123", "Taras123", "Taras@mail.com", "380682151604", "Taras123");
-
+            var user = userService.Login("Taras@mail.com","Taras123");
+            IUserService userService2 = kernel.Get<IUserService>();
+            Console.WriteLine(userService2.CurrentUser.Name);
 
 
         }
