@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL.Interfaces;
+using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -12,19 +14,17 @@ using System.Windows.Shapes;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for Registration.xaml
-    /// </summary>
     public partial class Registration : Window
     {
-        public Registration()
+        private IKernel kernel;
+        public Registration(IKernel kernel)
         {
             InitializeComponent();
+            this.kernel = kernel;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-           
             MainWindow win1 = new MainWindow();
             win1.Show();
             SystemCommands.CloseWindow(this);
@@ -32,10 +32,10 @@ namespace PL
 
         private void RegSignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            MainForm win2 = new MainForm();
-           
-            SystemCommands.CloseWindow(this);
+            IUserService userService = kernel.Get<IUserService>();
+            MainForm win2 = new MainForm(kernel);
             win2.Show();
+            Close();
         }
     }
 }

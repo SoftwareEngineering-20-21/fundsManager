@@ -1,4 +1,6 @@
-﻿using BLL.Services;
+﻿using BLL.Interfaces;
+using BLL.Services;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,31 +18,32 @@ using System.Windows.Shapes;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private IKernel kernel;
         public MainWindow()
         {
             InitializeComponent();
-            
+            var registrations = new NinjectRegistrations();
+            this.kernel = new StandardKernel(registrations);
         }
 
-
+        public MainWindow(IKernel kernel)
+        {
+            this.kernel = kernel;
+        }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            MainForm win2 = new MainForm();
-            
-            SystemCommands.CloseWindow(this);
+            IUserService userService = kernel.Get<IUserService>();
+            MainForm win2 = new MainForm(kernel);
             win2.Show();
+            Close();
         }
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            Registration win2 = new Registration();
-           
-            SystemCommands.CloseWindow(this);
+            Registration win2 = new Registration(kernel);
             win2.Show();
+            Close();
         }
     }
 }
