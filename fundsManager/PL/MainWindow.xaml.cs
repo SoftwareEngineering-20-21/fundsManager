@@ -40,12 +40,12 @@ namespace PL
             string password = PasswordBox.Password;
             if (email.Length == 0 || password.Length == 0)
             {
-                MessageBox.Show("The email or password field can not be empty.");
+                ErrorLabel.Content = "The email or password field can not be empty.";
                 return;
             }
             if (!userService.IsValidMail(email))
             {
-                MessageBox.Show("The email is not a valid email address.");
+                ErrorLabel.Content = "The email is not a valid email address.";
                 return;
             }
             try
@@ -57,7 +57,7 @@ namespace PL
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                ErrorLabel.Content = exc.Message;
             }
         }
 

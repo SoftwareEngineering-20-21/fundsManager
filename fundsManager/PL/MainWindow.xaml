@@ -21,10 +21,10 @@
             <Button x:Name="SignUpButton" Content="Sign Up" HorizontalAlignment="Left"  Margin="341,70,0,113" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Grid.ColumnSpan="2" Click="SignUpButton_Click"/>
             <Button Content="Login" HorizontalAlignment="Left" Margin="212,70,0,0" VerticalAlignment="Top" Height="39" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="LoginButton_Click"/>
             <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Margin="212,84,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="35"  FontSize="20" Background="#FF2FC3CB" FontStyle="Normal" Grid.ColumnSpan="2"/>
-            <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="36"  FontSize="20" Visibility="Visible"  PasswordChar="$" Background="#FF2FC3CB" Margin="212,1,0,0" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="36"  FontSize="20" Visibility="Visible"  Background="#FF2FC3CB" Margin="212,1,0,0" Grid.Row="1" Grid.ColumnSpan="2"/>
             <Label x:Name="LabelEmail" Content="Email:" HorizontalAlignment="Left" Margin="123,84,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="62" FontSize="20"/>
             <Label x:Name="LabelPassword" Content="Password:" HorizontalAlignment="Left" Margin="89,0,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Width="96" Grid.Row="1"/>
-            <Label x:Name="ErrorLabel" Content="Label" HorizontalAlignment="Left" Margin="260,35,0,0" VerticalAlignment="Top" Foreground="#FFD70D0D" Visibility="Hidden" RenderTransformOrigin="0.368,0.665"/>
+            <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Top" Foreground="#FFD70D0D" Visibility="Visible" RenderTransformOrigin="0.368,0.665" Grid.ColumnSpan="2" Width="269"/>
 
         </Grid>
     </Viewbox>

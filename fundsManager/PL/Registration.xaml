@@ -24,14 +24,14 @@
             <Label x:Name="LabelEmail" Content="Email:" HorizontalAlignment="Left" Margin="140,6,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="62" FontSize="20" Grid.Row="1"/>
             <Label x:Name="LabelPassword" Content="Password:" HorizontalAlignment="Left" Margin="106,44,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Width="96" Grid.Row="1"/>
             <Label Content="Confirm password:" HorizontalAlignment="Left" Margin="27,82,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Width="180" />
-            <PasswordBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="212,92,0,0" Grid.Row="1"  VerticalAlignment="Top" Width="210" Height="19" PasswordChar="$" Background="#FF2FC3CB" Password=""/>
+            <PasswordBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="212,92,0,0" Grid.Row="1"  VerticalAlignment="Top" Width="210" Height="19" Background="#FF2FC3CB" Password=""/>
             <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="212,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="19" Background="#FF2FC3CB" />
             <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="212,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="19"  Background="#FF2FC3CB" Text=""/>
             <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="212,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="19"  Background="#FF2FC3CB" Text=""/>
             <Label Content="Cell phone:" HorizontalAlignment="Left" Margin="92,113,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Grid.RowSpan="2"/>
             <Label Content="Second name:" HorizontalAlignment="Left" Margin="67,75,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB"/>
             <Label Content="First name:" HorizontalAlignment="Left" Margin="96,37,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB"/>
-            <Label x:Name="ErrorLabel" Content="Label" HorizontalAlignment="Left" Margin="279,10,0,0" VerticalAlignment="Top" Foreground="#FFD70D0D" Visibility="Hidden" RenderTransformOrigin="0.368,0.665" FontSize="20"/>
+            <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Left" Margin="212,10,0,0" VerticalAlignment="Top" Foreground="#FFD70D0D" Visibility="Visible" RenderTransformOrigin="0.368,0.665" FontSize="20" Width="210" Grid.ColumnSpan="2"/>
 
 
         </Grid>
