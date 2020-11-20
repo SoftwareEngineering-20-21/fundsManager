@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System;
 
 namespace DAL.Context
 {
@@ -15,9 +16,8 @@ namespace DAL.Context
 
 
         public FundsContext()
-            : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(
-                @"Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;").UseLazyLoadingProxies().Options)
 
+            : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(@Environment.GetEnvironmentVariable("FundsManagerDB")).UseLazyLoadingProxies().Options)
         {
             Database.EnsureCreated();
         }
