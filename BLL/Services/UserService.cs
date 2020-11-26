@@ -37,7 +37,7 @@ namespace BLL.Services
         {
             bool changed = false;
             var emails = unitOfWork.Repository<User>().Get().Select(x => x.Mail);
-            if (!emails.Contains(newMail) || IsValidMail(newMail))
+            if (!emails.Contains(newMail) && IsValidMail(newMail))
             {
                 CurrentUser.Mail = newMail;
                 unitOfWork.Repository<User>().Update(CurrentUser);
@@ -66,7 +66,8 @@ namespace BLL.Services
         public bool ChangePhoneNumber(string number)
         {
             bool changed = false;
-            if (phoneRegex.IsMatch(number))
+            var numbers = unitOfWork.Repository<User>().Get().Select(x => x.Phone);
+            if (phoneRegex.IsMatch(number) && !numbers.Contains(number))
             {
                 CurrentUser.Phone = number;
                 unitOfWork.Repository<User>().Update(CurrentUser);
