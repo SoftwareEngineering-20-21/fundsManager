@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace BLL.Services
 {
-    public class UserService: IUserService
+    public class UserService : IUserService
     {
         private readonly Regex phoneRegex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
         public User CurrentUser { get; private set; }
@@ -22,7 +22,7 @@ namespace BLL.Services
                 MailAddress m = new MailAddress(emailaddress);
                 return true;
             }
-            catch (Exception)
+            catch (FormatException)
             {
                 return false;
             }
@@ -37,7 +37,7 @@ namespace BLL.Services
         {
             bool changed = false;
             var emails = unitOfWork.Repository<User>().Get().Select(x => x.Mail);
-            if (!emails.Contains(newMail) || IsValidMail(newMail))
+            if (!emails.Contains(newMail) && IsValidMail(newMail))
             {
                 CurrentUser.Mail = newMail;
                 unitOfWork.Repository<User>().Update(CurrentUser);
@@ -66,7 +66,8 @@ namespace BLL.Services
         public bool ChangePhoneNumber(string number)
         {
             bool changed = false;
-            if (phoneRegex.IsMatch(number))
+            var numbers = unitOfWork.Repository<User>().Get().Select(x => x.Phone);
+            if (phoneRegex.IsMatch(number) && !numbers.Contains(number))
             {
                 CurrentUser.Phone = number;
                 unitOfWork.Repository<User>().Update(CurrentUser);
@@ -83,17 +84,13 @@ namespace BLL.Services
             {
                 CurrentUser = user;
             }
-            else
-            {
-                throw new ArgumentException("The email or password is incorrect.");
-            }
             return CurrentUser;
         }
 
         public User SignUp(string firstName, string lastName, string email, string phoneNumber, string password)
         {
             var existUser = unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email || x.Phone == phoneNumber);
-            if (existUser == null && phoneRegex.IsMatch(phoneNumber) && IsValidMail(email)) 
+            if (existUser == null && phoneRegex.IsMatch(phoneNumber) && IsValidMail(email))
             {
                 User user = new User
                 {
@@ -105,7 +102,7 @@ namespace BLL.Services
                     BankAccounts = new List<UserBankAccount>()
                 };
                 unitOfWork.Repository<User>().Update(user);
-                unitOfWork.Save(); 
+                unitOfWork.Save();
                 CurrentUser = user;
             }
             else
