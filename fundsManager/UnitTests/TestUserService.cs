@@ -31,9 +31,10 @@ namespace UnitTests
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.Setup(uow => uow.Repository<User>()).Returns(mock.Object);
             var service = new UserService(mockUnitOfWork.Object);
-            User testLogin = service.Login("test@test.com", "fanc");
-            Assert.AreEqual(testLogin, null);
-            testLogin = service.Login("test@test.com", password);
+
+            var exc = Assert.Throws<ArgumentException>(() => service.Login("test@test.com", "fanc"));
+            Assert.AreEqual(exc.Message, "The email or password is incorrect.");
+            User testLogin = service.Login("test@test.com", password);
             Assert.AreEqual(testLogin.Mail, "test@test.com");
             Assert.AreEqual(testLogin.Password, passwordHash);
         }
