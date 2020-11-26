@@ -62,9 +62,8 @@ namespace BLL.Services
                 DateTime datetoday = new DateTime(today.Year, today.Month, today.Day);
                 DateTime dateUpdateFile = new DateTime(updatedTimeFile.Year, updatedTimeFile.Month, updatedTimeFile.Day);
 
-                DateTime hourCurrenyUpdate = new DateTime(2015, 1, 1, 10, 0, 1);
-                DateTime hourToday = new DateTime(2015, 1, 1, today.Hour, today.Minute, today.Second);
-
+                TimeSpan hourCurrenyUpdate = new TimeSpan(10, 0, 0);
+                TimeSpan hourToday = new TimeSpan(today.Hour, today.Minute, today.Second);
                 if (datetoday != dateUpdateFile && hourToday > hourCurrenyUpdate) xml.Save("currency.xml");
             }
 
