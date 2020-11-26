@@ -26,6 +26,7 @@ namespace PL
             InitializeComponent();
             var registrations = new NinjectRegistrations();
             this.kernel = new StandardKernel(registrations);
+           
         }
 
         public MainWindow(IKernel kernel)
