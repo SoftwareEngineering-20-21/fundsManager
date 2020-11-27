@@ -24,8 +24,7 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-            MainForm registration = new MainForm(kernel);
-            registration.Show();
+         
             var registrations = new NinjectRegistrations();
             this.kernel = new StandardKernel(registrations);
             
