@@ -40,7 +40,8 @@ namespace PL
 
         private void SettingsChangePhoneNumberButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangePhoneNumber ChangePhoneNumber = new ChangePhoneNumber(kernel);
+            ChangePhoneNumber.Show();
         }
 
         private void SettingsLogOutButton_Click(object sender, RoutedEventArgs e)

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Change Email" Height="350" Width="800" Background="#FF083846">
     <Viewbox>
-        <Grid x:Name="Change_PasswordForm" Background="#FF083846" Height="366" Width="734">
+        <Grid x:Name="Change_EmailForm" Background="#FF083846" Height="366" Width="734">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="365*"/>
                 <ColumnDefinition Width="269*"/>
@@ -22,7 +22,7 @@
 
             <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Left" Margin="155,8,0,0" VerticalAlignment="Top" Foreground="#FFD70D0D" Visibility="Visible" RenderTransformOrigin="0.368,0.665" FontSize="20" Width="324" Grid.ColumnSpan="2"/>
 
-            <TextBox x:Name="ChangePasswordCurrentPasswordTextBox" Grid.ColumnSpan="2" Margin="184,134,184,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Background="#FF2FC3CB" Grid.RowSpan="2" />
+            <TextBox x:Name="NewEmailTextBox" Grid.ColumnSpan="2" Margin="184,134,184,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Background="#FF2FC3CB" Grid.RowSpan="2" />
 
 
         </Grid>
