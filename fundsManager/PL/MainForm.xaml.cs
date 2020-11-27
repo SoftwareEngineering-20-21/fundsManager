@@ -34,12 +34,20 @@ namespace PL
 
         private void SettingsChangeEmailButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangeEmail CnahgeEmail = new ChangeEmail(kernel);
+            CnahgeEmail.Show();
         }
 
         private void SettingsChangePhoneNumberButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void SettingsLogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow win1 = new MainWindow();
+            win1.Show();
+            SystemCommands.CloseWindow(this);
         }
     }
 }

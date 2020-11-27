@@ -64,9 +64,11 @@
                 </TabItem>
                 <TabItem Header="Settings" Background="#FF2FC3CB" Padding="6,2,6,45" Height="166" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
                     <Grid Background="#FF083846" Margin= "0,0,0,-2" Width="1111">
-                        <Button x:Name="SettingsChangePasswordButton" Content="Change Password" HorizontalAlignment="Left" Margin="338,184,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePasswordButton_Click"/>
-                        <Button x:Name="SettingsChangeEmailButton" Content="Change Email" HorizontalAlignment="Left" Margin="338,312,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangeEmailButton_Click"/>
-                        <Button x:Name="SettingsChangePhoneNumberButton" Content="Change Phone Number" HorizontalAlignment="Left" Margin="338,437,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePhoneNumberButton_Click"/>
+                        <Button x:Name="SettingsChangePasswordButton" Content="Change Password" HorizontalAlignment="Left" Margin="338,111,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePasswordButton_Click"/>
+                        <Button x:Name="SettingsChangeEmailButton" Content="Change Email" HorizontalAlignment="Left" Margin="338,237,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangeEmailButton_Click"/>
+                        <Button x:Name="SettingsChangePhoneNumberButton" Content="Change Phone Number" HorizontalAlignment="Left" Margin="338,362,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePhoneNumberButton_Click"/>
+                        <Button x:Name="SettingsLogOutButton" Content="Log Out" HorizontalAlignment="Left" Margin="338,487,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsLogOutButton_Click"/>
+
                     </Grid>
                 </TabItem>
 
