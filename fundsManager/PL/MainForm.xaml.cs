@@ -25,5 +25,21 @@ namespace PL
             this.kernel = kernel;
            
         }
+
+        private void SettingsChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            Change_Password CnahgePassword = new Change_Password(kernel);
+            CnahgePassword.Show();
+        }
+
+        private void SettingsChangeEmailButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SettingsChangePhoneNumberButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

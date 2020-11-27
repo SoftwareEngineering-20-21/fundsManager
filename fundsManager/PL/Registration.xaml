@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         Title="Registration" Height="450" Width="800" Background="#FF083846">
     <Viewbox>
-        <Grid x:Name="LoginForm" Background="#FF083846" Height="366" Width="634">
+        <Grid x:Name="RegistrationForm" Background="#FF083846" Height="366" Width="634">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="365*"/>
                 <ColumnDefinition Width="269*"/>
@@ -18,7 +18,7 @@
                 <RowDefinition Height="37*"/>
             </Grid.RowDefinitions>
             <Button x:Name="RegSignUpButton" Content="Sign Up" HorizontalAlignment="Left" Margin="212,139,0,44" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="RegSignUpButton_Click" />
-            <Button x:Name="Transaction_Confirm_Button" Content="Cancel" HorizontalAlignment="Left" Margin="341,139,0,0" VerticalAlignment="Top" Height="39" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="CancelButton_Click" Grid.ColumnSpan="2"/>
+            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="341,139,0,0" VerticalAlignment="Top" Height="39" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="CancelButton_Click" Grid.ColumnSpan="2"/>
             <Label x:Name="LabelEmail" Content="Email:" HorizontalAlignment="Left" Margin="140,6,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="62" FontSize="20" Grid.Row="1"/>
             <Label x:Name="LabelPassword" Content="Password:" HorizontalAlignment="Left" Margin="106,44,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Width="96" Grid.Row="1"/>
             <Label Content="Confirm password:" HorizontalAlignment="Left" Margin="27,82,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Width="180" />
