@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AddAccount" Height="350" Width="800" Background="#FF083846">
     <Viewbox>
-        <Grid x:Name="Change_PasswordForm" Background="#FF083846" Height="366" Width="734">
+        <Grid x:Name="AddAccountForm" Background="#FF083846" Height="366" Width="734">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="365*"/>
                 <ColumnDefinition Width="269*"/>

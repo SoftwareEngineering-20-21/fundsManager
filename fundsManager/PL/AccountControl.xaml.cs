@@ -33,7 +33,8 @@ namespace PL
         }
         private void AccountOptionsDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            DeleteAccount DeleteAccount = new DeleteAccount(kernel);
+            DeleteAccount.Show();
         }
     }
 }
