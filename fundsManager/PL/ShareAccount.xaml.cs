@@ -9,31 +9,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for AccountControl.xaml
+    /// Interaction logic for ShareAccount.xaml
     /// </summary>
-    public partial class AccountControl : UserControl
+    public partial class ShareAccount : Window
     {
         private IKernel kernel;
-        public AccountControl(IKernel kernel)
+        public ShareAccount(IKernel kernel)
         {
             InitializeComponent();
             this.kernel = kernel;
         }
 
-        private void AccountOptionsShare_Click(object sender, RoutedEventArgs e)
+        private void ChangeEmailCancelButton_Click(object sender, RoutedEventArgs e)
         {
-            ShareAccount ShareAccount = new ShareAccount(kernel);
-            ShareAccount.Show();
-        }
-        private void AccountOptionsDelete_Click(object sender, RoutedEventArgs e)
-        {
-
+            SystemCommands.CloseWindow(this);
         }
     }
 }
