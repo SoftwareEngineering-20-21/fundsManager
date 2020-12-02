@@ -63,5 +63,11 @@ namespace PL
             win1.Show();
             SystemCommands.CloseWindow(this);
         }
+
+        private void AddAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddAccount AddAccount = new AddAccount(kernel);
+            AddAccount.Show();
+        }
     }
 }

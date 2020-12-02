@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainForm" Height="450" Width="800" Background="#FF083846">
+        Title="MainForm" Height="450" Width="800" Background="#FF083846" >
     <Viewbox HorizontalAlignment="Left" Width="800" >
 
         <Grid Width="427">
@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
 
             <TabControl  TabStripPlacement="Left" Background="#FF083846" Grid.Row="1" BorderBrush="#FF083846" Grid.RowSpan="2" VerticalAlignment="Top" Padding="6,2,6,2" Grid.ColumnSpan="2" Margin="0,0,-820,0">
-                <Grid Background="#FF083846"  Margin="0,0,-366,-2" >
+                <Grid Background="#FF083846"  Margin="0,0,-6,-2" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="101*"/>
                         <RowDefinition Height="569*"/>
@@ -29,13 +29,15 @@
                     </Grid.RowDefinitions>
                 </Grid>
                 <TabItem Header="Accounts" Background="#FF2FC3CB"  Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" Width="124.236666666667" FontSize="20">
-                    <Grid Background="#FF083846" Margin="0,0,559,-2">
+                    <Grid Background="#FF083846" Margin="0,0,0,-2" Width="1109">
+                        <Button x:Name="AddAccountButton" Content="+Account" Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="876,509,0,0" VerticalAlignment="Top" Height="79" Width="145" FontSize="30" Click="AddAccountButton_Click"/>
 
                     </Grid>
 
                 </TabItem>
                 <TabItem Header="Stats" Background="#FF2FC3CB" Padding="6,2,6,45" Height="166" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
                     <Grid Background="#FF083846" Margin="0,0,10,-2">
+
                         <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="247,129,386,265">
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis Title="Time" Labels="{Binding Labels}"></lvc:Axis>
@@ -44,11 +46,11 @@
                                 <lvc:Axis Title="Money" LabelFormatter="{Binding Formatter}"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
-                        
+
                     </Grid>
                 </TabItem>
                 <TabItem Header="Transactions" Background="#FF2FC3CB" Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
-                    <Grid Background="#FF083846" Margin= "0,0,-366,-2" >
+                    <Grid Background="#FF083846" Width="1109" >
                         <Button x:Name="TransactionConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="462,437,0,0" VerticalAlignment="Top" Width="138" Height="55" FontSize="30" Background="#FF2FC3CB"/>
 
                         <ComboBox x:Name="TransactionsTypeComboBox" Text ="Type" HorizontalAlignment="Left"  Margin="78,199,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FF2FC3CB" BorderBrush="#FF2FC3CB">
@@ -57,16 +59,14 @@
                             <TextBlock x:Name="TransactionsExpencesTextBlock"  Width="125" Height="42" FontSize="30"><Run Text="Expences"/></TextBlock>
                             <TextBlock x:Name="TransactionsCurrentTextBlock"  Width="125" Height="42" FontSize="30"><Run Text="Current"/></TextBlock>
                         </ComboBox>
-                        <ComboBox x:Name="TransactionsFromComboBox" Width="160" Height="55" Margin="325,199,988,416" >
-
-                        </ComboBox>
+                        <ComboBox x:Name="TransactionsFromComboBox" Width="160" Height="56" Margin="325,198,624,417" />
                         <ComboBox x:Name="TransactionsToComboBox" HorizontalAlignment="Left" Margin="576,198,0,0" VerticalAlignment="Top" Width="160" Height="56" Background="Black">
 
                         </ComboBox>
-                        <TextBox x:Name="TransactionsAmountTextBox" HorizontalAlignment="Left" Margin="814,198,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Height="56" Background="#FFDDDDDD"/>
+                        <TextBox x:Name="TransactionsAmountTextBox" Margin="825,198,124,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Background="#FFDDDDDD"/>
                         <DatePicker x:Name="TransactionsDatePicker" HorizontalAlignment="Left" Margin="325,335,0,0" VerticalAlignment="Top" Width="411" Height="33" Background="#FF2FC3CB"/>
                         <Label x:Name="TransactionsTypeLable" Content="Type" HorizontalAlignment="Left" Margin="107,125,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="30"/>
-                        <Label x:Name="TransactionsFromLable" Content="From" HorizontalAlignment="Left" Margin="349,125,0,0" VerticalAlignment="Top" FontSize="30" Foreground="#FF2FC3CB"/>
+                        <Label x:Name="TransactionsFromLable" Content="From" HorizontalAlignment="Left" Margin="366,125,0,0" VerticalAlignment="Top" FontSize="30" Foreground="#FF2FC3CB"/>
                         <Label x:Name="TransactionsToLable" Content="To" HorizontalAlignment="Left" Margin="628,125,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="30"/>
                         <Label x:Name="TransactionsAmountLable" Content="Amount" HorizontalAlignment="Left" Margin="836,125,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="30"/>
 
@@ -74,10 +74,14 @@
                 </TabItem>
                 <TabItem Header="Settings" Background="#FF2FC3CB" Padding="6,2,6,45" Height="166" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
                     <Grid Background="#FF083846" Margin= "0,0,0,-2" Width="1111">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="419*"/>
+                            <RowDefinition Height="251*"/>
+                        </Grid.RowDefinitions>
                         <Button x:Name="SettingsChangePasswordButton" Content="Change Password" HorizontalAlignment="Left" Margin="338,111,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePasswordButton_Click"/>
                         <Button x:Name="SettingsChangeEmailButton" Content="Change Email" HorizontalAlignment="Left" Margin="338,237,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangeEmailButton_Click"/>
-                        <Button x:Name="SettingsChangePhoneNumberButton" Content="Change Phone Number" HorizontalAlignment="Left" Margin="338,362,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePhoneNumberButton_Click"/>
-                        <Button x:Name="SettingsLogOutButton" Content="Log Out" HorizontalAlignment="Left" Margin="338,487,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsLogOutButton_Click"/>
+                        <Button x:Name="SettingsChangePhoneNumberButton" Content="Change Phone Number" HorizontalAlignment="Left" Margin="338,362,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePhoneNumberButton_Click" Grid.RowSpan="2"/>
+                        <Button x:Name="SettingsLogOutButton" Content="Log Out" HorizontalAlignment="Left" Margin="338,68,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsLogOutButton_Click" Grid.Row="1"/>
 
                     </Grid>
                 </TabItem>
