@@ -69,5 +69,14 @@ namespace PL
             AddAccount AddAccount = new AddAccount(kernel);
             AddAccount.Show();
         }
+        
+
+        private void MainForm1_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (this.Height / this.Width != 0.5625)
+            {
+                this.Height = this.Width * 0.5625;
+            }
+        }
     }
 }
