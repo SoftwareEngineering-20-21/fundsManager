@@ -9,6 +9,7 @@ namespace BLL.Interfaces
 {
     public interface IStatisticsService
     {
+        User CurrentUser { get; set; }
         public IEnumerable<StatisticsItem> GetExpenceStatistics(DateTime fromDate,DateTime toDate);
         public IEnumerable<StatisticsItem> GetIncomeStatistics(DateTime fromDate, DateTime toDate);
         public IEnumerable<StatisticsItem> GetExpenceStatisticsFullPeriod();
