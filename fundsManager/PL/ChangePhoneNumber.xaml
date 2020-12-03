@@ -16,7 +16,7 @@
                 <RowDefinition Height="24*"/>
                 <RowDefinition Height="37*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="ChangePhoneNumberUpdateButton" Content="Update" HorizontalAlignment="Left" Margin="198,64,0,119" Height="39" Width="110" Background="#FF2FC3CB" FontSize="20" Grid.Row="1"  />
+            <Button x:Name="ChangePhoneNumberUpdateButton" Content="Update" HorizontalAlignment="Left" Margin="198,64,0,119" Height="39" Width="110" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="ChangePhoneNumberUpdateButton_Click"  />
             <Button x:Name="ChangePhoneNumberCancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="3,64,0,0" VerticalAlignment="Top" Height="39" Width="110" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="ChangePhoneNumberCancelButton_Click" Grid.Column="1"/>
             <Label x:Name="NewPhoneNumberLabel" Content="New Phone Number:" HorizontalAlignment="Left" Margin="-2,132,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="195" FontSize="20" Grid.RowSpan="2"/>
 

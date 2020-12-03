@@ -16,7 +16,7 @@
                 <RowDefinition Height="24*"/>
                 <RowDefinition Height="37*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="ChangeEmailUpdateButton" Content="Update" HorizontalAlignment="Left" Margin="184,72,0,111" Height="39" Width="110" Background="#FF2FC3CB" FontSize="20" Grid.Row="1"  />
+            <Button x:Name="ChangeEmailUpdateButton" Content="Update" HorizontalAlignment="Left" Margin="184,72,0,111" Height="39" Width="110" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="ChangeEmailUpdateButton_Click"  />
             <Button x:Name="ChangeEmailCancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="17,72,0,0" VerticalAlignment="Top" Height="39" Width="110" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="ChangeEmailCancelButton_Click" Grid.Column="1"/>
             <Label x:Name="NewEmailLabel" Content="New Email:" HorizontalAlignment="Left" Margin="62,130,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="122" FontSize="20" Grid.RowSpan="2"/>
 
