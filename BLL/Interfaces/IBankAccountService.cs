@@ -8,6 +8,7 @@ namespace BLL.Interfaces
 {
     public interface IBankAccountService
     {
+        public User CurrentUser { get; set; }
         decimal GetAccountScore(BankAccount account);
         IEnumerable<Transaction> GetAllUserTransactions();
         IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount);
