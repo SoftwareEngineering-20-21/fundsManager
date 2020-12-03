@@ -14,6 +14,8 @@ using System.Linq;
 using DAL.Domain;
 using DAL.Interfaces;
 using DAL.Enums;
+using BLL.Interfaces;
+using System.Threading.Tasks;
 
 namespace PL
 {
@@ -23,6 +25,13 @@ namespace PL
     public partial class AddAccount : Window
     {
         private IKernel kernel;
+
+        private Dictionary<string, AccountType> dictionary = new Dictionary<string, AccountType>
+        {
+            ["income"] = AccountType.Income,
+            ["expences"] = AccountType.Expence,
+            ["current"] = AccountType.Current
+        };
         public AddAccount(IKernel kernel)
         {
             InitializeComponent();
@@ -32,12 +41,28 @@ namespace PL
 
         private void AddAccountCancelButton_Click(object sender, RoutedEventArgs e)
         {
-            SystemCommands.CloseWindow(this);
+            Close();
         }
 
         private void AddAccountOKButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var service = kernel.Get<IBankAccountService>();
+            string name = AddAccountNameTextBox.Text;
+            string typeString = AddAccountTypeComboBox.Text;
+            string currencyString = AddAccountCurrencyComboBox.Text;
+            if (name.Length == 0 || typeString == "Type" || currencyString.Length == 0)
+            {
+                MessageBox.Show("Fields can not be empty");
+                return;
+            }
+            AccountType type = dictionary[AddAccountTypeComboBox.Text.ToLower()];
+            Currency currency = kernel.Get<IUnitOfWork>().Repository<Currency>().Get().FirstOrDefault(x => x.Code == AddAccountCurrencyComboBox.Text);
+            Task<BankAccount> bankAccount = service.CreateAccount(type, name, currency);
+            if (bankAccount == null)
+            {
+                MessageBox.Show("Something went wrong");
+            }
+            Close();
         }
     }
 }
