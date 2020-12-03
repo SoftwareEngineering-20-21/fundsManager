@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLL.Interfaces;
 
 namespace PL
 {
@@ -27,7 +28,19 @@ namespace PL
 
         private void ChangeEmailCancelButton_Click(object sender, RoutedEventArgs e)
         {
-            SystemCommands.CloseWindow(this);
+            Close();
+        }
+
+        private void ChangeEmailUpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            var service = kernel.Get<IUserService>();
+            var mail = NewEmailTextBox.Text;
+            if (!service.ChangeMail(mail))
+            {
+                MessageBox.Show("Invalid email");
+                return;
+            }
+            Close();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLL.Interfaces;
 
 namespace PL
 {
@@ -27,7 +28,18 @@ namespace PL
 
         private void ChangePhoneNumberCancelButton_Click(object sender, RoutedEventArgs e)
         {
-            SystemCommands.CloseWindow(this);
+            Close();
+        }
+
+        private void ChangePhoneNumberUpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            var service = kernel.Get<IUserService>();
+            string newPhone = NewPhoneNumberTextBox.Text;
+            if (!service.ChangePhoneNumber(newPhone))
+            {
+                MessageBox.Show("Invalid phone");
+            }
+            Close();
         }
     }
 }

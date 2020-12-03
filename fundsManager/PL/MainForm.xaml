@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
-        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+       
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:local1="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainForm" Height="450" Width="800"  Background="#FF083846" SizeChanged="MainForm1_SizeChanged" >
     <Viewbox HorizontalAlignment="Left" Width="800"  >
@@ -31,6 +31,10 @@
                 <TabItem Header="Accounts" Background="#FF2FC3CB"  Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" Width="124.236666666667" FontSize="20">
                     <Grid Background="#FF083846" Margin="0,0,0,-2" Width="1109">
                         <Button x:Name="AddAccountButton" Content="+Account" Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="876,509,0,0" VerticalAlignment="Top" Height="79" Width="145" FontSize="30" Click="AddAccountButton_Click"/>
+
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="846">
+                            <StackPanel x:Name="AccSPanel" Width="842" Height="662"/>
+                        </ScrollViewer>
 
                     </Grid>
 

@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLL.Interfaces;
+using BLL.Services;
 
 namespace PL
 {
@@ -27,7 +29,31 @@ namespace PL
 
         private void ChangePasswordCancelButton_Click(object sender, RoutedEventArgs e)
         {
-            SystemCommands.CloseWindow(this);
+            Close();
+        }
+
+        private void ChangePasswordUpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            var service = kernel.Get<IUserService>();
+            string current = ChangePasswordCurrentPasswordTextBox.Password;
+            string newPassword = ChangePasswordNewPasswordTextBox.Password;
+            string confirmPassword = ChangePasswordConfirmPasswordTextBox.Password;
+            if (current.Length == 0 || newPassword.Length == 0 || confirmPassword.Length == 0)
+            {
+                MessageBox.Show("Fields can not be empty");
+                return;
+            }
+            if (newPassword != confirmPassword)
+            {
+                MessageBox.Show("Password doesn't match.");
+                return;
+            }
+            if (!service.ChangePassword(current, newPassword))
+            {
+                MessageBox.Show("Current password is different");
+                return;
+            }
+            Close();
         }
     }
 }
