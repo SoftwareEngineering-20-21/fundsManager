@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
+using BLL.Interfaces;
+using System.Linq;
+using BLL.Models;
 
 namespace PL
 {
@@ -28,15 +31,9 @@ namespace PL
         {
             InitializeComponent();
             this.kernel = kernel;
-            SeriesCollection = new SeriesCollection
-                {
-                    new LineSeries
-                    {
-                        Values = new ChartValues<double> { 3, 5, 7, 4 }
-                    }
-                };
-            SeriesCollection.Add(new LineSeries { Values = new ChartValues<double> { 1, 8, 2, 5 } });
-            DataContext = this;
+            var service = kernel.Get<IStatisticsService>();
+            service.CurrentUser = kernel.Get<IUserService>().CurrentUser;
+            Load_graphic();
         }
 
         private void SettingsChangePasswordButton_Click(object sender, RoutedEventArgs e)
@@ -77,6 +74,31 @@ namespace PL
             {
                 this.Height = this.Width * 0.5625;
             }
+        }
+        private void Load_graphic()
+        {
+            IStatisticsService statsService = kernel.Get<IStatisticsService>();
+            var stats = statsService.GetIncomeStatisticsFullPeriod().ToList<StatisticsItem>();
+            var stats2 = statsService.GetExpenceStatisticsFullPeriod().ToList<StatisticsItem>();
+            ChartValues<decimal> chartIncome = new ChartValues<decimal>();
+            ChartValues<decimal> chartExpence = new ChartValues<decimal>();
+            stats.ForEach(x => chartIncome.Add(x.Value));
+            stats2.ForEach(x => chartExpence.Add(x.Value));
+            SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Income",
+                    Values = chartIncome
+                },
+                  new LineSeries
+                {
+                    Title = "Expence",
+                    Values = chartExpence
+                }
+            };
+
+            DataContext = this;
         }
     }
 }

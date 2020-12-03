@@ -51,7 +51,7 @@ namespace BLL.Services
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountTo
+                Value = x.AmountFrom
             });
         }
 
@@ -80,12 +80,12 @@ namespace BLL.Services
             }
 
             var transactions = unitOfWork.Repository<Transaction>()
-               .Get(x => x.UserId == CurrentUser.Id).Where(x => x.BankAccountTo.Type == AccountType.Income);
+               .Get(x => x.UserId == CurrentUser.Id).Where(x => x.BankAccountFrom.Type == AccountType.Income);
 
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountTo
+                Value = x.AmountFrom
             });
         }
     }
