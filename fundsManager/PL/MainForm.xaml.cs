@@ -31,6 +31,11 @@ namespace PL
         {
             InitializeComponent();
             this.kernel = kernel;
+            var statsService = kernel.Get<IStatisticsService>();
+            statsService.CurrentUser = kernel.Get<IUserService>().CurrentUser;
+            var bankAccountService = kernel.Get<IBankAccountService>();
+            bankAccountService.CurrentUser = kernel.Get<IUserService>().CurrentUser;
+
             SeriesCollection = new SeriesCollection
                 {
                     new LineSeries
@@ -80,8 +85,6 @@ namespace PL
             AccSPanel.Children.Add(accountControl8);
             AccountControl accountControl19 = new AccountControl(kernel);
             AccSPanel.Children.Add(accountControl19);
-            var service = kernel.Get<IStatisticsService>();
-            service.CurrentUser = kernel.Get<IUserService>().CurrentUser;
             Load_graphic();
         }
 
