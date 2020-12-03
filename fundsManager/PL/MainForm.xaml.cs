@@ -37,6 +37,46 @@ namespace PL
                 };
             SeriesCollection.Add(new LineSeries { Values = new ChartValues<double> { 1, 8, 2, 5 } });
             DataContext = this;
+            //AccountControl accountControl = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl);
+            //AccountControl accountControl1 = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl1);
+            //AccountControl accountControl2 = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl2);
+            //AccountControl accountControl13 = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl13);
+            //AccountControl accountControl4 = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl4);
+            //AccountControl accountControl15 = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl15);
+            //AccountControl accountControl6 = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl6);
+            //AccountControl accountControl7 = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl7);
+            //AccountControl accountControl8 = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl8);
+            //AccountControl accountControl19 = new AccountControl(kernel);
+            //AccSPanel.Items.Add(accountControl19);
+            AccountControl accountControl = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl);
+            AccountControl accountControl1 = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl1);
+            AccountControl accountControl2 = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl2);
+            AccountControl accountControl13 = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl13);
+            AccountControl accountControl4 = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl4);
+            AccountControl accountControl15 = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl15);
+            AccountControl accountControl6 = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl6);
+            AccountControl accountControl7 = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl7);
+            AccountControl accountControl8 = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl8);
+            AccountControl accountControl19 = new AccountControl(kernel);
+            AccSPanel.Children.Add(accountControl19);
         }
 
         private void SettingsChangePasswordButton_Click(object sender, RoutedEventArgs e)
