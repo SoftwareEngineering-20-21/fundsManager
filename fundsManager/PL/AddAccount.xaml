@@ -16,7 +16,7 @@
                 <RowDefinition Height="24*"/>
                 <RowDefinition Height="37*"/>
             </Grid.RowDefinitions>
-            <ComboBox x:Name="AddAccountTypeComboBox" Text ="Type" HorizontalAlignment="Left"  Margin="27,118,0,0" VerticalAlignment="Top" Width="134" Height="44" Background="#FF2FC3CB" BorderBrush="#FF2FC3CB" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+            <ComboBox x:Name="AddAccountTypeComboBox" Text ="Type" HorizontalAlignment="Left"  Margin="106,118,0,0" VerticalAlignment="Top" Width="134" Height="44" Background="#FF2FC3CB" BorderBrush="#FF2FC3CB" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
                 <ComboBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"/>
@@ -31,15 +31,13 @@
                 <TextBlock x:Name="AddAccountCurrentTextBlock"  Width="125" Height="42" FontSize="30"><Run Text="Current"/></TextBlock>
 
             </ComboBox>
-            <TextBox x:Name="AddAccountNameTextBox" HorizontalAlignment="Left" Margin="197,118,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="44" Grid.RowSpan="2" BorderBrush="#FFACACAC"/>
-            <TextBox x:Name="AddAccountAmountTextBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="367,118,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="44" Grid.RowSpan="2"/>
-            <ComboBox x:Name="AddAccountCurrencyComboBox" Grid.Column="1" HorizontalAlignment="Left" Margin="120,118,0,0" VerticalAlignment="Top" Width="134" Height="44" Grid.RowSpan="2"/>
-            <Label x:Name="AddAccountTypeLable" Content="Type" HorizontalAlignment="Left" Margin="54,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20"/>
-            <Label x:Name="AddAccountNameLabel" Content="Name"  HorizontalAlignment="Left" Margin="222,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20"/>
-            <Label x:Name="AddAccountAmountLabel" Content="Amount" HorizontalAlignment="Left" Margin="383,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20" Grid.ColumnSpan="2"/>
-            <Label x:Name="AddAccountCurrencyLabel" Content="Currency" HorizontalAlignment="Left" Margin="142,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20" Grid.Column="1"/>
-            <Button x:Name="AddAccountOKButton" Content="OK"  HorizontalAlignment="Left" Margin="130,0,0,0" VerticalAlignment="Center" Width="134" Height="44" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="AddAccountOKButton_Click"/>
-            <Button x:Name="AddAccountCancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="11,0,0,0" VerticalAlignment="Center" Width="134" Height="44" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="AddAccountCancelButton_Click" Grid.Column="1"/>
+            <TextBox x:Name="AddAccountNameTextBox" HorizontalAlignment="Left" Margin="300,118,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="44" Grid.RowSpan="2" BorderBrush="#FFACACAC" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="AddAccountCurrencyComboBox" Grid.Column="1" HorizontalAlignment="Left" Margin="78,118,0,0" VerticalAlignment="Top" Width="134" Height="44" Grid.RowSpan="2"/>
+            <Label x:Name="AddAccountTypeLable" Content="Type" HorizontalAlignment="Left" Margin="147,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20"/>
+            <Label x:Name="AddAccountNameLabel" Content="Name"  HorizontalAlignment="Left" Margin="336,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20"/>
+            <Label x:Name="AddAccountCurrencyLabel" Content="Currency" HorizontalAlignment="Left" Margin="100,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20" Grid.Column="1"/>
+            <Button x:Name="AddAccountOKButton" Content="OK"  HorizontalAlignment="Left" Margin="173,0,0,0" VerticalAlignment="Center" Width="134" Height="44" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="AddAccountOKButton_Click"/>
+            <Button x:Name="AddAccountCancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="21,0,0,0" VerticalAlignment="Center" Width="134" Height="44" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="AddAccountCancelButton_Click" Grid.Column="1"/>
         </Grid>
     </Viewbox>
 </Window>
