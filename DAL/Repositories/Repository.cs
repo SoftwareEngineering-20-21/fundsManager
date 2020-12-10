@@ -37,7 +37,7 @@ namespace DAL.Repositories
         }
         public IEnumerable<T> Get(Func<T, bool> predicate)
         {
-            return dbSet.Where(predicate).ToList();
+            return dbSet.ToList().Where(predicate);
         }
         public void Delete(T entity)
         {

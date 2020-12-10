@@ -15,6 +15,9 @@ using LiveCharts.Wpf;
 using BLL.Interfaces;
 using System.Linq;
 using BLL.Models;
+using DAL.Interfaces;
+using DAL.Domain;
+using DAL.Enums;
 
 namespace PL
 {
@@ -35,6 +38,8 @@ namespace PL
             statsService.CurrentUser = kernel.Get<IUserService>().CurrentUser;
             var bankAccountService = kernel.Get<IBankAccountService>();
             bankAccountService.CurrentUser = kernel.Get<IUserService>().CurrentUser;
+
+            TransactionsTypeComboBox.DropDownClosed += new System.EventHandler(TransactionTypeChanged);
 
             SeriesCollection = new SeriesCollection
                 {
@@ -118,7 +123,7 @@ namespace PL
             AddAccount AddAccount = new AddAccount(kernel);
             AddAccount.Show();
         }
-        
+
 
         private void MainForm1_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -151,6 +156,52 @@ namespace PL
             };
 
             DataContext = this;
+        }
+
+        private void TransactionConfirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            var service = kernel.Get<IBankAccountService>();
+            string FromName = TransactionsFromComboBox.Text;
+            string ToName = TransactionsToComboBox.Text;
+            if (FromName == "" || ToName == "" || !Decimal.TryParse(TransactionsAmountTextBox.Text, out decimal amount))
+            {
+                MessageBox.Show("Fields can not be empty");
+                return;
+            }
+            if (amount <= 0)
+            {
+                MessageBox.Show("Amount can not be negative or equal to 0");
+                return;
+            }
+            var all = service.GetAllUserAccounts();
+            BankAccount from = all.FirstOrDefault(x => x.Name == TransactionsFromComboBox.Text);
+            BankAccount to = all.FirstOrDefault(x => x.Name == TransactionsToComboBox.Text);
+            DateTime dateTime = (DateTime)TransactionsDatePicker.SelectedDate;
+            try
+            {
+                service.MakeTransaction(from, to, amount, dateTime, "");
+                MessageBox.Show("Done");
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+        }
+
+        private void TransactionTypeChanged(object sender, System.EventArgs e)
+        {
+            var service = kernel.Get<IBankAccountService>();
+            var all = service.GetAllUserAccounts();
+            if (TransactionsTypeComboBox.Text == "Income")
+            {
+                TransactionsToComboBox.ItemsSource = all.Where(x => x.Type == AccountType.Current).Select(x => x.Name).ToList<string>();
+                TransactionsFromComboBox.ItemsSource = all.Where(x => x.Type == AccountType.Income).Select(x => x.Name).ToList<string>();
+            }
+            else if (TransactionsTypeComboBox.Text == "Expences") 
+            {
+                TransactionsToComboBox.ItemsSource = all.Where(x => x.Type == AccountType.Expence).Select(x => x.Name).ToList<string>();
+                TransactionsFromComboBox.ItemsSource = all.Where(x => x.Type == AccountType.Current).Select(x => x.Name).ToList<string>();
+            }
         }
     }
 }
