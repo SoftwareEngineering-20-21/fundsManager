@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BLL.Interfaces;
+using DAL.Domain;
 
 namespace PL
 {
@@ -20,20 +22,26 @@ namespace PL
     public partial class AccountControl : UserControl
     {
         private IKernel kernel;
-        public AccountControl(IKernel kernel)
+        private BankAccount account;
+        public AccountControl(IKernel kernel, BankAccount acc)
         {
             InitializeComponent();
             this.kernel = kernel;
+            this.account = acc;
+            AccountNameLabel.Content = account.Name;
+            AccountCurrencyLabel.Content = account.CurrencyType.Code;
+            AccountTypeLabel.Content = account.Type;
+            AccountCostLabel.Content = kernel.Get<IBankAccountService>().GetAccountScore(account);
         }
 
         private void AccountOptionsShare_Click(object sender, RoutedEventArgs e)
         {
-            ShareAccount ShareAccount = new ShareAccount(kernel);
+            ShareAccount ShareAccount = new ShareAccount(kernel, account);
             ShareAccount.Show();
         }
         private void AccountOptionsDelete_Click(object sender, RoutedEventArgs e)
         {
-            DeleteAccount DeleteAccount = new DeleteAccount(kernel);
+            DeleteAccount DeleteAccount = new DeleteAccount(kernel, account);
             DeleteAccount.Show();
         }
     }
