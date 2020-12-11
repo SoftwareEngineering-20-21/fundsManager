@@ -86,6 +86,7 @@ namespace PL
             AccountControl accountControl19 = new AccountControl(kernel);
             AccSPanel.Children.Add(accountControl19);
             Load_graphic();
+            Load_pie();
         }
 
         private void SettingsChangePasswordButton_Click(object sender, RoutedEventArgs e)
@@ -150,6 +151,37 @@ namespace PL
                 }
             };
 
+            DataContext = this;
+        }
+        private void Load_pie()
+        {
+            IStatisticsService statsService = kernel.Get<IStatisticsService>();
+            var stats = statsService.GetIncomeStatisticsFullPeriod().ToList<StatisticsItem>();
+            var stats2 = statsService.GetExpenceStatisticsFullPeriod().ToList<StatisticsItem>();
+            ChartValues<decimal> chartIncome = new ChartValues<decimal>();
+            ChartValues<decimal> chartExpence = new ChartValues<decimal>();
+            stats.ForEach(x => chartIncome.Add(x.Value));
+            stats2.ForEach(x => chartExpence.Add(x.Value));
+            Func<ChartPoint, string> labelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+            SeriesCollection piechartData = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "Income",
+                    Values = new ChartValues<double> {stats.Count},
+                    DataLabels = true,
+                    LabelPoint = labelPoint
+                },
+                new PieSeries
+                {
+                    Title = "Expence",
+                    Values = new ChartValues<double> {stats2.Count},
+                    DataLabels = true,
+                    LabelPoint = labelPoint
+                },
+            };
+            pieChart.Series = piechartData;
+            pieChart.LegendLocation = LegendLocation.Right;
             DataContext = this;
         }
     }

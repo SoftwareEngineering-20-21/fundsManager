@@ -42,7 +42,7 @@
                 <TabItem Header="Stats" Background="#FF2FC3CB" Padding="6,2,6,45" Height="166" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
                     <Grid Background="#FF083846" Margin="0,0,10,-2">
 
-                        <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="251,279,347,97">
+                        <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="46,281,552,95">
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis Title="Time" Labels="{Binding Labels}"></lvc:Axis>
                             </lvc:CartesianChart.AxisX>
@@ -50,6 +50,14 @@
                                 <lvc:Axis Title="Money" LabelFormatter="{Binding Formatter}"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
+                        <lvc:PieChart x:Name="pieChart" LegendLocation="Bottom" Hoverable="False" DataTooltip="{x:Null}" Margin="580,245,48,103">
+                            <lvc:PieChart.Series>
+                                <lvc:PieSeries Title="Income" Values="1" DataLabels="True"
+                               LabelPoint="{Binding PointLabel}"/>
+                                <lvc:PieSeries Title="Expence" Values="1" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                            </lvc:PieChart.Series>
+                        </lvc:PieChart>
                         <DatePicker x:Name="StatsDatePicker" HorizontalAlignment="Left" Margin="615,130,0,0" VerticalAlignment="Top"  Width="411" Height="48" Background="#FF2FC3CB" FontSize="30"/>
                         <ComboBox x:Name="StatsAccountsComboBox" HorizontalAlignment="Left" Margin="115,123,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FF2FC3CB" BorderBrush="#FF2FC3CB"/>
                         <ComboBox x:Name="StatsGraphComboBox" HorizontalAlignment="Left" Margin="363,123,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FF2FC3CB" BorderBrush="#FF2FC3CB">
