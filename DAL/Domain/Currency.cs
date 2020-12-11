@@ -7,13 +7,11 @@ namespace DAL.Domain
     /// Currency class
     /// Contains field currency code
     /// </summary>
-    
-    public class Currency:BaseEntity
+    public class Currency : BaseEntity
     {
         /// <summary>
-        /// Currency code 
+        /// Gets or sets currency code 
         /// </summary>
-        
         [Required]
         public string Code { get; set; }
     }

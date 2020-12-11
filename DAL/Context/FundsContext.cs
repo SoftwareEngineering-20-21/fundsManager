@@ -1,9 +1,9 @@
-﻿using DAL.Domain;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System;
+using DAL.Domain;
 
 namespace DAL.Context
 {
@@ -11,32 +11,30 @@ namespace DAL.Context
     /// Fund Context class
     /// Contains fields Users, BankAccounts, Currency, Transaction and
     /// </summary>
-    
     public sealed class FundsContext : DbContext
     {
-        
         /// <summary>
-        /// Funds Context set of Users
+        /// Gets or sets funds Context set of Users
         /// </summary>
         public DbSet<User> Users { get; set; }
 
         /// <summary>
-        /// Funds Context set of Bank accounts
+        /// Gets or sets funds Context set of Bank accounts
         /// </summary>
         public DbSet<BankAccount> BankAccounts { get; set; }
 
         /// <summary>
-        /// Funds Context set of Currency
+        /// Gets or sets funds Context set of Currency
         /// </summary>
         public DbSet<Currency> Currency { get; set; }
 
         /// <summary>
-        /// Funds Context set of transactions
+        /// Gets or sets funds Context set of transactions
         /// </summary>
         public DbSet<Transaction> Transactions { get; set; }
-        
+
         /// <summary>
-        /// Constructor by default
+        /// Initializes a new instance of the <see cref="FundsContext"/> class.
         /// </summary>
         public FundsContext()
 
@@ -44,11 +42,11 @@ namespace DAL.Context
         {
             Database.EnsureCreated();
         }
-        
+
         /// <summary>
-        /// Constructor with paramethr
+        /// Initializes a new instance of the <see cref="FundsContext"/> class.
         /// </summary>
-        /// <param name="options">options</param>
+        /// <param name="options">DbContext options</param>
         public FundsContext(DbContextOptions<FundsContext> options)
             : base(options)
         {

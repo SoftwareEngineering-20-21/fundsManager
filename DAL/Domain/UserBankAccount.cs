@@ -4,28 +4,26 @@
     /// User Bank Account class
     /// Contains fields user Id, user, bank account Id, bank account
     /// </summary>
-    
     public class UserBankAccount
     {
         /// <summary>
-        /// User Bank Account user id
+        /// Gets or sets user bank account user id
         /// </summary>
         public int UserId { get; set; }
 
         /// <summary>
-        /// User Bank Account user
+        /// Gets or sets user bank account user
         /// </summary>
         public virtual User User { get; set; }
 
         /// <summary>
-        /// User Bank Account Bank Account id
+        /// Gets or sets user bank account bank account id
         /// </summary>
         public int BankAccountId { get; set; }
 
         /// <summary>
-        /// User Bank Account bank account
+        /// Gets or sets user bank account bank account
         /// </summary>
         public virtual BankAccount BankAccount { get; set; }
-
     }
 } 

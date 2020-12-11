@@ -9,39 +9,37 @@ namespace DAL.Domain
     /// Contains fields of user mail, user password, user name, user surname
     /// user phone
     /// </summary>
-    
-    public class User:BaseEntity
+    public class User : BaseEntity
     {
-        
         /// <summary>
-        /// User mail
+        /// Gets or sets user mail
         /// </summary>
         [Required]
         public string Mail { get; set; }
         
         /// <summary>
-        /// User password
+        /// Gets or sets user password
         /// </summary>
         [Required]
         public string Password { get; set; }
         
         /// <summary>
-        /// User list of bank accounts
+        /// Gets or sets user list of bank accounts
         /// </summary>
         public virtual List<UserBankAccount> BankAccounts { get; set; }
         
         /// <summary>
-        /// User name
+        /// Gets or sets user name
         /// </summary>
         public string Name { get; set; }
         
         /// <summary>
-        /// User surname
+        /// Gets or sets user surname
         /// </summary>
         public string Surname { get; set; }
         
         /// <summary>
-        /// User phone
+        /// Gets or sets user phone
         /// </summary>
         [Required]
         public string Phone { get; set; }

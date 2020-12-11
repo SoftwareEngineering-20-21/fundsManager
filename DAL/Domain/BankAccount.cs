@@ -9,37 +9,35 @@ namespace DAL.Domain
     /// Bank Account class
     /// Contains fields name, account type, currency type, currency id, list of users
     /// </summary>
-    
-    public class BankAccount:BaseEntity
+    public class BankAccount : BaseEntity
     {
-        
         /// <summary>
-        /// Bank account name
+        /// Gets or sets bank account name
         /// </summary>
         [Required]
         public string Name { get; set; }
 
         /// <summary>
-        /// Bank account type 
+        /// Gets or sets bank account type 
         /// </summary>
         [Required]
         public AccountType Type { get; set; }
 
         /// <summary>
-        /// Bank account type id
+        /// Gets or sets bank account type id
         /// </summary>
         [Required]
         [ForeignKey("CurrencyType")]
         public int CurrencyTypeId { get; set; }
 
         /// <summary>
-        /// Bank account currency type 
+        /// Gets or sets bank account currency type 
         /// </summary>
         [Required]
         public virtual Currency CurrencyType { get; set; }
 
         /// <summary>
-        /// Bank account list of Users
+        /// Gets or sets bank account list of Users
         /// </summary>
         public virtual List<UserBankAccount> Users { get; set; }
     }

@@ -4,11 +4,10 @@
     /// Base Entity class
     /// Contains field Id
     /// </summary>
-    
     public class BaseEntity
     {
         /// <summary>
-        /// base Entity id
+        /// Gets or sets base Entity id
         /// </summary>
         public int Id { get; set; }
     }

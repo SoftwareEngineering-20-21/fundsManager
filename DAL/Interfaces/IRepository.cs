@@ -10,10 +10,8 @@ namespace DAL.Interfaces
     /// Contains methods Get, Delete, Update, Add async, Save, Save async
     /// </summary>
     /// <typeparam name="T"> entity typeparam</typeparam>
-    
-    public interface IRepository<T> where T:BaseEntity
+    public interface IRepository<T> where T : BaseEntity
     {
-
         /// <summary>
         /// method of IRepository
         /// </summary>
@@ -25,7 +23,6 @@ namespace DAL.Interfaces
         /// </summary>
         /// <param name="predicate">predicate</param>
         /// <returns>list of entities by predicate</returns>
-    
         IEnumerable<T> Get(Func<T, bool> predicate);
 
         /// /// <summary>

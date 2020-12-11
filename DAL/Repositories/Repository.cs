@@ -16,30 +16,29 @@ namespace DAL.Repositories
     /// Implement IRepository
     /// </summary>
     /// <typeparam name="T">entity typeparam</typeparam>
-    
-    public class Repository<T>: IRepository<T> where T:BaseEntity
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly FundsContext context;
         private readonly DbSet<T> dbSet;
-        
+
         /// <summary>
-        /// Constructor by default
+        /// Initializes a new instance of the <see cref="Repository{T}"/> class.
         /// </summary>
         public Repository()
         {
             this.context = new FundsContext();
-            dbSet = context.Set<T>();
-            dbSet.Load();
+            this.dbSet = this.context.Set<T>();
+            this.dbSet.Load();
         }
-        
+
         /// <summary>
-        /// constructor by paramethr
+        /// Initializes a new instance of the <see cref="Repository{T}"/> class.
         /// </summary>
         /// <param name="context">context</param>
         public Repository(FundsContext context)
         {
             this.context = context;
-            dbSet = context.Set<T>();
+            this.dbSet = this.context.Set<T>();
         }
 
         /// <summary>
@@ -48,7 +47,7 @@ namespace DAL.Repositories
         /// <returns>list of entities</returns>
         public IEnumerable<T> Get()
         {
-            return dbSet.ToList();
+            return this.dbSet.ToList();
         }
 
         /// <summary>
@@ -58,7 +57,7 @@ namespace DAL.Repositories
         /// <returns>entity by id</returns>
         public T Get(int id)
         {
-            return dbSet.FirstOrDefault(x=>x.Id == id);
+            return this.dbSet.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -68,7 +67,7 @@ namespace DAL.Repositories
         /// <returns>list of entities by predicate</returns>
         public IEnumerable<T> Get(Func<T, bool> predicate)
         {
-            return dbSet.ToList().Where(predicate);
+            return this.dbSet.ToList().Where(predicate);
         }
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace DAL.Repositories
         /// <param name="entity">entity</param>
         public void Delete(T entity)
         {
-            dbSet.Remove(entity);
+            this.dbSet.Remove(entity);
         }
 
         /// <summary>
@@ -88,10 +87,10 @@ namespace DAL.Repositories
         /// <param name="id">id</param>
         public void Delete(int id)
         {
-            T elem = dbSet.Find(id);
+            T elem = this.dbSet.Find(id);
             if (elem != null)
             {
-                dbSet.Remove(elem);
+                this.dbSet.Remove(elem);
             }
         }
 
@@ -102,7 +101,7 @@ namespace DAL.Repositories
         /// <param name="entity">entity</param>
         public void Update(T entity)
         {
-            dbSet.Update(entity);
+            this.dbSet.Update(entity);
         }
 
         /// <summary>
@@ -112,7 +111,7 @@ namespace DAL.Repositories
         /// <returns>add task</returns>
         public async Task AddAsync(T entity)
         {
-            await dbSet.AddAsync(entity);
+            await this.dbSet.AddAsync(entity);
         }
 
         /// <summary>
@@ -121,7 +120,7 @@ namespace DAL.Repositories
         /// </summary>
         public void Save()
         {
-            context.SaveChanges();
+            this.context.SaveChanges();
         }
 
         /// <summary>
@@ -130,7 +129,7 @@ namespace DAL.Repositories
         /// <returns>saved changes</returns>
         public async Task SaveAsync()
         {
-            await context.SaveChangesAsync();
+            await this.context.SaveChangesAsync();
         }
     }
 }

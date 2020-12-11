@@ -8,10 +8,8 @@ namespace DAL.Interfaces
     /// Unit of Work interface
     /// Contains methods Save, Save async, Repository
     /// </summary>
-    
     public interface IUnitOfWork : IDisposable
     {
-
         /// <summary>
         /// Implementation of IUnitOfWork
         /// </summary>

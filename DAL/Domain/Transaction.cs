@@ -8,51 +8,49 @@ namespace DAL.Domain
     /// Transaction class
     /// contains fields Bank account, amount, transaction date, description, user id, user
     /// </summary>
-    
-    public class Transaction:BaseEntity
+    public class Transaction : BaseEntity
     {
-
         /// <summary>
-        /// bank account from Transaction
+        /// Gets or sets bank account from Transaction
         /// </summary>
         public virtual BankAccount BankAccountFrom { get; set; }
 
         /// <summary>
-        /// bank account to Transaction
+        /// Gets or sets bank account to Transaction
         /// </summary>
         public virtual BankAccount BankAccountTo { get; set; }
 
         /// <summary>
-        /// Amount to Transaction
+        /// Gets or sets amount to Transaction
         /// </summary>
         [Required]
         public decimal AmountTo { get; set; }
 
         /// <summary>
-        /// Amount From Transaction
+        /// Gets or sets amount From Transaction
         /// </summary>
         [Required]
         public decimal AmountFrom { get; set; }
 
         /// <summary>
-        /// Transaction Date
+        /// Gets or sets transaction Date
         /// </summary>
         [Required]
         public DateTime TransactionDate { get; set; }
 
         /// <summary>
-        /// Transaction Description
+        /// Gets or sets transaction Description
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Transaction UserId
+        /// Gets or sets transaction UserId
         /// </summary>
         [ForeignKey("User")]
         public int UserId { get; set; }
 
         /// <summary>
-        /// Transaction User
+        /// Gets or sets transaction User
         /// </summary>
         public virtual User User { get; set; }
     }
