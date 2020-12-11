@@ -12,16 +12,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DAL.Domain;
 using BLL.Interfaces;
+using System.ComponentModel;
 
 namespace PL
 {
     /// <summary>
     /// Interaction logic for DeleteAccount.xaml
     /// </summary>
-    public partial class DeleteAccount : Window
+    public partial class DeleteAccount : Window, INotifyPropertyChanged
     {
         private IKernel kernel;
-        private BankAccount account;
+
+        private readonly BankAccount account;
+
+        public event PropertyChangedEventHandler PropertyChanged;
         public DeleteAccount(IKernel kernel, BankAccount acc)
         {
             InitializeComponent();
@@ -37,6 +41,7 @@ namespace PL
         private void DeleteAccountOKButton_Click(object sender, RoutedEventArgs e)
         {
             kernel.Get<IBankAccountService>().DeleteAccount(account);
+            PropertyChanged(this, new PropertyChangedEventArgs("Deleted"));
             Close();
         }
     }

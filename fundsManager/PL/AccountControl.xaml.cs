@@ -13,16 +13,20 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BLL.Interfaces;
 using DAL.Domain;
+using System.ComponentModel;
 
 namespace PL
 {
     /// <summary>
     /// Interaction logic for AccountControl.xaml
     /// </summary>
-    public partial class AccountControl : UserControl
+    public partial class AccountControl : UserControl, INotifyPropertyChanged
     {
         private IKernel kernel;
-        private BankAccount account;
+
+        private readonly BankAccount account;
+
+        public event PropertyChangedEventHandler PropertyChanged;
         public AccountControl(IKernel kernel, BankAccount acc)
         {
             InitializeComponent();
@@ -42,7 +46,13 @@ namespace PL
         private void AccountOptionsDelete_Click(object sender, RoutedEventArgs e)
         {
             DeleteAccount DeleteAccount = new DeleteAccount(kernel, account);
+            DeleteAccount.PropertyChanged += DeleteCompleted;
             DeleteAccount.Show();
+        }
+
+        private void DeleteCompleted(object sender, PropertyChangedEventArgs e)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs("Deleted"));
         }
     }
 }
