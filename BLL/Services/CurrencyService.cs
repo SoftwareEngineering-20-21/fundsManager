@@ -7,24 +7,27 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using BLL.Interfaces;
+
 namespace BLL.Services
 {
     /// <summary>
     /// The Currency Service class
     /// Implement ICurrencyService interface
     /// </summary>
-    
     public class CurrencyService : ICurrencyService
     {
-        XmlDocument xml;
-        
         /// <summary>
-        /// Constructor by default
+        /// Contains xml document with currencies
+        /// </summary>
+        private XmlDocument xml;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CurrencyService"/> class.
         /// </summary>
         public CurrencyService()
         {
-            xml = new XmlDocument();
-            UpdateCurrency();
+            this.xml = new XmlDocument();
+            this.UpdateCurrency();
         }
 
         /// <summary>
@@ -32,17 +35,18 @@ namespace BLL.Services
         /// </summary>
         /// <param name="code">Code of currency</param>
         /// <returns>currency rate</returns>
-        public Decimal GetRate(string code)
+        public decimal GetRate(string code)
         {
-            UpdateCurrency();
-            XmlNodeList xnList = xml.SelectNodes("/exchange/currency");
-            foreach (XmlNode node in xnList)
+            this.UpdateCurrency();
+            XmlNodeList nodeList = this.xml.SelectNodes("/exchange/currency");
+            foreach (XmlNode node in nodeList)
             {
                 if (node["cc"].InnerText == code)
                 {
-                    return Decimal.Parse(node["rate"].InnerText);
+                    return decimal.Parse(node["rate"].InnerText);
                 }
             }
+
             throw new Exception();
         }
 
@@ -50,7 +54,7 @@ namespace BLL.Services
         /// Implementation of ICurrencyService
         /// </summary>
         /// <param name="code">Code of currency</param>
-        /// <param name="date">Date</param>
+        /// <param name="date">Wanted date</param>
         /// <returns>Currency rate on the date</returns>
         public decimal GetRateByDate(string code, DateTime date)
         {
@@ -60,7 +64,7 @@ namespace BLL.Services
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(content);
             XmlNodeList xmlNode = xmlDocument.SelectNodes("/exchange/currency");
-            return Decimal.Parse(xmlNode[0]["rate"].InnerText);
+            return decimal.Parse(xmlNode[0]["rate"].InnerText);
         }
 
         /// <summary>
@@ -70,13 +74,13 @@ namespace BLL.Services
         public void UpdateCurrency()
         {
             string content = new WebClient().DownloadString("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange");
-            xml.LoadXml(content);
+            this.xml.LoadXml(content);
             string fileName = "currency.xml";
             FileInfo fi = new FileInfo(fileName);
             bool exists = fi.Exists;
             if (!fi.Exists)
             {
-                xml.Save("currency.xml");
+                this.xml.Save("currency.xml");
             }
             else
             {
@@ -88,10 +92,11 @@ namespace BLL.Services
 
                 TimeSpan hourCurrenyUpdate = new TimeSpan(10, 0, 0);
                 TimeSpan hourToday = new TimeSpan(today.Hour, today.Minute, today.Second);
-                if (datetoday != dateUpdateFile && hourToday > hourCurrenyUpdate) xml.Save("currency.xml");
+                if (datetoday != dateUpdateFile && hourToday > hourCurrenyUpdate)
+                {
+                    this.xml.Save("currency.xml");
+                }
             }
-
         }
-
     }
 }

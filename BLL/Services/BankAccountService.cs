@@ -15,16 +15,23 @@ namespace BLL.Services
     /// </summary>
     public class BankAccountService : IBankAccountService
     {
-        
         /// <summary>
-        /// Bank accounte service current user
+        /// Contains an object of IUnitOfWork
+        /// </summary>
+        private readonly IUnitOfWork unitOfWork;
+
+        /// <summary>
+        /// Contains an object of ICurrencyService
+        /// </summary>
+        private readonly ICurrencyService currencyService;
+
+        /// <summary>
+        /// Gets or sets bank account service current user
         /// </summary>
         public User CurrentUser { get; set; }
-        private readonly IUnitOfWork unitOfWork;
-        private readonly ICurrencyService currencyService;
-        
+
         /// <summary>
-        /// Constructor with paramethr
+        /// Initializes a new instance of the <see cref="BankAccountService"/> class.
         /// </summary>
         /// <param name="unitOfWork">unit of work</param>
         /// <param name="currencyService">currency service</param>
@@ -43,19 +50,19 @@ namespace BLL.Services
         {
             if (account.Type == AccountType.Income)
             {
-                return unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
+                return this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
                     .Select(x => x.AmountFrom).Sum();
             }
             else if (account.Type == AccountType.Expence)
             {
-                return unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
+                return this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
                     .Select(x => x.AmountTo).Sum();
             }
             else
             {
-                return unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
+                return this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
                            .Select(x => x.AmountTo).Sum() -
-                       unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
+                       this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
                            .Select(x => x.AmountFrom).Sum();
             }
         }
@@ -66,12 +73,12 @@ namespace BLL.Services
         /// <returns>all user transaction</returns>
         public IEnumerable<Transaction> GetAllUserTransactions()
         {
-            if (CurrentUser is null)
+            if (this.CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
-            return unitOfWork.Repository<Transaction>().Get(x => x.UserId == CurrentUser.Id);
 
+            return this.unitOfWork.Repository<Transaction>().Get(x => x.UserId == this.CurrentUser.Id);
         }
 
         /// <summary>
@@ -81,13 +88,13 @@ namespace BLL.Services
         /// <returns>user transaction from account</returns>
         public IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount)
         {
-            if (CurrentUser is null)
+            if (this.CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
 
-            return unitOfWork.Repository<Transaction>()
-                .Get(x => x.UserId == CurrentUser.Id && x.BankAccountFrom.Id == fromAccount.Id);
+            return this.unitOfWork.Repository<Transaction>()
+                .Get(x => x.UserId == this.CurrentUser.Id && x.BankAccountFrom.Id == fromAccount.Id);
         }
 
         /// <summary>
@@ -97,13 +104,13 @@ namespace BLL.Services
         /// <returns>user transaction to account</returns>
         public IEnumerable<Transaction> GetAllUserTransactionsTo(BankAccount toAccount)
         {
-            if (CurrentUser is null)
+            if (this.CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
-            return unitOfWork.Repository<Transaction>()
-                .Get(x => x.UserId == CurrentUser.Id && x.BankAccountFrom.Id == toAccount.Id);
 
+            return this.unitOfWork.Repository<Transaction>()
+                .Get(x => x.UserId == this.CurrentUser.Id && x.BankAccountFrom.Id == toAccount.Id);
         }
 
         /// <summary>
@@ -114,12 +121,13 @@ namespace BLL.Services
         /// <returns>user transaction from dateFrom to dateTo</returns>
         public IEnumerable<Transaction> GetAllUserTransactions(DateTime dateFrom, DateTime dateTo)
         {
-            if (CurrentUser is null)
+            if (this.CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
-            return unitOfWork.Repository<Transaction>()
-                .Get(x => x.UserId == CurrentUser.Id && x.TransactionDate >= dateFrom && x.TransactionDate <= dateTo);
+
+            return this.unitOfWork.Repository<Transaction>()
+                .Get(x => x.UserId == this.CurrentUser.Id && x.TransactionDate >= dateFrom && x.TransactionDate <= dateTo);
         }
 
         /// <summary>
@@ -131,13 +139,13 @@ namespace BLL.Services
         /// <returns>user transaction account from dateFrom to dateTo </returns>
         public IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount, DateTime dateFrom, DateTime dateTo)
         {
-            if (CurrentUser is null)
+            if (this.CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
 
-            return unitOfWork.Repository<Transaction>()
-                .Get(x => x.UserId == CurrentUser.Id &&
+            return this.unitOfWork.Repository<Transaction>()
+                .Get(x => x.UserId == this.CurrentUser.Id &&
                           x.BankAccountFrom.Id == fromAccount.Id).Where(x => x.TransactionDate >= dateFrom && x.TransactionDate <= dateTo);
         }
 
@@ -150,13 +158,13 @@ namespace BLL.Services
         /// <returns>user transaction to account from dateFrom to dateTo</returns>
         public IEnumerable<Transaction> GetAllUserTransactionsTo(BankAccount toAccount, DateTime dateFrom, DateTime dateTo)
         {
-            if (CurrentUser is null)
+            if (this.CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
 
-            return unitOfWork.Repository<Transaction>()
-                .Get(x => x.UserId == CurrentUser.Id &&
+            return this.unitOfWork.Repository<Transaction>()
+                .Get(x => x.UserId == this.CurrentUser.Id &&
                           x.BankAccountTo.Id == toAccount.Id).Where(x => x.TransactionDate >= dateFrom && x.TransactionDate <= dateTo);
         }
 
@@ -166,13 +174,13 @@ namespace BLL.Services
         /// <returns>user accounts</returns>
         public IEnumerable<BankAccount> GetAllUserAccounts()
         {
-            if (CurrentUser is null)
+            if (this.CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
 
-            return unitOfWork.Repository<BankAccount>()
-                .Get(x => x.Users.Select(x => x.UserId).Contains(CurrentUser.Id));
+            return this.unitOfWork.Repository<BankAccount>()
+                .Get(x => x.Users.Select(x => x.UserId).Contains(this.CurrentUser.Id));
         }
 
         /// <summary>
@@ -183,39 +191,48 @@ namespace BLL.Services
         /// <param name="amount">amount of money</param>
         /// <param name="date">Date creation of transaction</param>
         /// <param name="description">description to transaction</param>
-        /// <returns>transaction</returns>
+        /// <returns> return transaction </returns>
         public async Task<Transaction> MakeTransaction(BankAccount from, BankAccount to, decimal amount, DateTime date, string description)
         {
-            if (CurrentUser is null)
+            if (this.CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
+
             if (from is null || to is null)
-                throw new ArgumentException("Bank fromAccount is null");
+            { 
+            throw new ArgumentException("Bank fromAccount is null");
+            }
 
             if (from.Type == AccountType.Income && to.Type == AccountType.Expence)
+            { 
                 throw new ArgumentException("Cannot create transaction from income to expence fromAccount");
+            }
 
             if (from.Type == AccountType.Expence)
+            {
                 throw new ArgumentException("Cannot create transaction from expence");
+            }
 
             if (from.Type == AccountType.Current && to.Type == AccountType.Income)
+            {
                 throw new ArgumentException("Cannot create transaction from current to income fromAccount");
+            }
 
             var transaction = new Transaction
             {
                 AmountFrom = amount,
-                AmountTo = amount * currencyService.GetRate(to.CurrencyType.Code) /
-                           currencyService.GetRate(from.CurrencyType.Code),
+                AmountTo = amount * this.currencyService.GetRate(to.CurrencyType.Code) /
+                           this.currencyService.GetRate(from.CurrencyType.Code),
                 BankAccountFrom = from,
                 BankAccountTo = to,
                 Description = description,
                 TransactionDate = date,
-                UserId = CurrentUser.Id,
-                User = CurrentUser
+                UserId = this.CurrentUser.Id,
+                User = this.CurrentUser
             };
-            await unitOfWork.Repository<Transaction>().AddAsync(transaction);
-            await unitOfWork.SaveAsync();
+            await this.unitOfWork.Repository<Transaction>().AddAsync(transaction);
+            await this.unitOfWork.SaveAsync();
             return transaction;
         }
 
@@ -227,17 +244,18 @@ namespace BLL.Services
         /// <returns>if account shared</returns>
         public bool ShareAccount(BankAccount account, string email)
         {
-            var user = unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email);
+            var user = this.unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email);
             if (user == null || account == null)
             {
                 return false;
             }
+
             user.BankAccounts.Add(new UserBankAccount
             {
                 BankAccount = account
             });
-            unitOfWork.Repository<User>().Update(user);
-            unitOfWork.Save();
+            this.unitOfWork.Repository<User>().Update(user);
+            this.unitOfWork.Save();
             return true;
         }
 
@@ -250,7 +268,7 @@ namespace BLL.Services
         /// <returns>created account</returns>
         public async Task<BankAccount> CreateAccount(AccountType type, string name, Currency currency)
         {
-            if (CurrentUser is null)
+            if (this.CurrentUser is null)
             {
                 throw new ArgumentException("Current user is null");
             }
@@ -266,13 +284,13 @@ namespace BLL.Services
                 Name = name,
                 Type = type
             };
-            CurrentUser.BankAccounts.Add(
+            this.CurrentUser.BankAccounts.Add(
                 new UserBankAccount
                 {
                     BankAccount = account
                 });
-            unitOfWork.Repository<User>().Update(CurrentUser);
-            await unitOfWork.SaveAsync();
+            this.unitOfWork.Repository<User>().Update(this.CurrentUser);
+            await this.unitOfWork.SaveAsync();
             return account;
         }
 
@@ -283,8 +301,8 @@ namespace BLL.Services
         /// <returns>if account deleted</returns>
         public async Task DeleteAccount(BankAccount account)
         {
-            unitOfWork.Repository<BankAccount>().Delete(account);
-            await unitOfWork.SaveAsync();
+            this.unitOfWork.Repository<BankAccount>().Delete(account);
+            await this.unitOfWork.SaveAsync();
         }
     }
 }

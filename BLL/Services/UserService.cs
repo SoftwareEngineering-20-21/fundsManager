@@ -14,28 +14,33 @@ namespace BLL.Services
     /// User Service class
     /// Implement IUserService
     /// </summary>
-    
     public class UserService : IUserService
     {
+        /// <summary>
+        /// Contains regex to validate phone number
+        /// </summary>
         private readonly Regex phoneRegex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
         
         /// <summary>
-        /// User service current user
+        /// Gets user service current user
         /// </summary>
         public User CurrentUser { get; private set; }
-        
+
+        /// <summary>
+        /// Contains an object of IUnitOfWork
+        /// </summary>
         private readonly IUnitOfWork unitOfWork;
 
         /// <summary>
         /// Implementation of IUserService
         /// </summary>
-        /// <param name="emailaddress">select email</param>
-        /// <returns>if emailaddress valid</returns>
-        public bool IsValidMail(string emailaddress)
+        /// <param name="email">select email</param>
+        /// <returns>if email is valid</returns>
+        public bool IsValidMail(string email)
         {
             try
             {
-                MailAddress m = new MailAddress(emailaddress);
+                MailAddress m = new MailAddress(email);
                 return true;
             }
             catch (Exception)
@@ -43,15 +48,15 @@ namespace BLL.Services
                 return false;
             }
         }
-        
+
         /// <summary>
-        /// Constructor with paramethr
+        /// Initializes a new instance of the <see cref="UserService"/> class.
         /// </summary>
         /// <param name="unitOfWork">unit of work</param>
         public UserService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            CurrentUser = null;
+            this.CurrentUser = null;
         }
 
         /// <summary>
@@ -62,14 +67,15 @@ namespace BLL.Services
         public bool ChangeMail(string newMail)
         {
             bool changed = false;
-            var emails = unitOfWork.Repository<User>().Get().Select(x => x.Mail);
-            if (!emails.Contains(newMail) && IsValidMail(newMail))
+            var emails = this.unitOfWork.Repository<User>().Get().Select(x => x.Mail);
+            if (!emails.Contains(newMail) && this.IsValidMail(newMail))
             {
-                CurrentUser.Mail = newMail;
-                unitOfWork.Repository<User>().Update(CurrentUser);
-                unitOfWork.Save();
+                this.CurrentUser.Mail = newMail;
+                this.unitOfWork.Repository<User>().Update(this.CurrentUser);
+                this.unitOfWork.Save();
                 changed = true;
             }
+
             return changed;
         }
 
@@ -82,16 +88,17 @@ namespace BLL.Services
         public bool ChangePassword(string oldPassword, string newPassword)
         {
             bool changed = false;
-            string currentPassword = CurrentUser.Password;
+            string currentPassword = this.CurrentUser.Password;
             bool validPassword = BCrypt.Net.BCrypt.Verify(oldPassword, currentPassword);
             if (validPassword)
             {
                 string hashPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
-                CurrentUser.Password = hashPassword;
-                unitOfWork.Repository<User>().Update(CurrentUser);
-                unitOfWork.Save();
+                this.CurrentUser.Password = hashPassword;
+                this.unitOfWork.Repository<User>().Update(this.CurrentUser);
+                this.unitOfWork.Save();
                 changed = true;
             }
+
             return changed;
         }
 
@@ -103,14 +110,15 @@ namespace BLL.Services
         public bool ChangePhoneNumber(string number)
         {
             bool changed = false;
-            var numbers = unitOfWork.Repository<User>().Get().Select(x => x.Phone);
-            if (phoneRegex.IsMatch(number) && !numbers.Contains(number))
+            var numbers = this.unitOfWork.Repository<User>().Get().Select(x => x.Phone);
+            if (this.phoneRegex.IsMatch(number) && !numbers.Contains(number))
             {
-                CurrentUser.Phone = number;
-                unitOfWork.Repository<User>().Update(CurrentUser);
-                unitOfWork.Save();
+                this.CurrentUser.Phone = number;
+                this.unitOfWork.Repository<User>().Update(this.CurrentUser);
+                this.unitOfWork.Save();
                 changed = true;
             }
+
             return changed;
         }
 
@@ -119,19 +127,20 @@ namespace BLL.Services
         /// </summary>
         /// <param name="email">user email</param>
         /// <param name="password">user password</param>
-        /// <returns>logined user</returns>
+        /// <returns>logged-in user</returns>
         public User Login(string email, string password)
         {
-            User user = unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email);
+            User user = this.unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email);
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
-                CurrentUser = user;
+                this.CurrentUser = user;
             }
             else
             {
                 throw new ArgumentException("The email or password is incorrect.");
             }
-            return CurrentUser;
+
+            return this.CurrentUser;
         }
 
         /// <summary>
@@ -142,11 +151,11 @@ namespace BLL.Services
         /// <param name="email">user email</param>
         /// <param name="phoneNumber">user phone number</param>
         /// <param name="password">user password</param>
-        /// <returns>registred user</returns>
+        /// <returns> registered user</returns>
         public User SignUp(string firstName, string lastName, string email, string phoneNumber, string password)
         {
-            var existUser = unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email || x.Phone == phoneNumber);
-            if (existUser == null && phoneRegex.IsMatch(phoneNumber) && IsValidMail(email))
+            var existUser = this.unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email || x.Phone == phoneNumber);
+            if (existUser == null && this.phoneRegex.IsMatch(phoneNumber) && this.IsValidMail(email))
             {
                 User user = new User
                 {
@@ -157,15 +166,16 @@ namespace BLL.Services
                     Password = BCrypt.Net.BCrypt.HashPassword(password),
                     BankAccounts = new List<UserBankAccount>()
                 };
-                unitOfWork.Repository<User>().Update(user);
-                unitOfWork.Save();
-                CurrentUser = user;
+                this.unitOfWork.Repository<User>().Update(user);
+                this.unitOfWork.Save();
+                this.CurrentUser = user;
             }
             else
             {
                 throw new ArgumentException("Phone or mail incorrect");
             }
-            return CurrentUser;
+
+            return this.CurrentUser;
         }
     }
 }

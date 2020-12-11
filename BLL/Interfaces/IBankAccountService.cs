@@ -39,7 +39,7 @@ namespace BLL.Interfaces
         /// <returns>user transaction from account</returns>
         IEnumerable<Transaction> GetAllUserTransactionsFrom(BankAccount fromAccount);
 
-        /// <summary
+        /// <summary>
         /// method of IBankAccountService
         /// </summary>
         /// <param name="toAccount">The bank account that get user transaction</param>
