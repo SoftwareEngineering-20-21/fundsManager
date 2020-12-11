@@ -13,7 +13,9 @@ namespace BLL.Interfaces
     public interface IUserService
     {
         
-        
+        /// <summary>
+        /// User Service current user
+        /// </summary>
         User CurrentUser { get; }
 
         /// <summary>

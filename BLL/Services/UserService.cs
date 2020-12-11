@@ -18,7 +18,12 @@ namespace BLL.Services
     public class UserService : IUserService
     {
         private readonly Regex phoneRegex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
+        
+        /// <summary>
+        /// User service current user
+        /// </summary>
         public User CurrentUser { get; private set; }
+        
         private readonly IUnitOfWork unitOfWork;
 
         /// <summary>
@@ -38,6 +43,11 @@ namespace BLL.Services
                 return false;
             }
         }
+        
+        /// <summary>
+        /// Constructor with paramethr
+        /// </summary>
+        /// <param name="unitOfWork">unit of work</param>
         public UserService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;

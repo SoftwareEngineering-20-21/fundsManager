@@ -7,6 +7,9 @@
     
     public class BaseEntity
     {
+        /// <summary>
+        /// base Entity id
+        /// </summary>
         public int Id { get; set; }
     }
 }

@@ -13,6 +13,10 @@ namespace BLL.Interfaces
     /// </summary>
     public interface IBankAccountService
     {
+        
+        /// <summary>
+        /// Bank account service current user
+        /// </summary>
         public User CurrentUser { get; set; }
 
         /// <summary>

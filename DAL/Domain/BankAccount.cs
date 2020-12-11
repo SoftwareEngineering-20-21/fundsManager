@@ -12,18 +12,35 @@ namespace DAL.Domain
     
     public class BankAccount:BaseEntity
     {
+        
+        /// <summary>
+        /// Bank account name
+        /// </summary>
         [Required]
         public string Name { get; set; }
-        
+
+        /// <summary>
+        /// Bank account type 
+        /// </summary>
         [Required]
         public AccountType Type { get; set; }
-        
+
+        /// <summary>
+        /// Bank account type id
+        /// </summary>
         [Required]
         [ForeignKey("CurrencyType")]
         public int CurrencyTypeId { get; set; }
 
+        /// <summary>
+        /// Bank account currency type 
+        /// </summary>
         [Required]
         public virtual Currency CurrencyType { get; set; }
+
+        /// <summary>
+        /// Bank account list of Users
+        /// </summary>
         public virtual List<UserBankAccount> Users { get; set; }
     }
 }

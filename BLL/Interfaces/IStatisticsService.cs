@@ -15,6 +15,9 @@ namespace BLL.Interfaces
     
     public interface IStatisticsService
     {
+        /// <summary>
+        /// Statistics service current user
+        /// </summary>
         User CurrentUser { get; set; }
 
         /// <summary>

@@ -18,7 +18,19 @@ namespace BLL.Services
     
     public class StatisticsService : IStatisticsService
     {
+        
+        /// <summary>
+        /// Statistics service current user
+        /// </summary>
         public User CurrentUser { get; set; }
+
+        private readonly IUnitOfWork unitOfWork;
+
+        /// <summary>
+        /// Constructor by default
+        /// </summary>
+        /// <param name="unitOfWork">unit of work</param>
+
         public StatisticsService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
@@ -97,6 +109,7 @@ namespace BLL.Services
         /// Implementation of IStatisticService
         /// </summary>
         /// <returns>income statistic for the whole period</returns>
+        
         public IEnumerable<StatisticsItem> GetIncomeStatisticsFullPeriod()
         {
             if (CurrentUser is null)

@@ -17,6 +17,10 @@ namespace BLL.Services
     public class CurrencyService : ICurrencyService
     {
         XmlDocument xml;
+        
+        /// <summary>
+        /// Constructor by default
+        /// </summary>
         public CurrencyService()
         {
             xml = new XmlDocument();

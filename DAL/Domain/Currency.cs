@@ -9,7 +9,11 @@ namespace DAL.Domain
     /// </summary>
     
     public class Currency:BaseEntity
-    { 
+    {
+        /// <summary>
+        /// Currency code 
+        /// </summary>
+        
         [Required]
         public string Code { get; set; }
     }

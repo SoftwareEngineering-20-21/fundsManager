@@ -21,12 +21,21 @@ namespace DAL.Repositories
     {
         private readonly FundsContext context;
         private readonly DbSet<T> dbSet;
+        
+        /// <summary>
+        /// Constructor by default
+        /// </summary>
         public Repository()
         {
             this.context = new FundsContext();
             dbSet = context.Set<T>();
             dbSet.Load();
         }
+        
+        /// <summary>
+        /// constructor by paramethr
+        /// </summary>
+        /// <param name="context">context</param>
         public Repository(FundsContext context)
         {
             this.context = context;

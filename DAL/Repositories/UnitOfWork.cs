@@ -17,10 +17,19 @@ namespace DAL.Repositories
         private readonly FundsContext context;
         private bool disposed;
         private Dictionary<string, object> repositories;
+        
+        /// <summary>
+        /// Constructor by default
+        /// </summary>
         public UnitOfWork()
         {
             this.context = new FundsContext();
         }
+        
+        /// <summary>
+        /// Constructor with paramethr
+        /// </summary>
+        /// <param name="context">context</param>
         public UnitOfWork(FundsContext context)
         {
             this.context = context;

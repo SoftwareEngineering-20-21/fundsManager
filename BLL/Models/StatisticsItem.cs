@@ -12,7 +12,15 @@ namespace BLL.Models
     /// </summary>
     public class StatisticsItem
     {
+
+        /// <summary>
+        /// Statistic item date
+        /// </summary>
         public DateTime Date { get; set; }
+        
+        /// <summary>
+        /// Statistic item value
+        /// </summary>
         public decimal Value { get; set; }
     }
 }

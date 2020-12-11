@@ -14,22 +14,51 @@ namespace DAL.Context
     
     public sealed class FundsContext : DbContext
     {
+        
+        /// <summary>
+        /// Funds Context set of Users
+        /// </summary>
         public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        /// Funds Context set of Bank accounts
+        /// </summary>
         public DbSet<BankAccount> BankAccounts { get; set; }
+
+        /// <summary>
+        /// Funds Context set of Currency
+        /// </summary>
         public DbSet<Currency> Currency { get; set; }
+
+        /// <summary>
+        /// Funds Context set of transactions
+        /// </summary>
         public DbSet<Transaction> Transactions { get; set; }
+        
+        /// <summary>
+        /// Constructor by default
+        /// </summary>
         public FundsContext()
 
             : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(@Environment.GetEnvironmentVariable("FundsManagerDB")).UseLazyLoadingProxies().Options)
         {
             Database.EnsureCreated();
         }
+        
+        /// <summary>
+        /// Constructor with paramethr
+        /// </summary>
+        /// <param name="options">options</param>
         public FundsContext(DbContextOptions<FundsContext> options)
             : base(options)
         {
             Database.EnsureCreated();
         }
 
+        /// <summary>
+        /// Set table relationships
+        /// </summary>
+        /// <param name="modelBuilder">model builder</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserBankAccount>().HasKey(t => new {t.UserId, t.BankAccountId});

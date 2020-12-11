@@ -15,9 +15,19 @@ namespace BLL.Services
     /// </summary>
     public class BankAccountService : IBankAccountService
     {
+        
+        /// <summary>
+        /// Bank accounte service current user
+        /// </summary>
         public User CurrentUser { get; set; }
         private readonly IUnitOfWork unitOfWork;
         private readonly ICurrencyService currencyService;
+        
+        /// <summary>
+        /// Constructor with paramethr
+        /// </summary>
+        /// <param name="unitOfWork">unit of work</param>
+        /// <param name="currencyService">currency service</param>
         public BankAccountService(IUnitOfWork unitOfWork, ICurrencyService currencyService)
         {
             this.unitOfWork = unitOfWork;

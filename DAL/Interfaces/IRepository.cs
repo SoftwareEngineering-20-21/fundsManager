@@ -23,15 +23,16 @@ namespace DAL.Interfaces
         /// <summary>
         /// method of IRepository
         /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns>entity by id</returns>
-        IEnumerable<T> Get(Func<T, bool> predicate);
-
-        /// <summary>
-        /// method of IRepository
-        /// </summary>
         /// <param name="predicate">predicate</param>
         /// <returns>list of entities by predicate</returns>
+    
+        IEnumerable<T> Get(Func<T, bool> predicate);
+
+        /// /// <summary>
+        /// method of IRepository
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <returns>entity by id</returns>
         T Get(int id);
 
         /// <summary>
