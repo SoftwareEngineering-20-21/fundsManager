@@ -45,13 +45,13 @@ namespace PL
                 MessageBox.Show("Please enter valid email");
                 return;
             }
-            var answer = kernel.Get<IBankAccountService>().ShareAccount(account, email);
-            answer.Wait();
-            if (!answer.Result)
+            bool answer = kernel.Get<IBankAccountService>().ShareAccount(account, email);
+            if (!answer)
             {
                 MessageBox.Show("User not found");
                 return;
             }
+            MessageBox.Show("Done");
             Close();
         }
     }

@@ -62,7 +62,7 @@ namespace PL
             {
                 return;
             }
-            foreach(BankAccount account in accounts)
+            foreach (BankAccount account in accounts)
             {
                 AccSPanel.Children.Add(new AccountControl(kernel, account));
             }
@@ -96,7 +96,13 @@ namespace PL
         private void AddAccountButton_Click(object sender, RoutedEventArgs e)
         {
             AddAccount AddAccount = new AddAccount(kernel);
+            //AddAccount.AddAccountOKButton.Click += RefreshView;
             AddAccount.Show();
+        }
+
+        private void RefreshView(object sender, RoutedEventArgs e)
+        {
+            UpdateAccountsView();
         }
 
         private void MainForm1_SizeChanged(object sender, SizeChangedEventArgs e)
