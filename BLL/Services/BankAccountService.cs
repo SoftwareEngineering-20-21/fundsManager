@@ -200,12 +200,12 @@ namespace BLL.Services
             }
 
             if (from is null || to is null)
-            { 
-            throw new ArgumentException("Bank fromAccount is null");
+            {
+                throw new ArgumentException("Bank fromAccount is null");
             }
 
             if (from.Type == AccountType.Income && to.Type == AccountType.Expence)
-            { 
+            {
                 throw new ArgumentException("Cannot create transaction from income to expence fromAccount");
             }
 
@@ -218,12 +218,12 @@ namespace BLL.Services
             {
                 throw new ArgumentException("Cannot create transaction from current to income fromAccount");
             }
-
             var transaction = new Transaction
             {
                 AmountFrom = amount,
-                AmountTo = amount * this.currencyService.GetRate(to.CurrencyType.Code) /
-                           this.currencyService.GetRate(from.CurrencyType.Code),
+
+                AmountTo = amount * this.currencyService.GetRate(from.CurrencyType.Code) /
+                           this.currencyService.GetRate(to.CurrencyType.Code),
                 BankAccountFrom = from,
                 BankAccountTo = to,
                 Description = description,
