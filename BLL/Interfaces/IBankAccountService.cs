@@ -103,13 +103,13 @@ namespace BLL.Interfaces
         /// <param name="name">name of account</param>
         /// <param name="currency">select currency</param>
         /// <returns>created account</returns>
-        Task<BankAccount> CreateAccount(AccountType type, string name, Currency currency);
+        BankAccount CreateAccount(AccountType type, string name, Currency currency);
 
         /// <summary>
         /// method of IBankAccountService
         /// </summary>
         /// <param name="account">The bank account to delete</param>
         /// <returns>if account deleted</returns>
-        Task DeleteAccount(BankAccount account);
+        void DeleteAccount(BankAccount account);
     }
 }

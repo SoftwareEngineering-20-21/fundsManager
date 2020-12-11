@@ -12,34 +12,34 @@
         </member>
         <member name="P:DAL.Context.FundsContext.Users">
             <summary>
-            Funds Context set of Users
+            Gets or sets funds Context set of Users
             </summary>
         </member>
         <member name="P:DAL.Context.FundsContext.BankAccounts">
             <summary>
-            Funds Context set of Bank accounts
+            Gets or sets funds Context set of Bank accounts
             </summary>
         </member>
         <member name="P:DAL.Context.FundsContext.Currency">
             <summary>
-            Funds Context set of Currency
+            Gets or sets funds Context set of Currency
             </summary>
         </member>
         <member name="P:DAL.Context.FundsContext.Transactions">
             <summary>
-            Funds Context set of transactions
+            Gets or sets funds Context set of transactions
             </summary>
         </member>
         <member name="M:DAL.Context.FundsContext.#ctor">
             <summary>
-            Constructor by default
+            Initializes a new instance of the <see cref="T:DAL.Context.FundsContext"/> class.
             </summary>
         </member>
         <member name="M:DAL.Context.FundsContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{DAL.Context.FundsContext})">
             <summary>
-            Constructor with paramethr
+            Initializes a new instance of the <see cref="T:DAL.Context.FundsContext"/> class.
             </summary>
-            <param name="options">options</param>
+            <param name="options">DbContext options</param>
         </member>
         <member name="M:DAL.Context.FundsContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
@@ -55,27 +55,27 @@
         </member>
         <member name="P:DAL.Domain.BankAccount.Name">
             <summary>
-            Bank account name
+            Gets or sets bank account name
             </summary>
         </member>
         <member name="P:DAL.Domain.BankAccount.Type">
             <summary>
-            Bank account type 
+            Gets or sets bank account type 
             </summary>
         </member>
         <member name="P:DAL.Domain.BankAccount.CurrencyTypeId">
             <summary>
-            Bank account type id
+            Gets or sets bank account type id
             </summary>
         </member>
         <member name="P:DAL.Domain.BankAccount.CurrencyType">
             <summary>
-            Bank account currency type 
+            Gets or sets bank account currency type 
             </summary>
         </member>
         <member name="P:DAL.Domain.BankAccount.Users">
             <summary>
-            Bank account list of Users
+            Gets or sets bank account list of Users
             </summary>
         </member>
         <member name="T:DAL.Domain.BaseEntity">
@@ -86,7 +86,7 @@
         </member>
         <member name="P:DAL.Domain.BaseEntity.Id">
             <summary>
-            base Entity id
+            Gets or sets base Entity id
             </summary>
         </member>
         <member name="T:DAL.Domain.Currency">
@@ -97,7 +97,7 @@
         </member>
         <member name="P:DAL.Domain.Currency.Code">
             <summary>
-            Currency code 
+            Gets or sets currency code 
             </summary>
         </member>
         <member name="T:DAL.Domain.Transaction">
@@ -108,42 +108,42 @@
         </member>
         <member name="P:DAL.Domain.Transaction.BankAccountFrom">
             <summary>
-            bank account from Transaction
+            Gets or sets bank account from Transaction
             </summary>
         </member>
         <member name="P:DAL.Domain.Transaction.BankAccountTo">
             <summary>
-            bank account to Transaction
+            Gets or sets bank account to Transaction
             </summary>
         </member>
         <member name="P:DAL.Domain.Transaction.AmountTo">
             <summary>
-            Amount to Transaction
+            Gets or sets amount to Transaction
             </summary>
         </member>
         <member name="P:DAL.Domain.Transaction.AmountFrom">
             <summary>
-            Amount From Transaction
+            Gets or sets amount From Transaction
             </summary>
         </member>
         <member name="P:DAL.Domain.Transaction.TransactionDate">
             <summary>
-            Transaction Date
+            Gets or sets transaction Date
             </summary>
         </member>
         <member name="P:DAL.Domain.Transaction.Description">
             <summary>
-            Transaction Description
+            Gets or sets transaction Description
             </summary>
         </member>
         <member name="P:DAL.Domain.Transaction.UserId">
             <summary>
-            Transaction UserId
+            Gets or sets transaction UserId
             </summary>
         </member>
         <member name="P:DAL.Domain.Transaction.User">
             <summary>
-            Transaction User
+            Gets or sets transaction User
             </summary>
         </member>
         <member name="T:DAL.Domain.User">
@@ -155,32 +155,32 @@
         </member>
         <member name="P:DAL.Domain.User.Mail">
             <summary>
-            User mail
+            Gets or sets user mail
             </summary>
         </member>
         <member name="P:DAL.Domain.User.Password">
             <summary>
-            User password
+            Gets or sets user password
             </summary>
         </member>
         <member name="P:DAL.Domain.User.BankAccounts">
             <summary>
-            User list of bank accounts
+            Gets or sets user list of bank accounts
             </summary>
         </member>
         <member name="P:DAL.Domain.User.Name">
             <summary>
-            User name
+            Gets or sets user name
             </summary>
         </member>
         <member name="P:DAL.Domain.User.Surname">
             <summary>
-            User surname
+            Gets or sets user surname
             </summary>
         </member>
         <member name="P:DAL.Domain.User.Phone">
             <summary>
-            User phone
+            Gets or sets user phone
             </summary>
         </member>
         <member name="T:DAL.Domain.UserBankAccount">
@@ -191,22 +191,22 @@
         </member>
         <member name="P:DAL.Domain.UserBankAccount.UserId">
             <summary>
-            User Bank Account user id
+            Gets or sets user bank account user id
             </summary>
         </member>
         <member name="P:DAL.Domain.UserBankAccount.User">
             <summary>
-            User Bank Account user
+            Gets or sets user bank account user
             </summary>
         </member>
         <member name="P:DAL.Domain.UserBankAccount.BankAccountId">
             <summary>
-            User Bank Account Bank Account id
+            Gets or sets user bank account bank account id
             </summary>
         </member>
         <member name="P:DAL.Domain.UserBankAccount.BankAccount">
             <summary>
-            User Bank Account bank account
+            Gets or sets user bank account bank account
             </summary>
         </member>
         <member name="T:DAL.Enums.AccountType">
@@ -330,12 +330,12 @@
         </member>
         <member name="M:DAL.Repositories.Repository`1.#ctor">
             <summary>
-            Constructor by default
+            Initializes a new instance of the <see cref="T:DAL.Repositories.Repository`1"/> class.
             </summary>
         </member>
         <member name="M:DAL.Repositories.Repository`1.#ctor(DAL.Context.FundsContext)">
             <summary>
-            constructor by paramethr
+            Initializes a new instance of the <see cref="T:DAL.Repositories.Repository`1"/> class.
             </summary>
             <param name="context">context</param>
         </member>

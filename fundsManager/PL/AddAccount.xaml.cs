@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using System.Linq;
 using DAL.Domain;
 using DAL.Interfaces;
@@ -22,11 +23,13 @@ namespace PL
     /// <summary>
     /// Interaction logic for AddAccount.xaml
     /// </summary>
-    public partial class AddAccount : Window
+    public partial class AddAccount : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private IKernel kernel;
 
-        private Dictionary<string, AccountType> dictionary = new Dictionary<string, AccountType>
+        private readonly Dictionary<string, AccountType> dictionary = new Dictionary<string, AccountType>
         {
             ["income"] = AccountType.Income,
             ["expences"] = AccountType.Expence,
@@ -57,11 +60,12 @@ namespace PL
             }
             AccountType type = dictionary[AddAccountTypeComboBox.Text.ToLower()];
             Currency currency = kernel.Get<IUnitOfWork>().Repository<Currency>().Get().FirstOrDefault(x => x.Code == AddAccountCurrencyComboBox.Text);
-            Task<BankAccount> bankAccount = service.CreateAccount(type, name, currency);
+            BankAccount bankAccount = service.CreateAccount(type, name, currency);
             if (bankAccount == null)
             {
                 MessageBox.Show("Something went wrong");
             }
+            PropertyChanged(this, new PropertyChangedEventArgs("Added"));
             Close();
         }
     }

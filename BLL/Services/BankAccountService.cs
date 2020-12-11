@@ -266,7 +266,7 @@ namespace BLL.Services
         /// <param name="name">name of account</param>
         /// <param name="currency">select currency</param>
         /// <returns>created account</returns>
-        public async Task<BankAccount> CreateAccount(AccountType type, string name, Currency currency)
+        public BankAccount CreateAccount(AccountType type, string name, Currency currency)
         {
             if (this.CurrentUser is null)
             {
@@ -290,7 +290,7 @@ namespace BLL.Services
                     BankAccount = account
                 });
             this.unitOfWork.Repository<User>().Update(this.CurrentUser);
-            await this.unitOfWork.SaveAsync();
+            this.unitOfWork.Save();
             return account;
         }
 
@@ -299,10 +299,10 @@ namespace BLL.Services
         /// </summary>
         /// <param name="account">The bank account to delete</param>
         /// <returns>if account deleted</returns>
-        public async Task DeleteAccount(BankAccount account)
+        public void DeleteAccount(BankAccount account)
         {
             this.unitOfWork.Repository<BankAccount>().Delete(account);
-            await this.unitOfWork.SaveAsync();
+            unitOfWork.Save();
         }
     }
 }

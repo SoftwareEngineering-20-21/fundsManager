@@ -18,6 +18,7 @@ using BLL.Models;
 using DAL.Interfaces;
 using DAL.Domain;
 using DAL.Enums;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -98,10 +99,11 @@ namespace PL
         {
             AddAccount AddAccount = new AddAccount(kernel);
             //AddAccount.AddAccountOKButton.Click += RefreshView;
+            AddAccount.PropertyChanged += RefreshView;
             AddAccount.Show();
         }
 
-        private void RefreshView(object sender, RoutedEventArgs e)
+        private void RefreshView(object sender, PropertyChangedEventArgs e)
         {
             UpdateAccountsView();
         }
