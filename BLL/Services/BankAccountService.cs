@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.Interfaces;
+using Castle.Components.DictionaryAdapter;
 using DAL.Domain;
 using DAL.Enums;
 using DAL.Interfaces;
@@ -50,20 +51,29 @@ namespace BLL.Services
         {
             if (account.Type == AccountType.Income)
             {
-                return this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
+                return this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id) is null ? 0:
+                    this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
                     .Select(x => x.AmountFrom).Sum();
             }
             else if (account.Type == AccountType.Expence)
             {
-                return this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
+                return this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id) is null ? 0 :
+                    this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
                     .Select(x => x.AmountTo).Sum();
             }
             else
             {
-                return this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
-                           .Select(x => x.AmountTo).Sum() -
-                       this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
-                           .Select(x => x.AmountFrom).Sum();
+                var accountsToScore =
+                    (this.unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)) is null
+                        ? 0
+                        : unitOfWork.Repository<Transaction>().Get(x => x.BankAccountTo.Id == account.Id)
+                            .Select(x => x.AmountTo).Sum();
+                var accountsFromScore =
+                    (unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)) is null
+                        ? 0
+                        : unitOfWork.Repository<Transaction>().Get(x => x.BankAccountFrom.Id == account.Id)
+                            .Select(x => x.AmountFrom).Sum();
+                return accountsToScore -accountsFromScore;
             }
         }
 
@@ -218,6 +228,12 @@ namespace BLL.Services
             {
                 throw new ArgumentException("Cannot create transaction from current to income fromAccount");
             }
+
+            if (from.Type == AccountType.Current && to.Type == AccountType.Expence && this.GetAccountScore(from) - amount < 0)
+            {
+                throw new ArgumentException("You don't have money for this");
+            }
+
             var transaction = new Transaction
             {
                 AmountFrom = amount,
@@ -301,6 +317,11 @@ namespace BLL.Services
         /// <returns>if account deleted</returns>
         public void DeleteAccount(BankAccount account)
         {
+            var transactions = this.unitOfWork.Repository<Transaction>().Get(x=>x.BankAccountFrom.Id == account.Id || x.BankAccountTo.Id == account.Id);
+            foreach (var transaction in transactions)
+            {
+                this.unitOfWork.Repository<Transaction>().Delete(transaction);
+            }
             this.unitOfWork.Repository<BankAccount>().Delete(account);
             unitOfWork.Save();
         }
