@@ -148,7 +148,7 @@ namespace PL
             var service = kernel.Get<IBankAccountService>();
             string FromName = TransactionsFromComboBox.Text;
             string ToName = TransactionsToComboBox.Text;
-            if (FromName == "" || ToName == "" || !Decimal.TryParse(TransactionsAmountTextBox.Text, out decimal amount))
+            if (FromName == "" || ToName == "" || !decimal.TryParse(TransactionsAmountTextBox.Text, out decimal amount))
             {
                 MessageBox.Show("Fields can not be empty");
                 return;
@@ -158,10 +158,19 @@ namespace PL
                 MessageBox.Show("Amount can not be negative or equal to 0");
                 return;
             }
+            DateTime dateTime = (DateTime)TransactionsDatePicker.SelectedDate;
+            if (dateTime > DateTime.Today)
+            {
+                MessageBox.Show("Invalid date");
+            }
             var all = service.GetAllUserAccounts();
             BankAccount from = all.FirstOrDefault(x => x.Name == TransactionsFromComboBox.Text);
             BankAccount to = all.FirstOrDefault(x => x.Name == TransactionsToComboBox.Text);
-            DateTime dateTime = (DateTime)TransactionsDatePicker.SelectedDate;
+            if (from.Id == to.Id)
+            {
+                MessageBox.Show("Cannot make transaction on the same account");
+                return;
+            }
             try
             {
                 service.MakeTransaction(from, to, amount, dateTime, "");
@@ -186,6 +195,11 @@ namespace PL
             else if (TransactionsTypeComboBox.Text == "Expences") 
             {
                 TransactionsToComboBox.ItemsSource = all.Where(x => x.Type == AccountType.Expence).Select(x => x.Name).ToList<string>();
+                TransactionsFromComboBox.ItemsSource = all.Where(x => x.Type == AccountType.Current).Select(x => x.Name).ToList<string>();
+            }
+            else if (TransactionsTypeComboBox.Text == "Current")
+            {
+                TransactionsToComboBox.ItemsSource = all.Where(x => x.Type == AccountType.Current).Select(x => x.Name).ToList<string>();
                 TransactionsFromComboBox.ItemsSource = all.Where(x => x.Type == AccountType.Current).Select(x => x.Name).ToList<string>();
             }
         }
