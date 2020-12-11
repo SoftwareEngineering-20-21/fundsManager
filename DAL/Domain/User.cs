@@ -4,6 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace DAL.Domain
 {
+    /// <summary>
+    /// User class
+    /// Contains fields of user mail, user password, user name, user surname
+    /// user phone
+    /// </summary>
+    
     public class User:BaseEntity
     {
         [Required]

@@ -6,6 +6,10 @@ using System.Text;
 
 namespace BLL.Models
 {
+    /// <summary>
+    /// Statistic Item class
+    /// Contains field of dateTime and value
+    /// </summary>
     public class StatisticsItem
     {
         public DateTime Date { get; set; }

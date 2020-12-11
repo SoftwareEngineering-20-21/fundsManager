@@ -7,6 +7,10 @@ using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
+    /// <summary>
+    /// Unit of work class
+    /// Implement IUnitOfWork intreface
+    /// </summary>
     public class UnitOfWork :  IUnitOfWork
     {
    
@@ -22,6 +26,11 @@ namespace DAL.Repositories
             this.context = context;
         }
 
+        /// <summary>
+        /// Implementation of IUnitOfWork
+        /// </summary>
+        /// <typeparam name="T">typeparam of repository</typeparam>
+        /// <returns>repository by type</returns>
         public IRepository<T> Repository<T>() where T : BaseEntity
         {
             repositories ??= new Dictionary<string, object>();
@@ -37,7 +46,10 @@ namespace DAL.Repositories
             return (Repository<T>)repositories[type];
         }
 
-
+        /// <summary>
+        /// Defining the destructor
+        /// </summary>
+        /// <param name="disposing">disposing</param>
         public virtual void Dispose(bool disposing)
         {
             if (!disposed && disposing)
@@ -48,16 +60,26 @@ namespace DAL.Repositories
             disposed = true;
         }
 
+        /// <summary>
+        /// Defining the destructor
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
    
+        /// <summary>
+        /// Save changes
+        /// </summary>
         public void Save()
         {
             context.SaveChanges();
         }
+        /// <summary>
+        /// Save changes
+        /// </summary>
+        /// <returns>saved changes</returns>
         public async Task SaveAsync()
         {
             await context.SaveChangesAsync();

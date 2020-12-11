@@ -11,6 +11,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DAL.Repositories
 {
+    /// <summary>
+    /// Repository class
+    /// Implement IRepository
+    /// </summary>
+    /// <typeparam name="T">entity typeparam</typeparam>
+    
     public class Repository<T>: IRepository<T> where T:BaseEntity
     {
         private readonly FundsContext context;
@@ -26,24 +32,51 @@ namespace DAL.Repositories
             this.context = context;
             dbSet = context.Set<T>();
         }
+
+        /// <summary>
+        /// Implementation of IRepository
+        /// </summary>
+        /// <returns>list of entities</returns>
         public IEnumerable<T> Get()
         {
             return dbSet.ToList();
         }
 
+        /// <summary>
+        /// Implementation of IRepository
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <returns>entity by id</returns>
         public T Get(int id)
         {
             return dbSet.FirstOrDefault(x=>x.Id == id);
         }
+
+        /// <summary>
+        /// Implementation of IRepository
+        /// </summary>
+        /// <param name="predicate">predicate</param>
+        /// <returns>list of entities by predicate</returns>
         public IEnumerable<T> Get(Func<T, bool> predicate)
         {
             return dbSet.ToList().Where(predicate);
         }
+
+        /// <summary>
+        /// Implementation of IRepository
+        /// delete entity
+        /// </summary>
+        /// <param name="entity">entity</param>
         public void Delete(T entity)
         {
             dbSet.Remove(entity);
         }
 
+        /// <summary>
+        /// Implementation of IRepository
+        /// delete entity by id
+        /// </summary>
+        /// <param name="id">id</param>
         public void Delete(int id)
         {
             T elem = dbSet.Find(id);
@@ -53,21 +86,39 @@ namespace DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Implementation of IRepository
+        /// update entity 
+        /// </summary>
+        /// <param name="entity">entity</param>
         public void Update(T entity)
         {
             dbSet.Update(entity);
         }
 
+        /// <summary>
+        /// Implementation of IRepository
+        /// </summary>
+        /// <param name="entity">entity</param>
+        /// <returns>add task</returns>
         public async Task AddAsync(T entity)
         {
             await dbSet.AddAsync(entity);
         }
 
+        /// <summary>
+        /// Implementation of IRepository
+        /// Save changes
+        /// </summary>
         public void Save()
         {
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// Implementation of IRepository
+        /// </summary>
+        /// <returns>saved changes</returns>
         public async Task SaveAsync()
         {
             await context.SaveChangesAsync();

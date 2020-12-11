@@ -7,14 +7,17 @@ using System;
 
 namespace DAL.Context
 {
+    /// <summary>
+    /// Fund Context class
+    /// Contains fields Users, BankAccounts, Currency, Transaction and
+    /// </summary>
+    
     public sealed class FundsContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Currency> Currency { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-
-
         public FundsContext()
 
             : base(new DbContextOptionsBuilder<FundsContext>().UseSqlServer(@Environment.GetEnvironmentVariable("FundsManagerDB")).UseLazyLoadingProxies().Options)

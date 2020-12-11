@@ -4,6 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Domain
 {
+    /// <summary>
+    /// Transaction class
+    /// contains fields Bank account, amount, transaction date, description, user id, user
+    /// </summary>
+    
     public class Transaction:BaseEntity
     {
         public virtual BankAccount BankAccountFrom { get; set; }

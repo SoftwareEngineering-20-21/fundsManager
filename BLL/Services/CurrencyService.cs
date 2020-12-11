@@ -9,15 +9,25 @@ using System.Xml.XPath;
 using BLL.Interfaces;
 namespace BLL.Services
 {
+    /// <summary>
+    /// The Currency Service class
+    /// Implement ICurrencyService interface
+    /// </summary>
+    
     public class CurrencyService : ICurrencyService
     {
         XmlDocument xml;
-
         public CurrencyService()
         {
             xml = new XmlDocument();
             UpdateCurrency();
         }
+
+        /// <summary>
+        /// Implementation of ICurrencyService
+        /// </summary>
+        /// <param name="code">Code of currency</param>
+        /// <returns>currency rate</returns>
         public Decimal GetRate(string code)
         {
             UpdateCurrency();
@@ -32,6 +42,12 @@ namespace BLL.Services
             throw new Exception();
         }
 
+        /// <summary>
+        /// Implementation of ICurrencyService
+        /// </summary>
+        /// <param name="code">Code of currency</param>
+        /// <param name="date">Date</param>
+        /// <returns>Currency rate on the date</returns>
         public decimal GetRateByDate(string code, DateTime date)
         {
             string convertedDate = date.ToString("yyyyMMdd");
@@ -43,6 +59,10 @@ namespace BLL.Services
             return Decimal.Parse(xmlNode[0]["rate"].InnerText);
         }
 
+        /// <summary>
+        /// Implementation of ICurrencyService
+        /// Update Currency
+        /// </summary>
         public void UpdateCurrency()
         {
             string content = new WebClient().DownloadString("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange");
