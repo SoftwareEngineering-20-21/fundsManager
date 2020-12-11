@@ -152,7 +152,7 @@ namespace BLL.Services
             await unitOfWork.SaveAsync();
             return transaction;
         }
-        public async Task<bool> ShareAccount(BankAccount account, string email)
+        public bool ShareAccount(BankAccount account, string email)
         {
             var user = unitOfWork.Repository<User>().Get().FirstOrDefault(x => x.Mail == email);
             if (user == null || account == null)
@@ -164,7 +164,7 @@ namespace BLL.Services
                 BankAccount = account
             });
             unitOfWork.Repository<User>().Update(user);
-            await unitOfWork.SaveAsync();
+            unitOfWork.Save();
             return true;
         }
 

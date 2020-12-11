@@ -18,7 +18,7 @@ namespace BLL.Interfaces
         IEnumerable<Transaction> GetAllUserTransactionsTo(BankAccount toAccount, DateTime dateFrom, DateTime dateTo);
         IEnumerable<BankAccount> GetAllUserAccounts();
         Task<Transaction> MakeTransaction(BankAccount from, BankAccount to, decimal amount, DateTime date, string description);
-        Task<bool> ShareAccount(BankAccount account, string email);
+        bool ShareAccount(BankAccount account, string email);
         Task<BankAccount> CreateAccount(AccountType type, string name, Currency currency);
         Task DeleteAccount(BankAccount account);
     }

@@ -16,7 +16,7 @@
                 <RowDefinition Height="24*"/>
                 <RowDefinition Height="37*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="ShareAccountOKButton" Content="OK" HorizontalAlignment="Left" Margin="155,72,0,111" Height="39" Width="110" Background="#FF2FC3CB" FontSize="20" Grid.Row="1"  />
+            <Button x:Name="ShareAccountOKButton" Content="OK" HorizontalAlignment="Left" Margin="155,72,0,111" Height="39" Width="110" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="ShareAccountOKButton_Click"  />
             <Button x:Name="ShareAccountCancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="45,72,0,0" VerticalAlignment="Top" Height="39" Width="110" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="ChangeEmailCancelButton_Click" Grid.Column="1"/>
             <Label x:Name="ShareAccountEmailLabel" Content="Email" HorizontalAlignment="Left" Margin="317,83,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="122" FontSize="20" Grid.ColumnSpan="2"/>
 
