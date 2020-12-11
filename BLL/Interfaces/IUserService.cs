@@ -1,6 +1,6 @@
+using System;
 using DAL.Domain;
 using DAL.Enums;
-using System;
 
 namespace BLL.Interfaces
 {
@@ -9,12 +9,10 @@ namespace BLL.Interfaces
     /// Contains method to Login, SignUp, ChangePassword,
     /// ChangeMail, ChangePhoneNumber, isValidMail
     /// </summary>
-    
     public interface IUserService
     {
-        
         /// <summary>
-        /// User Service current user
+        /// Gets user service current user
         /// </summary>
         User CurrentUser { get; }
 
@@ -23,7 +21,7 @@ namespace BLL.Interfaces
         /// </summary>
         /// <param name="email">user email</param>
         /// <param name="password">user password</param>
-        /// <returns>logined user</returns>
+        /// <returns>logged-in user</returns>
         User Login(string email, string password);
 
         /// <summary>
@@ -34,7 +32,7 @@ namespace BLL.Interfaces
         /// <param name="email">user email</param>
         /// <param name="phoneNumber">user phone number</param>
         /// <param name="password">user password</param>
-        /// <returns>registred user</returns>
+        /// <returns>registered user</returns>
         User SignUp(string firstName, string lastName, string email, string phoneNumber, string password);
 
         /// <summary>
@@ -62,8 +60,8 @@ namespace BLL.Interfaces
         /// <summary>
         /// method of IUserService
         /// </summary>
-        /// <param name="emailaddress">select email</param>
-        /// <returns>if emailaddress valid</returns>
-        bool IsValidMail(string emailaddress);
+        /// <param name="email">select email</param>
+        /// <returns>if email valid</returns>
+        bool IsValidMail(string email);
     }
 }

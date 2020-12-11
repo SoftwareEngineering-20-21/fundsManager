@@ -191,7 +191,7 @@ namespace BLL.Services
         /// <param name="amount">amount of money</param>
         /// <param name="date">Date creation of transaction</param>
         /// <param name="description">description to transaction</param>
-        /// <returns> return transaction </returns>
+        /// <returns> transaction if done </returns>
         public async Task<Transaction> MakeTransaction(BankAccount from, BankAccount to, decimal amount, DateTime date, string description)
         {
             if (this.CurrentUser is null)

@@ -13,9 +13,8 @@ namespace BLL.Interfaces
     /// </summary>
     public interface IBankAccountService
     {
-        
         /// <summary>
-        /// Bank account service current user
+        /// Gets or sets bank account service current user
         /// </summary>
         public User CurrentUser { get; set; }
 
@@ -86,7 +85,7 @@ namespace BLL.Interfaces
         /// <param name="amount">amount of money</param>
         /// <param name="date">Date creation of transaction</param>
         /// <param name="description">description to transaction</param>
-        /// <returns>transaction</returns>
+        /// <returns> transaction if done </returns>
         Task<Transaction> MakeTransaction(BankAccount from, BankAccount to, decimal amount, DateTime date, string description);
 
         /// <summary>

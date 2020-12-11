@@ -8,7 +8,6 @@ namespace BLL.Interfaces
     /// The Currency Service interface
     /// Contains method GetRate, GetRatByDate and UpdateCurrency
     /// </summary>
-    
     public interface ICurrencyService
     { 
         /// <summary>
@@ -22,14 +21,14 @@ namespace BLL.Interfaces
         /// </summary>
         /// <param name="code">Code of currency</param>
         /// <returns>currency rate</returns>
-        Decimal GetRate(string code);
+        decimal GetRate(string code);
 
         /// <summary>
         /// method of ICurrencyService
         /// </summary>
         /// <param name="code">Code of currency</param>
-        /// <param name="date">Date</param>
+        /// <param name="date">Wanted date</param>
         /// <returns>Currency rate on the date</returns>
-        Decimal GetRateByDate(string code, DateTime date);
+        decimal GetRateByDate(string code, DateTime date);
     }
 }
