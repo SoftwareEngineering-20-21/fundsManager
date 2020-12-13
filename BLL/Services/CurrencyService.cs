@@ -37,6 +37,10 @@ namespace BLL.Services
         /// <returns>currency rate</returns>
         public decimal GetRate(string code)
         {
+            if (code.ToLower() == "uah")
+            {
+                return 1;
+            }
             this.UpdateCurrency();
             XmlNodeList nodeList = this.xml.SelectNodes("/exchange/currency");
             foreach (XmlNode node in nodeList)
@@ -58,6 +62,10 @@ namespace BLL.Services
         /// <returns>Currency rate on the date</returns>
         public decimal GetRateByDate(string code, DateTime date)
         {
+            if (code.ToLower() == "uah")
+            {
+                return 1;
+            }
             string convertedDate = date.ToString("yyyyMMdd");
             string url = $"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode={code}&date={convertedDate}";
             string content = new WebClient().DownloadString(url);
