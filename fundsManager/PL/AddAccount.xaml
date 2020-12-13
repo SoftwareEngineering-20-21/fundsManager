@@ -36,8 +36,20 @@
             <Label x:Name="AddAccountTypeLable" Content="Type" HorizontalAlignment="Left" Margin="147,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20"/>
             <Label x:Name="AddAccountNameLabel" Content="Name"  HorizontalAlignment="Left" Margin="336,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20"/>
             <Label x:Name="AddAccountCurrencyLabel" Content="Currency" HorizontalAlignment="Left" Margin="100,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20" Grid.Column="1"/>
-            <Button x:Name="AddAccountOKButton" Content="OK"  HorizontalAlignment="Left" Margin="173,0,0,0" VerticalAlignment="Center" Width="134" Height="44" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="AddAccountOKButton_Click"/>
-            <Button x:Name="AddAccountCancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="21,0,0,0" VerticalAlignment="Center" Width="134" Height="44" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="AddAccountCancelButton_Click" Grid.Column="1"/>
+            <Button x:Name="AddAccountOKButton" Content="OK"  HorizontalAlignment="Left" Margin="173,0,0,0" VerticalAlignment="Center" Width="134" Height="44" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="AddAccountOKButton_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="AddAccountCancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="21,0,0,0" VerticalAlignment="Center" Width="134" Height="44" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="AddAccountCancelButton_Click" Grid.Column="1">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
         </Grid>
     </Viewbox>
 </Window>

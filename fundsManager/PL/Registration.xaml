@@ -17,9 +17,22 @@
                 <RowDefinition Height="24*"/>
                 <RowDefinition Height="37*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="RegSignUpButton" Content="Sign Up" HorizontalAlignment="Left" Margin="212,150,0,33" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="RegSignUpButton_Click" />
-            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="341,150,0,0" VerticalAlignment="Top" Height="39" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="CancelButton_Click" Grid.ColumnSpan="2"/>
-            <Label x:Name="LabelEmail" Content="Email:" HorizontalAlignment="Left" Margin="140,21,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="62" FontSize="20" Grid.Row="1"/>
+            <Button x:Name="RegSignUpButton" Content="Sign Up" HorizontalAlignment="Left" Margin="212,150,0,33" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="RegSignUpButton_Click" >
+
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="341,150,0,0" VerticalAlignment="Top" Height="39" Width="81" Background="#FF2FC3CB" FontSize="20" Grid.Row="1" Click="CancelButton_Click" Grid.ColumnSpan="2">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Label x:Name="LabelEmail" Content="Email:" HorizontalAlignment="Left" Margin="140,21,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" Height="35" Width="62" FontSize="20" Grid.Row="1"/>
             <Label x:Name="LabelPassword" Content="Password:" HorizontalAlignment="Left" Margin="106,56,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Width="96" Grid.Row="1"/>
             <Label Content="Confirm password:" HorizontalAlignment="Left" Margin="27,97,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="20" Foreground="#FF2FC3CB" Width="180" />
             <PasswordBox x:Name="ConfirmPasswordTextBox" FontSize="15" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="212,102,0,0" Grid.Row="1"  VerticalAlignment="Top" Width="210" Height="26" Background="#FF2FC3CB"/>

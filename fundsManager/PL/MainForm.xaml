@@ -31,7 +31,13 @@
                 </Grid>
                 <TabItem Header="Accounts" Background="#FF2FC3CB"  Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" Width="124.236666666667" FontSize="20">
                     <Grid Background="#FF083846" Margin="0,0,0,-2" Width="1109">
-                        <Button x:Name="AddAccountButton" Content="+Account" Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="930,567,0,0" VerticalAlignment="Top" Height="61" Width="145" FontSize="30" Click="AddAccountButton_Click" RenderTransformOrigin="0.5,0.5">
+                        <Button x:Name="AddAccountButton"  Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="1005,572,0,0" VerticalAlignment="Top" Height="88" Width="90" FontSize="60" Click="AddAccountButton_Click" RenderTransformOrigin="0.5,0.5">
+                            <Image Source="C:\Users\yanch\Downloads/+img.png" Height="47" Width="74"></Image>
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="35"/>
+                                </Style>
+                            </Button.Resources>
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -42,14 +48,14 @@
                             </Button.RenderTransform>
                         </Button>
 
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="297">
-                            <StackPanel x:Name="AccSPanel" Width="300" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="325">
+                            <StackPanel x:Name="AccSPanel" Width="325" Height="662"/>
                         </ScrollViewer>
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="307,0,0,0" Width="300">
-                            <StackPanel x:Name="AccSPanel2" Width="300" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="340,0,0,0" Width="326">
+                            <StackPanel x:Name="AccSPanel2" Width="325" Height="662"/>
                         </ScrollViewer>
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="607,0,0,0" Width="314">
-                            <StackPanel x:Name="AccSPanel3" Width="310" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="671,0,0,0" Width="325">
+                            <StackPanel x:Name="AccSPanel3" Width="325" Height="662"/>
                         </ScrollViewer>
 
                     </Grid>
@@ -88,7 +94,14 @@
                 </TabItem>
                 <TabItem Header="Transactions" Background="#FF2FC3CB" Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
                     <Grid Background="#FF083846" Width="1109" >
-                        <Button x:Name="TransactionConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="462,437,0,0" VerticalAlignment="Top" Width="138" Height="55" FontSize="30" Background="#FF2FC3CB" Click="TransactionConfirmButton_Click"/>
+                        <Button x:Name="TransactionConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="462,437,0,0" VerticalAlignment="Top" Width="138" Height="55" FontSize="30" Background="#FF2FC3CB" Click="TransactionConfirmButton_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="20"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
 
                         <ComboBox x:Name="TransactionsTypeComboBox" Text ="Type" HorizontalAlignment="Left"  Margin="78,199,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FF2FC3CB" BorderBrush="#FF2FC3CB">
                             <TextBlock x:Name="TransactionsIncomeTextBlock"  Width="125" Height="42" FontSize="30"><Run Text="Income"/></TextBlock>
@@ -114,11 +127,34 @@
                             <RowDefinition Height="419*"/>
                             <RowDefinition Height="251*"/>
                         </Grid.RowDefinitions>
-                        <Button x:Name="SettingsChangePasswordButton" Content="Change Password" HorizontalAlignment="Left" Margin="338,111,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePasswordButton_Click"/>
-                        <Button x:Name="SettingsChangeEmailButton" Content="Change Email" HorizontalAlignment="Left" Margin="338,237,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangeEmailButton_Click"/>
-                        <Button x:Name="SettingsChangePhoneNumberButton" Content="Change Phone Number" HorizontalAlignment="Left" Margin="338,362,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePhoneNumberButton_Click" Grid.RowSpan="2"/>
-                        <Button x:Name="SettingsLogOutButton" Content="Log Out" HorizontalAlignment="Left" Margin="338,68,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsLogOutButton_Click" Grid.Row="1"/>
-
+                        <Button x:Name="SettingsChangePasswordButton" Content="Change Password" HorizontalAlignment="Left" Margin="338,111,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePasswordButton_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="40"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button x:Name="SettingsChangeEmailButton" Content="Change Email" HorizontalAlignment="Left" Margin="338,237,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangeEmailButton_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="40"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button x:Name="SettingsChangePhoneNumberButton" Content="Change Phone Number" HorizontalAlignment="Left" Margin="338,362,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsChangePhoneNumberButton_Click" Grid.RowSpan="2">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="40"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button x:Name="SettingsLogOutButton" Content="Log Out" HorizontalAlignment="Left" Margin="338,68,0,0" VerticalAlignment="Top" Height="79" Width="352" Background="#FF2FC3CB" FontSize="30" Click="SettingsLogOutButton_Click" Grid.Row="1">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="40"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
                     </Grid>
                 </TabItem>
 
