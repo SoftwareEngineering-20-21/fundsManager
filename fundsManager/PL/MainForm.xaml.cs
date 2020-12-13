@@ -59,6 +59,8 @@ namespace PL
         private void UpdateAccountsView()
         {
             AccSPanel.Children.Clear();
+            AccSPanel2.Children.Clear();
+            AccSPanel3.Children.Clear();
             List<BankAccount> accounts = kernel.Get<IBankAccountService>().GetAllUserAccounts().ToList<BankAccount>();
             if (accounts.Count == 0)
             {
@@ -66,9 +68,24 @@ namespace PL
             }
             foreach (BankAccount account in accounts)
             {
-                AccountControl control = new AccountControl(kernel, account);
-                control.PropertyChanged += RefreshView;
-                AccSPanel.Children.Add(control);
+                if (account.Type == AccountType.Income)
+                {
+                    AccountControl control = new AccountControl(kernel, account);
+                    control.PropertyChanged += RefreshView;
+                    AccSPanel.Children.Add(control);
+                }
+                if (account.Type == AccountType.Current)
+                {
+                    AccountControl control = new AccountControl(kernel, account);
+                    control.PropertyChanged += RefreshView;
+                    AccSPanel2.Children.Add(control);
+                }
+                if (account.Type == AccountType.Expence)
+                {
+                    AccountControl control = new AccountControl(kernel, account);
+                    control.PropertyChanged += RefreshView;
+                    AccSPanel3.Children.Add(control);
+                }
             }
         }
 
