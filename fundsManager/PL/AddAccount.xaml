@@ -31,7 +31,7 @@
                 <TextBlock x:Name="AddAccountCurrentTextBlock"  Width="125" Height="42" FontSize="30"><Run Text="Current"/></TextBlock>
 
             </ComboBox>
-            <TextBox x:Name="AddAccountNameTextBox" HorizontalAlignment="Left" Margin="300,118,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="44" Grid.RowSpan="2" BorderBrush="#FFACACAC" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="AddAccountNameTextBox" HorizontalAlignment="Left" Margin="300,118,0,0" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="44" Grid.RowSpan="2" BorderBrush="#FFACACAC" Grid.ColumnSpan="2"/>
             <ComboBox x:Name="AddAccountCurrencyComboBox" Grid.Column="1" HorizontalAlignment="Left" Margin="78,118,0,0" VerticalAlignment="Top" Width="134" Height="44" Grid.RowSpan="2"/>
             <Label x:Name="AddAccountTypeLable" Content="Type" HorizontalAlignment="Left" Margin="147,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20"/>
             <Label x:Name="AddAccountNameLabel" Content="Name"  HorizontalAlignment="Left" Margin="336,72,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="20"/>

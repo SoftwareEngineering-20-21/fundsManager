@@ -22,7 +22,7 @@
 
             <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Left" Margin="155,8,0,0" VerticalAlignment="Top" Foreground="#FFD70D0D" Visibility="Visible" RenderTransformOrigin="0.368,0.665" FontSize="20" Width="324" Grid.ColumnSpan="2"/>
 
-            <TextBox x:Name="NewEmailTextBox" Grid.ColumnSpan="2" Margin="184,134,184,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Background="#FF2FC3CB" Grid.RowSpan="2" />
+            <TextBox x:Name="NewEmailTextBox" Grid.ColumnSpan="2" FontSize="20" Margin="184,134,184,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Background="#FF2FC3CB" Grid.RowSpan="2" />
 
 
         </Grid>

@@ -42,14 +42,14 @@
                             </Button.RenderTransform>
                         </Button>
 
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="272">
-                            <StackPanel x:Name="AccSPanel" Width="272" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="297">
+                            <StackPanel x:Name="AccSPanel" Width="300" Height="662"/>
                         </ScrollViewer>
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="287,0,0,0" Width="315">
-                            <StackPanel x:Name="AccSPanel2" Width="315" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="307,0,0,0" Width="300">
+                            <StackPanel x:Name="AccSPanel2" Width="300" Height="662"/>
                         </ScrollViewer>
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="602,0,0,0" Width="319">
-                            <StackPanel x:Name="AccSPanel3" Width="315" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="607,0,0,0" Width="314">
+                            <StackPanel x:Name="AccSPanel3" Width="310" Height="662"/>
                         </ScrollViewer>
 
                     </Grid>
@@ -99,7 +99,7 @@
                         <ComboBox x:Name="TransactionsToComboBox" HorizontalAlignment="Left" Margin="576,198,0,0" VerticalAlignment="Top" Width="160" Height="56" Background="Black">
 
                         </ComboBox>
-                        <TextBox x:Name="TransactionsAmountTextBox" Margin="825,198,124,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Background="#FFDDDDDD"/>
+                        <TextBox x:Name="TransactionsAmountTextBox" Margin="825,198,124,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" FontSize="30" Background="#FFDDDDDD" Text=""/>
                         <DatePicker x:Name="TransactionsDatePicker" SelectedDate="{x:Static sys:DateTime.Now}" HorizontalAlignment="Left" Margin="325,335,0,0" VerticalAlignment="Top" Width="411" Height="48" Background="#FF2FC3CB" FontSize="30"/>
                         <Label x:Name="TransactionsTypeLable" Content="Type" HorizontalAlignment="Left" Margin="107,125,0,0" VerticalAlignment="Top" Foreground="#FF2FC3CB" FontSize="30"/>
                         <Label x:Name="TransactionsFromLable" Content="From" HorizontalAlignment="Left" Margin="366,125,0,0" VerticalAlignment="Top" FontSize="30" Foreground="#FF2FC3CB"/>
