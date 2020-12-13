@@ -31,10 +31,25 @@
                 </Grid>
                 <TabItem Header="Accounts" Background="#FF2FC3CB"  Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" Width="124.236666666667" FontSize="20">
                     <Grid Background="#FF083846" Margin="0,0,0,-2" Width="1109">
-                        <Button x:Name="AddAccountButton" Content="+Account" Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="876,509,0,0" VerticalAlignment="Top" Height="79" Width="145" FontSize="30" Click="AddAccountButton_Click"/>
+                        <Button x:Name="AddAccountButton" Content="+Account" Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="930,567,0,0" VerticalAlignment="Top" Height="61" Width="145" FontSize="30" Click="AddAccountButton_Click" RenderTransformOrigin="0.5,0.5">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0.831"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
 
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="846">
-                            <StackPanel x:Name="AccSPanel" Width="842" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="272">
+                            <StackPanel x:Name="AccSPanel" Width="272" Height="662"/>
+                        </ScrollViewer>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="287,0,0,0" Width="315">
+                            <StackPanel x:Name="AccSPanel2" Width="315" Height="662"/>
+                        </ScrollViewer>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="602,0,0,0" Width="319">
+                            <StackPanel x:Name="AccSPanel3" Width="315" Height="662"/>
                         </ScrollViewer>
 
                     </Grid>

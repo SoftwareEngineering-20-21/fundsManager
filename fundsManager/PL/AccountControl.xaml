@@ -6,19 +6,18 @@
              xmlns:local="clr-namespace:PL" xmlns:i="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
              mc:Ignorable="d" Height="114" Width="330">
     <StackPanel Margin="0,10,0,0" VerticalAlignment="Top" Background="#FF2FC3CB" HorizontalAlignment="Center" Width="310" Height="104">
+        <StackPanel.ContextMenu>
+            <ContextMenu>
+                <MenuItem x:Name="AccountOptionsShare" Header="Share"  FontSize="10" Click="AccountOptionsShare_Click" />
+                <MenuItem x:Name="AccountOptionsDelete" Header="Delete"  FontSize="10" Click="AccountOptionsDelete_Click" />
+            </ContextMenu>
+        </StackPanel.ContextMenu>
         <Grid Height="98" Width="315">
-            <Label x:Name="AccountNameLabel"  Content="" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Width="120"/>
-            <Label x:Name="AccountCostLabel"  Content="" HorizontalAlignment="Left" Margin="135,5,0,0" VerticalAlignment="Top" FontSize="20" Width="120"/>
-            <Label x:Name="AccountCurrencyLabel"  Content="" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" FontSize="20" Width="120"/>
-            <Label x:Name="AccountTypeLabel"  Content="" HorizontalAlignment="Left" Margin="130,51,0,0" VerticalAlignment="Top" FontSize="20" Width="120"/>
-            <Button x:Name="AccountOptionsButton" Content="..." FontSize="20" Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" Width="45" Height="32" BorderBrush="{x:Null}">
-                <Button.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="AccountOptionsShare" Header="Share"  FontSize="10" Click="AccountOptionsShare_Click" />
-                        <MenuItem x:Name="AccountOptionsDelete" Header="Delete"  FontSize="10" Click="AccountOptionsDelete_Click" />
-                    </ContextMenu>
-                </Button.ContextMenu>
-            </Button>
+            <Label x:Name="AccountNameLabel"  Content="" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Width="145"/>
+            <Label x:Name="AccountCostLabel"  Content="" HorizontalAlignment="Left" Margin="160,5,0,0" VerticalAlignment="Top" FontSize="20" Width="145"/>
+            <Label x:Name="AccountCurrencyLabel"  Content="" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" FontSize="20" Width="145"/>
+            <Label x:Name="AccountTypeLabel"  Content="" HorizontalAlignment="Left" Margin="160,51,0,0" VerticalAlignment="Top" FontSize="20" Width="145"/>
+
 
         </Grid>
     </StackPanel>
