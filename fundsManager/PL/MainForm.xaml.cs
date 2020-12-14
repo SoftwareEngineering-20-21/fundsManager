@@ -20,6 +20,7 @@ using DAL.Domain;
 using DAL.Enums;
 using System.ComponentModel;
 
+
 namespace PL
 {
     /// <summary>
@@ -28,9 +29,8 @@ namespace PL
     public partial class MainForm : Window
     {
         private IKernel kernel;
-
-        public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
+        public List<string> LabelsIncome { get; set; }
+        public List<string> LabelsExpence { get; set; }
         public MainForm(IKernel kernel)
         {
             InitializeComponent();
@@ -42,18 +42,17 @@ namespace PL
 
             TransactionsTypeComboBox.DropDownClosed += new System.EventHandler(TransactionTypeChanged);
 
-            SeriesCollection = new SeriesCollection
-                {
-                    new LineSeries
-                    {
-                        Values = new ChartValues<double> { 3, 5, 7, 4 }
-                    }
-                };
-            SeriesCollection.Add(new LineSeries { Values = new ChartValues<double> { 1, 8, 2, 5 } });
-            DataContext = this;
             UpdateAccountsView();
-            Load_graphic();
-            Load_pie();
+            //Stats
+            StatsAccountsComboBox.ItemsSource = kernel.Get<IUnitOfWork>().Repository<Currency>().Get().Select(x => x.Code).ToList<String>();
+            LabelsIncome = new List<string>();
+            LabelsExpence = new List<string>();
+            
+            StatsAccountsComboBox.DropDownClosed += new System.EventHandler(Load_IncomeChart);
+            StatsAccountsComboBox.DropDownClosed += new System.EventHandler(Load_ExpenceChart);
+            StatsAccountsComboBox.DropDownClosed += new System.EventHandler(Load_PieChart);
+            IncomeChart.Zoom = ZoomingOptions.X;
+            ExpenceChart.Zoom = ZoomingOptions.X;
         }
 
         private void UpdateAccountsView()
@@ -134,32 +133,6 @@ namespace PL
             }
         }
 
-        private void Load_graphic()
-        {
-            IStatisticsService statsService = kernel.Get<IStatisticsService>();
-            var stats = statsService.GetIncomeStatisticsFullPeriod().ToList<StatisticsItem>();
-            var stats2 = statsService.GetExpenceStatisticsFullPeriod().ToList<StatisticsItem>();
-            ChartValues<decimal> chartIncome = new ChartValues<decimal>();
-            ChartValues<decimal> chartExpence = new ChartValues<decimal>();
-            stats.ForEach(x => chartIncome.Add(x.Value));
-            stats2.ForEach(x => chartExpence.Add(x.Value));
-            SeriesCollection = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Title = "Income",
-                    Values = chartIncome
-                },
-                  new LineSeries
-                {
-                    Title = "Expence",
-                    Values = chartExpence
-                }
-            };
-
-            DataContext = this;
-        }
-
         private void TransactionConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             var service = kernel.Get<IBankAccountService>();
@@ -220,29 +193,69 @@ namespace PL
                 TransactionsFromComboBox.ItemsSource = all.Where(x => x.Type == AccountType.Current).Select(x => x.Name).ToList<string>();
             }
         }
-        private void Load_pie()
+        //----Stats----
+        private void Load_IncomeChart(object sender, System.EventArgs e)
+        {
+           
+            IStatisticsService statsService = kernel.Get<IStatisticsService>();
+            var statItemsIncome = statsService.GetIncomeStatisticsFullPeriod(StatsAccountsComboBox.Text).ToList<StatisticsItem>();
+            ChartValues<decimal> chartIncome = new ChartValues<decimal>();
+            statItemsIncome.ForEach(x => { chartIncome.Add(x.Value);
+                                           LabelsIncome.Add(x.Date.ToString());
+                                         }) ;
+            LineSeries incomeSeries = new LineSeries { Title = "Income", Values = chartIncome };
+            incomeSeries.Stroke = Brushes.DodgerBlue;
+            incomeSeries.Fill = Brushes.Transparent;
+
+            IncomeChart.Series = new SeriesCollection{incomeSeries};
+            IncomeChart.DataContext = this;
+        }
+        private void Load_ExpenceChart(object sender, System.EventArgs e)
         {
             IStatisticsService statsService = kernel.Get<IStatisticsService>();
-            var stats = statsService.GetIncomeStatisticsFullPeriod().ToList<StatisticsItem>();
-            var stats2 = statsService.GetExpenceStatisticsFullPeriod().ToList<StatisticsItem>();
+            var statsItemsExpence = statsService.GetExpenceStatisticsFullPeriod(StatsAccountsComboBox.Text).ToList<StatisticsItem>();
+            ChartValues<decimal> chartExpence = new ChartValues<decimal>();
+            statsItemsExpence.ForEach(x => {  chartExpence.Add(x.Value);
+                                              LabelsExpence.Add(x.Date.ToString());
+                                           });
+            LineSeries expenceSeries = new LineSeries{ Title = "Expence",Values = chartExpence};
+            expenceSeries.Stroke = Brushes.Red;
+            //expenceSeries.Fill = Brushes.Red;
+            expenceSeries.Fill = Brushes.Transparent;
+            ExpenceChart.Series = new SeriesCollection{ expenceSeries };
+            IncomeChart.DataContext = this;
+        }
+        private void Load_PieChart(object sender, System.EventArgs e)
+        {
+            IStatisticsService statsService = kernel.Get<IStatisticsService>();
+            var stats = statsService.GetIncomeStatisticsFullPeriod(StatsAccountsComboBox.Text).ToList<StatisticsItem>();
+            var stats2 = statsService.GetExpenceStatisticsFullPeriod(StatsAccountsComboBox.Text).ToList<StatisticsItem>();
             ChartValues<decimal> chartIncome = new ChartValues<decimal>();
             ChartValues<decimal> chartExpence = new ChartValues<decimal>();
-            stats.ForEach(x => chartIncome.Add(x.Value));
-            stats2.ForEach(x => chartExpence.Add(x.Value));
+            decimal sumIncome = 0;
+            decimal sumExpence = 0;
+            stats.ForEach(x => { chartIncome.Add(x.Value);
+                                 sumIncome += x.Value;
+                               });
+            stats2.ForEach(x => { chartExpence.Add(x.Value);
+                                  sumExpence += x.Value;
+                                });
+       
+
             Func<ChartPoint, string> labelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
             SeriesCollection piechartData = new SeriesCollection
             {
                 new PieSeries
                 {
                     Title = "Income",
-                    Values = new ChartValues<double> {stats.Count},
+                    Values = new ChartValues<decimal> {sumIncome},
                     DataLabels = true,
                     LabelPoint = labelPoint
                 },
                 new PieSeries
                 {
                     Title = "Expence",
-                    Values = new ChartValues<double> {stats2.Count},
+                    Values = new ChartValues<decimal> {sumExpence},
                     DataLabels = true,
                     LabelPoint = labelPoint
                 },

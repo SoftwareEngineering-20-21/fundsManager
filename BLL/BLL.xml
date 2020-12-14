@@ -149,29 +149,31 @@
             Gets or sets statistics service current user
             </summary>
         </member>
-        <member name="M:BLL.Interfaces.IStatisticsService.GetExpenceStatistics(System.DateTime,System.DateTime)">
+        <member name="M:BLL.Interfaces.IStatisticsService.GetExpenceStatistics(System.String,System.DateTime,System.DateTime)">
             <summary>
             method of IStatisticService
             </summary>
             <param name="fromDate">expenses statistic from date</param>
             <param name="toDate">expenses statistic to date</param>
+            <param name="currency">currency</param>
             <returns>statistic from fromDate to toDate</returns>
         </member>
-        <member name="M:BLL.Interfaces.IStatisticsService.GetIncomeStatistics(System.DateTime,System.DateTime)">
+        <member name="M:BLL.Interfaces.IStatisticsService.GetIncomeStatistics(System.String,System.DateTime,System.DateTime)">
             <summary>
             method of IStatisticService
             </summary>
             <param name="fromDate">income statistic from date</param>
             <param name="toDate">income statistic to date</param>
+            <param name="currency">currency</param>
             <returns>income statistic from fromDate to toDate</returns>
         </member>
-        <member name="M:BLL.Interfaces.IStatisticsService.GetExpenceStatisticsFullPeriod">
+        <member name="M:BLL.Interfaces.IStatisticsService.GetExpenceStatisticsFullPeriod(System.String)">
             <summary>
             method of IStatisticService
             </summary>
             <returns>expenses statistic for the whole period</returns>
         </member>
-        <member name="M:BLL.Interfaces.IStatisticsService.GetIncomeStatisticsFullPeriod">
+        <member name="M:BLL.Interfaces.IStatisticsService.GetIncomeStatisticsFullPeriod(System.String)">
             <summary>
             method of IStatisticService
             </summary>
@@ -428,21 +430,28 @@
             Gets or sets statistics service current user
             </summary>
         </member>
-        <member name="M:BLL.Services.StatisticsService.#ctor(DAL.Interfaces.IUnitOfWork)">
+        <member name="F:BLL.Services.StatisticsService.currencyService">
+            <summary>
+            Contains an object of ICurrencyService
+            </summary>
+        </member>
+        <member name="M:BLL.Services.StatisticsService.#ctor(DAL.Interfaces.IUnitOfWork,BLL.Interfaces.ICurrencyService)">
             <summary>
             Initializes a new instance of the <see cref="T:BLL.Services.StatisticsService"/> class.
             </summary>
             <param name="unitOfWork">unit of work</param>
+            <param name="currencyService">currence service</param>
         </member>
-        <member name="M:BLL.Services.StatisticsService.GetExpenceStatistics(System.DateTime,System.DateTime)">
+        <member name="M:BLL.Services.StatisticsService.GetExpenceStatistics(System.String,System.DateTime,System.DateTime)">
             <summary>
             Implementation of IStatisticService
             </summary>
             <param name="fromDate">expenses statistic from date</param>
             <param name="toDate">expenses statistic to date</param>
+            <param name="currency">currency</param>
             <returns>statistic from fromDate to toDate</returns>
         </member>
-        <member name="M:BLL.Services.StatisticsService.GetIncomeStatistics(System.DateTime,System.DateTime)">
+        <member name="M:BLL.Services.StatisticsService.GetIncomeStatistics(System.String,System.DateTime,System.DateTime)">
             <summary>
             Implementation of IStatisticService
             </summary>
@@ -450,13 +459,13 @@
             <param name="toDate">income statistic to date</param>
             <returns>income statistic from fromDate to toDate</returns>
         </member>
-        <member name="M:BLL.Services.StatisticsService.GetExpenceStatisticsFullPeriod">
+        <member name="M:BLL.Services.StatisticsService.GetExpenceStatisticsFullPeriod(System.String)">
             <summary>
             Implementation of IStatisticService
             </summary>
             <returns>expenses statistic for the whole period</returns>
         </member>
-        <member name="M:BLL.Services.StatisticsService.GetIncomeStatisticsFullPeriod">
+        <member name="M:BLL.Services.StatisticsService.GetIncomeStatisticsFullPeriod(System.String)">
             <summary>
             Implementation of IStatisticService
             </summary>

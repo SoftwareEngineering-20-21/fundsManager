@@ -27,12 +27,19 @@ namespace BLL.Services
         public User CurrentUser { get; set; }
 
         /// <summary>
+        /// Contains an object of ICurrencyService
+        /// </summary>
+        private readonly ICurrencyService currencyService;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StatisticsService"/> class.
         /// </summary>
         /// <param name="unitOfWork">unit of work</param>
-        public StatisticsService(IUnitOfWork unitOfWork)
+        /// <param name="currencyService">currence service</param>
+        public StatisticsService(IUnitOfWork unitOfWork, ICurrencyService currencyService)
         {
             this.unitOfWork = unitOfWork;
+            this.currencyService = currencyService;
         }
 
         /// <summary>
@@ -40,8 +47,9 @@ namespace BLL.Services
         /// </summary>
         /// <param name="fromDate">expenses statistic from date</param>
         /// <param name="toDate">expenses statistic to date</param>
+        /// <param name="currency">currency</param>
         /// <returns>statistic from fromDate to toDate</returns>
-        public IEnumerable<StatisticsItem> GetExpenceStatistics(DateTime fromDate, DateTime toDate)
+        public IEnumerable<StatisticsItem> GetExpenceStatistics(string currency,DateTime fromDate, DateTime toDate)
         {
             if (this.CurrentUser is null)
             {
@@ -54,7 +62,7 @@ namespace BLL.Services
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountTo
+                Value = x.AmountTo * this.currencyService.GetRate(x.BankAccountTo.CurrencyType.Code) / this.currencyService.GetRate(currency)
             });
         }
 
@@ -63,8 +71,9 @@ namespace BLL.Services
         /// </summary>
         /// <param name="fromDate">income statistic from date</param>
         /// <param name="toDate">income statistic to date</param>
+        /// <param name="currency">currency</param>
         /// <returns>income statistic from fromDate to toDate</returns>
-        public IEnumerable<StatisticsItem> GetIncomeStatistics(DateTime fromDate, DateTime toDate)
+        public IEnumerable<StatisticsItem> GetIncomeStatistics(string currency,DateTime fromDate, DateTime toDate)
         {
             if (this.CurrentUser is null)
             {
@@ -77,7 +86,7 @@ namespace BLL.Services
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountFrom
+                Value = x.AmountFrom * this.currencyService.GetRate(x.BankAccountFrom.CurrencyType.Code) / this.currencyService.GetRate(currency)
             });
         }
 
@@ -85,7 +94,7 @@ namespace BLL.Services
         /// Implementation of IStatisticService
         /// </summary>
         /// <returns>expenses statistic for the whole period</returns>
-        public IEnumerable<StatisticsItem> GetExpenceStatisticsFullPeriod()
+        public IEnumerable<StatisticsItem> GetExpenceStatisticsFullPeriod(string currency)
         {
             if (this.CurrentUser is null)
             {
@@ -95,18 +104,19 @@ namespace BLL.Services
             var transactions = this.unitOfWork.Repository<Transaction>()
                .Get(x => x.UserId == this.CurrentUser.Id).Where(x => x.BankAccountTo.Type == AccountType.Expence);
 
+
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountTo
-            });
+                Value = x.AmountTo * this.currencyService.GetRate(x.BankAccountTo.CurrencyType.Code) / this.currencyService.GetRate(currency)
+            }) ;
         }
 
         /// <summary>
         /// Implementation of IStatisticService
         /// </summary>
         /// <returns>income statistic for the whole period</returns>
-        public IEnumerable<StatisticsItem> GetIncomeStatisticsFullPeriod()
+        public IEnumerable<StatisticsItem> GetIncomeStatisticsFullPeriod(string currency)
         {
             if (this.CurrentUser is null)
             {
@@ -119,7 +129,7 @@ namespace BLL.Services
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountFrom
+                Value = x.AmountFrom * this.currencyService.GetRate(x.BankAccountFrom.CurrencyType.Code) / this.currencyService.GetRate(currency)
             });
         }
     }
