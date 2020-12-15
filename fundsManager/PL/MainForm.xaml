@@ -29,10 +29,20 @@
                         <RowDefinition Height="161*"/>
                     </Grid.RowDefinitions>
                 </Grid>
-                <TabItem Header="Accounts" Background="#FF2FC3CB"  Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" Width="124.236666666667" FontSize="20">
+                <TabItem  Background="#FF2FC3CB"  Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" Width="124.236666666667" FontSize="20">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="img1" Height="108" Width="96" VerticalAlignment="Center" Source="icons\bank-account.png" Margin="5,30,0,0" />
+                            <TextBlock Text="" Margin="2,0,0,0" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </TabItem.Header>
                     <Grid Background="#FF083846" Margin="0,0,0,-2" Width="1109">
-                        <Button x:Name="AddAccountButton"  Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="1005,572,0,0" VerticalAlignment="Top" Height="88" Width="90" FontSize="60" Click="AddAccountButton_Click" RenderTransformOrigin="0.5,0.5">
-                            <Image Source="C:\Users\yanch\Downloads/+img.png" Height="47" Width="74"></Image>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="49*"/>
+                            <RowDefinition Height="286*"/>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="AddAccountButton"  Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="1005,474,0,0" VerticalAlignment="Top" Height="88" Width="90" FontSize="60" Click="AddAccountButton_Click" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+                            <Image Source="icons\add.png" Height="62" Width="91"></Image>
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="35"/>
@@ -48,20 +58,26 @@
                             </Button.RenderTransform>
                         </Button>
 
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="325">
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="325" Grid.RowSpan="2">
                             <StackPanel x:Name="AccSPanel" Width="325" Height="662"/>
                         </ScrollViewer>
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="340,0,0,0" Width="326">
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="340,0,0,0" Width="326" Grid.RowSpan="2">
                             <StackPanel x:Name="AccSPanel2" Width="325" Height="662"/>
                         </ScrollViewer>
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="671,0,0,0" Width="325">
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="671,0,0,0" Width="325" Grid.RowSpan="2">
                             <StackPanel x:Name="AccSPanel3" Width="325" Height="662"/>
                         </ScrollViewer>
 
                     </Grid>
 
                 </TabItem>
-                <TabItem Header="Stats" Background="#FF2FC3CB" Padding="6,2,6,45" Height="166" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
+                <TabItem  Background="#FF2FC3CB" Padding="6,2,6,45" Height="166" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="img2" Height="108" Width="96" Margin="5,30,0,0" Source="icons\statistics.png" />
+                            <TextBlock Text="" Margin="2,0,0,0" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </TabItem.Header>
                     <Grid Background="#FF083846" Margin="0,0,10,-2">
 
                         <lvc:CartesianChart x:Name="ExpenceChart" Series="{Binding SeriesCollection}"  Margin="515,376,10,0">
@@ -93,7 +109,13 @@
 
                     </Grid>
                 </TabItem>
-                <TabItem Header="Transactions" Background="#FF2FC3CB" Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
+                <TabItem  Background="#FF2FC3CB" Padding="6,2,6,45" Height="166.96" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="img3" Height="108" Width="96" VerticalAlignment="Center" Margin="5,30,0,0" Source="icons\transaction.png" />
+                            
+                        </StackPanel>
+                    </TabItem.Header>
                     <Grid Background="#FF083846" Width="1109" >
                         <Button x:Name="TransactionConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="462,437,0,0" VerticalAlignment="Top" Width="138" Height="55" FontSize="30" Background="#FF2FC3CB" Click="TransactionConfirmButton_Click">
                             <Button.Resources>
@@ -122,7 +144,13 @@
 
                     </Grid>
                 </TabItem>
-                <TabItem Header="Settings" Background="#FF2FC3CB" Padding="6,2,6,45" Height="166" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
+                <TabItem  Background="#FF2FC3CB" Padding="6,2,6,45" Height="166" BorderBrush="#FF083846" FontSize="20" Width="124.236666666667">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Height="122">
+                            <Image Name="img4" Height="108" Width="96" VerticalAlignment="Center" Margin="5,20,0,0" Source="icons\settings.png" />
+
+                        </StackPanel>
+                    </TabItem.Header>
                     <Grid Background="#FF083846" Margin= "0,0,0,-2" Width="1111">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="419*"/>
