@@ -20,7 +20,7 @@ namespace BLL.Services
         /// Contains xml document with currencies
         /// </summary>
         private XmlDocument xml;
-
+        private DateTime lastUpdate;
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyService"/> class.
         /// </summary>
@@ -41,7 +41,14 @@ namespace BLL.Services
             {
                 return 1;
             }
-            this.UpdateCurrency();
+
+            TimeSpan hourCurrenyUpdate = new TimeSpan(10, 0, 0);
+            TimeSpan hourToday = new TimeSpan(DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second);
+            if (DateTime.Today != lastUpdate && hourToday > hourCurrenyUpdate)
+            {
+                this.UpdateCurrency();
+            }
+
             XmlNodeList nodeList = this.xml.SelectNodes("/exchange/currency");
             foreach (XmlNode node in nodeList)
             {
@@ -102,7 +109,9 @@ namespace BLL.Services
                 TimeSpan hourToday = new TimeSpan(today.Hour, today.Minute, today.Second);
                 if (datetoday != dateUpdateFile && hourToday > hourCurrenyUpdate)
                 {
+
                     this.xml.Save("currency.xml");
+                    lastUpdate = DateTime.Today;
                 }
             }
         }

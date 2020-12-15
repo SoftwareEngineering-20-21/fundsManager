@@ -457,6 +457,7 @@
             </summary>
             <param name="fromDate">income statistic from date</param>
             <param name="toDate">income statistic to date</param>
+            <param name="currency">currency</param>
             <returns>income statistic from fromDate to toDate</returns>
         </member>
         <member name="M:BLL.Services.StatisticsService.GetExpenceStatisticsFullPeriod(System.String)">

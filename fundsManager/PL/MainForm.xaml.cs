@@ -47,7 +47,43 @@ namespace PL
             StatsAccountsComboBox.ItemsSource = kernel.Get<IUnitOfWork>().Repository<Currency>().Get().Select(x => x.Code).ToList<String>();
             LabelsIncome = new List<string>();
             LabelsExpence = new List<string>();
-            
+            ExpenceChart.Series= new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Series 1",
+                    Values = new ChartValues<double> { 4, 6, 5, 2 ,4 }
+                },
+                new LineSeries
+                {
+                    Title = "Series 2",
+                    Values = new ChartValues<double> { 6, 7, 3, 4 ,6 },
+                    PointGeometry = null
+                },
+                new LineSeries
+                {
+                    Title = "Series 3",
+                    Values = new ChartValues<double> { 4,2,7,2,7 },
+                }
+            };
+            IncomeChart.Series= new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Series 1",
+                    Values = new ChartValues<double> { 4, 6, 5, 2 ,4 }
+                },
+                new LineSeries
+                {
+                    Title = "Series 2",
+                    Values = new ChartValues<double> { 6, 7, 3, 4 ,6 },
+                },
+                new LineSeries
+                {
+                    Title = "Series 3",
+                    Values = new ChartValues<double> { 4,2,7,2,7 },
+                }
+            };
             StatsAccountsComboBox.DropDownClosed += new System.EventHandler(Load_IncomeChart);
             StatsAccountsComboBox.DropDownClosed += new System.EventHandler(Load_ExpenceChart);
             StatsAccountsComboBox.DropDownClosed += new System.EventHandler(Load_PieChart);
@@ -248,14 +284,14 @@ namespace PL
                 new PieSeries
                 {
                     Title = "Income",
-                    Values = new ChartValues<decimal> {sumIncome},
+                    Values = new ChartValues<decimal> {Math.Round(sumIncome,2)},
                     DataLabels = true,
                     LabelPoint = labelPoint
                 },
                 new PieSeries
                 {
                     Title = "Expence",
-                    Values = new ChartValues<decimal> {sumExpence},
+                    Values = new ChartValues<decimal> {Math.Round(sumExpence,2)},
                     DataLabels = true,
                     LabelPoint = labelPoint
                 },
