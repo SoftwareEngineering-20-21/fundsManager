@@ -41,11 +41,21 @@
                             <RowDefinition Height="49*"/>
                             <RowDefinition Height="286*"/>
                         </Grid.RowDefinitions>
-                        <Button x:Name="AddAccountButton"  Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="1005,474,0,0" VerticalAlignment="Top" Height="88" Width="90" FontSize="60" Click="AddAccountButton_Click" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
-                            <Image Source="icons\add.png" Height="62" Width="91"></Image>
+                        <Button x:Name="AddAccountButton"  Background="#FF2FC3CB" HorizontalAlignment="Left" Margin="1004,448,0,0" VerticalAlignment="Top" Height="83" Width="83" FontSize="60" Click="AddAccountButton_Click" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+                            <Image Source="icons\add.png" Height="62" Width="72"></Image>
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="35"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
                             </Button.Resources>
                             <Button.RenderTransform>
@@ -58,14 +68,14 @@
                             </Button.RenderTransform>
                         </Button>
 
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="325" Grid.RowSpan="2">
-                            <StackPanel x:Name="AccSPanel" Width="325" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10,0,0,0" Width="315" Grid.RowSpan="2">
+                            <StackPanel x:Name="AccSPanel" Width="315" Height="662"/>
                         </ScrollViewer>
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="340,0,0,0" Width="326" Grid.RowSpan="2">
-                            <StackPanel x:Name="AccSPanel2" Width="325" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="340,0,0,0" Width="315" Grid.RowSpan="2">
+                            <StackPanel x:Name="AccSPanel2" Width="315" Height="662"/>
                         </ScrollViewer>
-                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="671,0,0,0" Width="325" Grid.RowSpan="2">
-                            <StackPanel x:Name="AccSPanel3" Width="325" Height="662"/>
+                        <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True"  VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="671,0,0,0" Width="315" Grid.RowSpan="2">
+                            <StackPanel x:Name="AccSPanel3" Width="315" Height="662"/>
                         </ScrollViewer>
 
                     </Grid>
@@ -98,7 +108,7 @@
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
 
-                        <lvc:PieChart x:Name="pieChart" LegendLocation="Right" Hoverable="False"  Margin="19,116,553,90">
+                        <lvc:PieChart x:Name="pieChart" LegendLocation="Bottom" Hoverable="False"  Margin="19,116,553,90">
                             <lvc:PieChart.Series>
                                 <lvc:PieSeries Title="Income" Values="4" DataLabels="True"/>
                                 <lvc:PieSeries Title="Expence" Values="3" DataLabels="True"/>
@@ -113,7 +123,7 @@
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Image Name="img3" Height="108" Width="96" VerticalAlignment="Center" Margin="5,30,0,0" Source="icons\transaction.png" />
-                            
+
                         </StackPanel>
                     </TabItem.Header>
                     <Grid Background="#FF083846" Width="1109" >
@@ -121,6 +131,16 @@
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="20"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
                             </Button.Resources>
                         </Button>
@@ -160,6 +180,16 @@
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="40"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
                             </Button.Resources>
                         </Button>
@@ -167,6 +197,16 @@
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="40"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
                             </Button.Resources>
                         </Button>
@@ -174,6 +214,16 @@
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="40"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
                             </Button.Resources>
                         </Button>
@@ -181,6 +231,16 @@
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="40"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
                             </Button.Resources>
                         </Button>

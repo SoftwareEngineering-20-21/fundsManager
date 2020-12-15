@@ -297,7 +297,6 @@ namespace PL
                 },
             };
             pieChart.Series = piechartData;
-            pieChart.LegendLocation = LegendLocation.Right;
             DataContext = this;
         }
     }
