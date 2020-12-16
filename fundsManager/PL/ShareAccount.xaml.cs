@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using DAL.Domain;
 using BLL.Interfaces;
 using System.Threading.Tasks;
+using log4net;
 
 namespace PL
 {
@@ -38,6 +39,7 @@ namespace PL
 
         private void ShareAccountOKButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Share clicked");
             string email = ShareAccountEmailTextBox.Text;
             
             if (email == "" || !kernel.Get<IUserService>().IsValidMail(email))
@@ -49,9 +51,11 @@ namespace PL
             if (!answer)
             {
                 MessageBox.Show("User not found");
+                kernel.Get<ILog>().Info("Shared account failed");
                 return;
             }
             MessageBox.Show("Done");
+            kernel.Get<ILog>().Info("Share ended successfully");
             Close();
         }
     }

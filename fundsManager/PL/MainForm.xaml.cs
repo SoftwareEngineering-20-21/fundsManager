@@ -19,6 +19,7 @@ using DAL.Interfaces;
 using DAL.Domain;
 using DAL.Enums;
 using System.ComponentModel;
+using log4net;
 
 
 namespace PL
@@ -89,24 +90,28 @@ namespace PL
 
         private void SettingsChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Change password button clicked");
             Change_Password CnahgePassword = new Change_Password(kernel);
             CnahgePassword.Show();
         }
 
         private void SettingsChangeEmailButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Change email button clicked");
             ChangeEmail CnahgeEmail = new ChangeEmail(kernel);
             CnahgeEmail.Show();
         }
 
         private void SettingsChangePhoneNumberButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Change phone button clicked");
             ChangePhoneNumber ChangePhoneNumber = new ChangePhoneNumber(kernel);
             ChangePhoneNumber.Show();
         }
 
         private void SettingsLogOutButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Log out button clicked");
             MainWindow win1 = new MainWindow();
             win1.Show();
             SystemCommands.CloseWindow(this);
@@ -114,6 +119,7 @@ namespace PL
 
         private void AddAccountButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Add account button clicked");
             AddAccount AddAccount = new AddAccount(kernel);
             AddAccount.PropertyChanged += RefreshView;
             AddAccount.Show();
@@ -134,6 +140,7 @@ namespace PL
 
         private void TransactionConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Transaction confirm button clicked");
             var service = kernel.Get<IBankAccountService>();
             string FromName = TransactionsFromComboBox.Text;
             string ToName = TransactionsToComboBox.Text;
@@ -165,10 +172,12 @@ namespace PL
                 service.MakeTransaction(from, to, amount, dateTime, "");
                 MessageBox.Show("Done");
                 UpdateAccountsView();
+                kernel.Get<ILog>().Info("Transaction ended");
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
+                kernel.Get<ILog>().Info("Transaction failed " + exc.Message);
             }
         }
 

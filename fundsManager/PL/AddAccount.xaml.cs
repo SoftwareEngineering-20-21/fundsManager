@@ -17,6 +17,7 @@ using DAL.Interfaces;
 using DAL.Enums;
 using BLL.Interfaces;
 using System.Threading.Tasks;
+using log4net;
 
 namespace PL
 {
@@ -49,6 +50,7 @@ namespace PL
 
         private void AddAccountOKButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Add account button clicked");
             var service = kernel.Get<IBankAccountService>();
             string name = AddAccountNameTextBox.Text;
             string typeString = AddAccountTypeComboBox.Text;
@@ -64,6 +66,7 @@ namespace PL
             if (bankAccount == null)
             {
                 MessageBox.Show("Something went wrong");
+                kernel.Get<ILog>().Info("Add account failed");
             }
             PropertyChanged(this, new PropertyChangedEventArgs("Added"));
             Close();

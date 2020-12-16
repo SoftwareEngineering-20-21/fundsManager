@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using log4net;
 
 namespace PL
 {
@@ -38,6 +39,7 @@ namespace PL
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Login button clicked");    
             IUserService userService = kernel.Get<IUserService>();
             string email = EmailTextBox.Text;
             string password = PasswordBox.Password;
@@ -60,12 +62,14 @@ namespace PL
             }
             catch (ArgumentException exc)
             {
+                kernel.Get<ILog>().Info("Login failed");
                 ErrorLabel.Content = exc.Message;
             }
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Sign up button clicked");
             Registration registration = new Registration(kernel);
             registration.Show();
             Close();

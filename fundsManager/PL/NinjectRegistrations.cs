@@ -5,6 +5,7 @@ using DAL.Context;
 using DAL.Domain;
 using DAL.Interfaces;
 using DAL.Repositories;
+using log4net;
 using Ninject.Modules;
 
 namespace PL
@@ -13,6 +14,7 @@ namespace PL
     {
         public override void Load()
         {
+            Bind<ILog>().ToMethod(cfg => LoggerConfig.GetLogger());
             Bind<FundsContext>().ToSelf().InSingletonScope();
             Bind<IRepository<BankAccount>>().To<Repository<BankAccount>>().InSingletonScope();
             Bind<IRepository<Currency>>().To<Repository<Currency>>().InSingletonScope();

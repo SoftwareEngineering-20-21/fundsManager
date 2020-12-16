@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using log4net;
 
 namespace PL
 {
@@ -26,6 +27,7 @@ namespace PL
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            kernel.Get<ILog>().Info("Cancel button clicked");
             MainWindow win1 = new MainWindow();
             win1.Show();
             SystemCommands.CloseWindow(this);
@@ -34,6 +36,7 @@ namespace PL
         private void RegSignUpButton_Click(object sender, RoutedEventArgs e)
         {
 
+            kernel.Get<ILog>().Info("Registration button clicked");
             IUserService userService = kernel.Get<IUserService>();
             string firstName = FirstNameTextBox.Text;
             string secondName = SecondNameTextBox.Text;
@@ -69,9 +72,11 @@ namespace PL
                 MainForm mainForm = new MainForm(kernel);
                 mainForm.Show();
                 Close();
+                kernel.Get<ILog>().Info("Registration success");
             }
             catch (ArgumentException exc)
             {
+                kernel.Get<ILog>().Info("Registration failed");
                 ErrorLabel.Content = exc.Message;
             }
   
