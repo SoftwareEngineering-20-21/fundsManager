@@ -62,7 +62,7 @@ namespace BLL.Services
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountTo * this.currencyService.GetRate(x.BankAccountTo.CurrencyType.Code) / this.currencyService.GetRate(currency)
+                Value = Math.Round(x.AmountTo * this.currencyService.GetRate(x.BankAccountTo.CurrencyType.Code) / this.currencyService.GetRate(currency),2)
             });
         }
 
@@ -86,7 +86,7 @@ namespace BLL.Services
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountFrom * this.currencyService.GetRate(x.BankAccountFrom.CurrencyType.Code) / this.currencyService.GetRate(currency)
+                Value = Math.Round(x.AmountFrom * this.currencyService.GetRate(x.BankAccountFrom.CurrencyType.Code) / this.currencyService.GetRate(currency),2)
             });
         }
 
@@ -108,7 +108,7 @@ namespace BLL.Services
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountTo * this.currencyService.GetRate(x.BankAccountTo.CurrencyType.Code) / this.currencyService.GetRate(currency)
+                Value = Math.Round(x.AmountTo * this.currencyService.GetRate(x.BankAccountTo.CurrencyType.Code) / this.currencyService.GetRate(currency),2)
             }) ;
         }
 
@@ -129,7 +129,7 @@ namespace BLL.Services
             return transactions.Select(x => new StatisticsItem
             {
                 Date = x.TransactionDate,
-                Value = x.AmountFrom * this.currencyService.GetRate(x.BankAccountFrom.CurrencyType.Code) / this.currencyService.GetRate(currency)
+                Value = Math.Round(x.AmountFrom * this.currencyService.GetRate(x.BankAccountFrom.CurrencyType.Code) / this.currencyService.GetRate(currency),2)
             });
         }
     }
