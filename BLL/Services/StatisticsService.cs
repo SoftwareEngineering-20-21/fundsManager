@@ -63,7 +63,7 @@ namespace BLL.Services
             {
                 Date = x.TransactionDate,
                 Value = Math.Round(x.AmountTo * this.currencyService.GetRate(x.BankAccountTo.CurrencyType.Code) / this.currencyService.GetRate(currency),2)
-            });
+            }).OrderBy(x => x.Date);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace BLL.Services
             {
                 Date = x.TransactionDate,
                 Value = Math.Round(x.AmountFrom * this.currencyService.GetRate(x.BankAccountFrom.CurrencyType.Code) / this.currencyService.GetRate(currency),2)
-            });
+            }).OrderBy(x => x.Date);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace BLL.Services
             {
                 Date = x.TransactionDate,
                 Value = Math.Round(x.AmountTo * this.currencyService.GetRate(x.BankAccountTo.CurrencyType.Code) / this.currencyService.GetRate(currency),2)
-            }) ;
+            }).OrderBy(x => x.Date);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace BLL.Services
             {
                 Date = x.TransactionDate,
                 Value = Math.Round(x.AmountFrom * this.currencyService.GetRate(x.BankAccountFrom.CurrencyType.Code) / this.currencyService.GetRate(currency),2)
-            });
+            }).OrderBy(x=>x.Date);
         }
     }
 }
