@@ -97,30 +97,30 @@
                             <TextBlock Text="" Margin="2,0,0,0" VerticalAlignment="Bottom" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid Background="#FF083846" Margin="0,0,10,-2">
+                    <Grid Background="#FF083846" Width="1107">
 
-                        <lvc:CartesianChart x:Name="ExpenceChart" Series="{Binding SeriesCollection}"  Margin="515,376,10,0">
+                        <lvc:CartesianChart x:Name="ExpenceChart"   Margin="505,344,10,10">
                             <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="Time" Labels="{Binding LabelsExpence}"></lvc:Axis>
+                                <lvc:Axis Title="Time" Labels="{Binding LabelsExpence}" FontSize="16"></lvc:Axis>
                             </lvc:CartesianChart.AxisX>
                             <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Money" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                                <lvc:Axis Title="Money" FontSize="16"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
 
-                        <lvc:CartesianChart x:Name="IncomeChart"  Margin="515,47,11,330">
+                        <lvc:CartesianChart x:Name="IncomeChart"  Margin="505,10,11,345" Height="315">
                             <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="Time"  Labels="{Binding LabelsIncome}"></lvc:Axis>
+                                <lvc:Axis Title="Time"  Labels="{Binding LabelsIncome}" FontSize="16"></lvc:Axis>
                             </lvc:CartesianChart.AxisX>
                             <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Money"></lvc:Axis>
+                                <lvc:Axis Title="Money" FontSize="16"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
 
-                        <lvc:PieChart x:Name="pieChart" LegendLocation="Bottom" Hoverable="False"  Margin="19,116,553,90">
+                        <lvc:PieChart x:Name="pieChart" LegendLocation="Right" Hoverable="False"  Margin="28,84,581,112">
                             <lvc:PieChart.Series>
-                                <lvc:PieSeries Title="Income" Values="4" DataLabels="True"/>
-                                <lvc:PieSeries Title="Expence" Values="3" DataLabels="True"/>
+                                <lvc:PieSeries Title="Income" Values="4" Fill="LightSeaGreen"/>
+                                <lvc:PieSeries Title="Expence" Values="3" Fill="PaleVioletRed" />
                             </lvc:PieChart.Series>
                         </lvc:PieChart>
                         <ComboBox x:Name="StatsAccountsComboBox" HorizontalAlignment="Left" Margin="169,24,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FF2FC3CB" BorderBrush="#FF2FC3CB" />
